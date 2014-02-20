@@ -9,13 +9,14 @@
 
         {%PARSEPAGEHERE%}
     </div>
-
+```
 
 2. Express-Route in __'./modules/pagehandler/routes.js'__ hinzufügen
 
 ```javascript
 
-    "/mypage/:getvar1" : "mypage"   // "express-route" : "name-der-funktion-in-pages.js"
+    "/mypage/:getvar1" : "mypage"   // "express-route" : "name-der-funktion-in-pages.js"`
+```
 
 3. Funktion in __'./modules/pagehandler/pages.js'__ hinzufügen
 
