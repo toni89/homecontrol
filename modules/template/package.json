@@ -1,0 +1,11 @@
+{
+    "name": "template",
+    "description": "Simple template-engine",
+    "version" : "0.0.1",
+    "main" : "./template.js",
+    "plugin" : {
+        "provides" : [
+            "template"
+        ]
+    }
+}

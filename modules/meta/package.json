@@ -1,0 +1,14 @@
+{
+    "name": "meta",
+    "description": "Simple api for HTML-Metaproperties",
+    "version" : "0.0.1",
+    "main" : "./meta.js",
+    "plugin" : {
+        "consumes" : [
+            "template"
+        ],
+        "provides" : [
+            "meta"
+        ]
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "name": "pagehandler",
+    "description": "Maps express-routes to individual pages",
+    "version" : "0.0.1",
+    "main" : "./pagehandler.js",
+    "plugin" : {
+        "consumes" : [
+            "template",
+            "meta"
+        ]
+    }
+}
