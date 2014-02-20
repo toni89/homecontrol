@@ -2,14 +2,14 @@
 
 1. HTML-Template 'mypage.tpl' unter **'./www/templates'** erstellen
 
-```html
+    ```html
 
-    <div>
-        {%VAR1%}
+        <div>
+            {%VAR1%}
 
-        {%PARSEPAGEHERE%}
-    </div>
-```
+            {%PARSEPAGEHERE%}
+        </div>
+    ```
 
 2. Express-Route in **'./modules/pagehandler/routes.js'** hinzufügen
 
@@ -20,24 +20,24 @@
 
 3. Funktion in **'./modules/pagehandler/pages.js'** hinzufügen
 
-```javascript
+    ```javascript
 
-    // tpl - Zugriff auf Templatefunktionen
-    // meta - Zugriff auf Metamodul
-    // req / res / next - Express und Middlewarezugriff
-    "mypage" : function(tpl, meta, req, res, next) {
+        // tpl - Zugriff auf Templatefunktionen
+        // meta - Zugriff auf Metamodul
+        // req / res / next - Express und Middlewarezugriff
+        "mypage" : function(tpl, meta, req, res, next) {
 
-        meta.title("MyPage");
-        meta.desctiption("Some description");
-        meta.keywords("keywords1,keyword2");
-        meta.robots("index, nofollow");
+            meta.title("MyPage");
+            meta.desctiption("Some description");
+            meta.keywords("keywords1,keyword2");
+            meta.robots("index, nofollow");
 
 
-        tpl.set("VAR1", "Hello World")                  // Setze einfache Variable
-        tpl.parse("PARSEPAGEHERE", "anotherpage.tpl");  // Parse andere Seite
-        tpl.template("index.tpl");                      // Setze das zu anzeigende Template
-    }
-```
+            tpl.set("VAR1", "Hello World")                  // Setze einfache Variable
+            tpl.parse("PARSEPAGEHERE", "anotherpage.tpl");  // Parse andere Seite
+            tpl.template("index.tpl");                      // Setze das zu anzeigende Template
+        }
+    ```
 
 4. Aufruf im Browser unter **'http://localhost:8000/mypage/'**
 
@@ -46,70 +46,70 @@
 
 1. Ordner mit package.json Datei und folgendem Beispielcode in **'./modules'** erstellen
 
-```javascript
+    ```javascript
 
-    {
-        "name": "mymodule",                     // Name
-        "description": "example description",   // Kurze Beschreibung
-        "version" : "0.0.1",
-        "main" : "./mymodule.js",               // rel. Pfad zum Einstiegspunkt
-        "plugin" : {
-            "consumes" : [                      // Abhängigkeit zu anderen Modulen erstellen
-                "module1",
-                "module2"
-            ],
-            "provides" : [                      // Modul für Architect-System freigeben
-                "mymodule"
-            ]
+        {
+            "name": "mymodule",                     // Name
+            "description": "example description",   // Kurze Beschreibung
+            "version" : "0.0.1",
+            "main" : "./mymodule.js",               // rel. Pfad zum Einstiegspunkt
+            "plugin" : {
+                "consumes" : [                      // Abhängigkeit zu anderen Modulen erstellen
+                    "module1",
+                    "module2"
+                ],
+                "provides" : [                      // Modul für Architect-System freigeben
+                    "mymodule"
+                ]
+            }
         }
-    }
-```
+    ```
 
 2. **'./config.js'** anpassen
 
-```javascript
+    ```javascript
 
-    {
-        "packagePath" : "./modules/mymodule",   // Pfad zum Modul
-        "port" : 1337,                          // Einfache Variable (später über options.prop1 aufrufbar)
-        "default" : {                           // Set von Optionen
-            "title" : "foo"
+        {
+            "packagePath" : "./modules/mymodule",   // Pfad zum Modul
+            "port" : 1337,                          // Einfache Variable (später über options.prop1 aufrufbar)
+            "default" : {                           // Set von Optionen
+                "title" : "foo"
+            }
+            "clients" : [
+                "client1" : "127.0.0.1"            // Arrays sind auch möglich
+            ]
         }
-        "clients" : [
-            "client1" : "127.0.0.1"            // Arrays sind auch möglich
-        ]
-    }
-```
+    ```
 
 3. Mithilfe folgendem Template Modul implementieren
 
-```javascript
+    ```javascript
 
-    var assert = require("assert");
+        var assert = require("assert");
 
-    var mymodule = {
-        "func1" : function() { },
-        "func2" : function() { }
-    };
+        var mymodule = {
+            "func1" : function() { },
+            "func2" : function() { }
+        };
 
-    // Private Funktion
-    function _privateFunc() {}
-
-
-    // options - enthält die in der config.js festgelegten Variablen
-    // imports - enthält alle in der package.json mit 'consumes' referenzierten Module
-    // register - Mithilfe register kann das komplette Modul oder nur Teilfunktionen verfügbar gemacht werden
-    module.exports = function(options, imports, register) {
-        assert(imports.module1, "Package 'module1' is required");   // Module1 auf Verfügbarkeit prüfen
-        assert(options.port, "Option 'port' is required");          // Option 'port' auf Verfügbarkeit prüfen
+        // Private Funktion
+        function _privateFunc() {}
 
 
-        // Modul freigeben
-        register(null, {
-            "mymodule" : mymodule
-        });
-    }
-```
+        // options - enthält die in der config.js festgelegten Variablen
+        // imports - enthält alle in der package.json mit 'consumes' referenzierten Module
+        // register - Mithilfe register kann das komplette Modul oder nur Teilfunktionen verfügbar gemacht werden
+        module.exports = function(options, imports, register) {
+            assert(imports.module1, "Package 'module1' is required");   // Module1 auf Verfügbarkeit prüfen
+            assert(options.port, "Option 'port' is required");          // Option 'port' auf Verfügbarkeit prüfen
+
+
+            // Modul freigeben
+            register(null, {
+                "mymodule" : mymodule
+            });
+        }
+    ```
 
 Für eine bessere/sicherere Kapselung des Moduls kann über register ein Objekt mit den verfügbaren Funktionen definiert werden
 
@@ -118,7 +118,7 @@ Für eine bessere/sicherere Kapselung des Moduls kann über register ein Objekt 
     register(null, {
         "mymodule" : {
             "publicFunc1" : mymodule.func1()
-        }
+            }
     });
 ```
 
