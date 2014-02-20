@@ -1,6 +1,6 @@
-## Webtemplate mitsamt Route erstellen
+### Webtemplate mitsamt Route erstellen
 
-1. HTML-Template 'mypage.tpl' unter __'./www/templates'__ erstellen
+1. HTML-Template 'mypage.tpl' unter **'./www/templates'** erstellen
 
 ```html
 
@@ -11,14 +11,14 @@
     </div>
 ```
 
-2. Express-Route in __'./modules/pagehandler/routes.js'__ hinzufügen
+2. Express-Route in **'./modules/pagehandler/routes.js'** hinzufügen
 
 ```javascript
 
     "/mypage/:getvar1" : "mypage"   // "express-route" : "name-der-funktion-in-pages.js"
 ```
 
-3. Funktion in __'./modules/pagehandler/pages.js'__ hinzufügen
+3. Funktion in **'./modules/pagehandler/pages.js'** hinzufügen
 
 ```javascript
 
@@ -39,12 +39,12 @@
     }
 ```
 
-4. Aufruf im Browser unter __'http://localhost:8000/mypage/'__
+4. Aufruf im Browser unter **'http://localhost:8000/mypage/'**
 
 
-## Architect-Modul erstellen
+### Architect-Modul erstellen
 
-1. Ordner mit package.json Datei und folgendem Beispielcode in ./modules erstellen
+1. Ordner mit package.json Datei und folgendem Beispielcode in **'./modules'** erstellen
 
 ```javascript
 
@@ -65,7 +65,7 @@
     }
 ```
 
-2. config.js anpassen
+2. **'./config.js'** anpassen
 
 ```javascript
 
