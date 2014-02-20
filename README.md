@@ -117,7 +117,7 @@ Für eine bessere/sicherere Kapselung des Moduls kann über register ein Objekt 
 
     register(null, {
         "mymodule" : {
-            "publicFunc1" : mymodule.func1()
+            "publicFunc1" : _privateFunc()
             }
     });
 ```
