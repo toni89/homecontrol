@@ -1,6 +1,6 @@
 ### Webtemplate mitsamt Route erstellen
 
-    1. HTML-Template 'mypage.tpl' unter **'./www/templates'** erstellen
+1. HTML-Template 'mypage.tpl' unter **'./www/templates'** erstellen
 
 ```html
 
@@ -11,14 +11,14 @@
     </div>
 ```
 
-    2. Express-Route in **'./modules/pagehandler/routes.js'** hinzufügen
+2. Express-Route in **'./modules/pagehandler/routes.js'** hinzufügen
 
-```javascript
+    ```javascript
 
-    "/mypage/:getvar1" : "mypage"   // "express-route" : "name-der-funktion-in-pages.js"
-```
+        "/mypage/:getvar1" : "mypage"   // "express-route" : "name-der-funktion-in-pages.js"
+    ```
 
-    3. Funktion in **'./modules/pagehandler/pages.js'** hinzufügen
+3. Funktion in **'./modules/pagehandler/pages.js'** hinzufügen
 
 ```javascript
 
