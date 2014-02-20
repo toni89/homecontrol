@@ -15,8 +15,8 @@
 
 ```javascript
 
-    "/mypage/:getvar1" : "mypage"   // "express-route" : "name-der-funktion-in-pages.js"`
-``
+    "/mypage/:getvar1" : "mypage"   // "express-route" : "name-der-funktion-in-pages.js"
+```
 
 3. Funktion in __'./modules/pagehandler/pages.js'__ hinzufügen
 
@@ -37,7 +37,7 @@
         tpl.parse("PARSEPAGEHERE", "anotherpage.tpl");  // Parse andere Seite
         tpl.template("index.tpl");                      // Setze das zu anzeigende Template
     }
-``
+```
 
 4. Aufruf im Browser unter __'http://localhost:8000/mypage/'__
 
@@ -62,8 +62,8 @@
                 "mymodule"
             ]
         }
-    }`
-``
+    }
+```
 
 2. config.js anpassen
 
@@ -78,8 +78,8 @@
         "clients" : [
             "client1" : "127.0.0.1"            // Arrays sind auch möglich
         ]
-    }`
-``
+    }
+```
 
 3. Mithilfe folgendem Template Modul implementieren
 
