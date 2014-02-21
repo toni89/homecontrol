@@ -1,0 +1,17 @@
+{
+    "name" : "gpio",
+    "description" : "Provides api for controlling Raspberry Gpio's",
+    "version" : "0.0.1",
+    "main" : "./gpio.js",
+    "dependencies" : {
+        "rpi-gpio" : "0.0.4"
+    },
+    "plugin" : {
+        "consumes" : [
+            "resthandler"
+        ],
+        "provides" : [
+            "gpio"
+        ]
+    }
+}

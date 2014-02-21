@@ -1,0 +1,11 @@
+{
+    "name" : "resthandler",
+    "description" : "Provides a simple rest-api",
+    "version" : "0.0.1",
+    "main" : "./resthandler.js",
+    "plugin" : {
+        "provides" : [
+            "resthandler"
+        ]
+    }
+}

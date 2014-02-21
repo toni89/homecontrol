@@ -1,5 +1,6 @@
 var server = "localhost",
-    port = 8000;
+    port = 8000,
+    restport = 8001;
 
 
 module.exports = [
@@ -31,5 +32,11 @@ module.exports = [
         "packagePath" : "./modules/pagehandler",
         "port" : port,
         "staticFiles" : __dirname + "/www/static"
+    },
+
+    // resthandler
+    {
+        "packagePath" : "./modules/resthandler",
+        "port" : restport
     }
 ]
