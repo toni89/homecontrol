@@ -1,0 +1,11 @@
+{
+    "name": "server",
+    "description": "Provides express and socket connection",
+    "version" : "0.0.1",
+    "main" : "./server.js",
+    "plugin" : {
+        "provides" : [
+            "server"
+        ]
+    }
+}

@@ -5,6 +5,7 @@
     "main" : "./pagehandler.js",
     "plugin" : {
         "consumes" : [
+            "server",
             "template",
             "meta"
         ]

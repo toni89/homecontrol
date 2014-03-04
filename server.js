@@ -11,8 +11,9 @@ var pluginPath,
 
 for(var i in plugins) {
     pluginPath =  path.join(__dirname, "plugins/" + plugins[i] + "/config.js");
-    if (fs.existsSync(pluginPath))
+    if (fs.existsSync(pluginPath)){
         config = config.concat(architect.loadConfig(pluginPath));
+    }
 }
 
 // Load plugins and start application

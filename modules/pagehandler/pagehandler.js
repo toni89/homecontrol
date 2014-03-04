@@ -4,19 +4,20 @@ var assert = require("assert"),
     routes = require("./routes.js");
 
 module.exports = function(options, imports, register) {
+    assert(imports.server, "Package 'server' is required");
     assert(imports.template, "Package 'template' is required");
     assert(imports.meta, "Package 'meta' is required");
-    assert(options.port, "Option 'port' is required");
-    assert(options.staticFiles, "Option 'staticFiles' is required");
+    assert(options.staticFiles, "Option 'staticFiles' is required");1
 
-    var app = express(),
+    var app = imports.server.express,
         tpl = imports.template,
         meta = imports.meta;
 
-    app.use(express.compress());
-    app.use(express.logger());
+    //app.use(express.compress());
+    //app.use(express.logger());
     app.use(express.static(options.staticFiles));
-    app.listen(options.port);
+
+
 
     Object.keys(routes).forEach(function(method) {
         var mapping = routes[method];

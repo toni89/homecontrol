@@ -2,7 +2,9 @@
     "name": "homecontrol",
     "version": "0.0.1",
     "dependencies" : {
+        "connect" : "2.13.0",
         "express" : "3.4.8",
+        "socket.io" : "0.8.5",
         "restify" : "2.6.1",
         "architect" : "0.1.10",
         "async" : "0.2.9",

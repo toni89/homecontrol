@@ -30,13 +30,12 @@ module.exports = [
     // pagehandler
     {
         "packagePath" : "./modules/pagehandler",
-        "port" : port,
         "staticFiles" : __dirname + "/www/static"
     },
 
-    // resthandler
+    // socket
     {
-        "packagePath" : "./modules/resthandler",
-        "port" : restport
+        "packagePath" : "./modules/server",
+        "port" : port
     }
 ]
