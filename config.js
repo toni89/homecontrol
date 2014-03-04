@@ -1,6 +1,5 @@
-var server = "localhost",
-    port = 8000,
-    restport = 8001;
+var server = "192.168.178.36",
+    port = 8000;
 
 
 module.exports = [

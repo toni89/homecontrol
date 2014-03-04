@@ -28,6 +28,7 @@
 
     <!-- Stylecheets / Custom -->
     <link rel="stylesheet" type="text/css" href="{%BASEDIR%}/js/sidr-1.2.1/stylesheets/jquery.sidr.dark.css" />
+    <link rel="stylesheet" type="text/css" href="{%BASEDIR%}/css/sidebar.css" />
     <link rel="stylesheet" type="text/css" href="{%BASEDIR%}/css/style.css" />
 
 
@@ -61,7 +62,7 @@
             <!-- Your content -->
             <ul>
                 <li><a href="#">List 1</a></li>
-                <li class="active"><a href="#">List 2</a></li>
+                <li><a href="#">List 2</a></li>
                 <li><a href="#">List 3</a></li>
             </ul>
         </div>
@@ -108,9 +109,10 @@
     <script src="{%BASEDIR%}/simplicity/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="{%BASEDIR%}/simplicity/assets/jquery-ui/jquery-ui-1.10.3.custom.min.js"></script>
 
+    <!-- Sidebar Stuff -->
     <script src="{%BASEDIR%}/js/sidr-1.2.1/jquery.sidr.min.js"></script>
-
-    <script src="{%BASEDIR%}/js/page.js"></script>
+    <script src="{%BASEDIR%}/js/jquery.touchwipe.min.js"></script>
+    <script src="{%BASEDIR%}/js/sidebar.js"></script>
 
 </body>
 </html>
