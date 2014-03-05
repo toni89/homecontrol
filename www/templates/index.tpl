@@ -15,6 +15,7 @@
 
     <!-- Stylesheets / Assets -->
     <link rel='stylesheet' type='text/css' href="{%BASEDIR%}/simplicity/assets/jquery-ui/ui-lightness/jquery-ui-1.10.3.custom.css" />
+    <link rel='stylesheet' type='text/css' href='{%BASEDIR%}/simplicity/assets/datatables/jquery.dataTables.css' />
 
     <!-- Stylesheets / Symplicity -->
     <link rel="stylesheet" type="text/css" href="{%BASEDIR%}/simplicity/css/styles-less.css" />
@@ -72,23 +73,17 @@
         <div class="content-liquid-full">
             <div class="container">
 
-                <!-- header start -->
+                <!-- header Start -->
                 <div class="row header-bar">
                     <ul class="left-icons">
                         <li><a id="toogle-sidr-sidebar" href="#sidr-sidebar" class="collapse-sidebar"><i class="fa fa-bars"></i></a></li>
                     </ul>
                 </div>
-                <!-- header end -->
+                <!-- header End -->
 
-
+                <!-- Content Start -->
                 {%PAGE%}
-
-
-
-
-
-
-
+                <!-- Content End -->
 
             </div>
         </div>
@@ -99,6 +94,8 @@
     <script src="{%BASEDIR%}/simplicity/assets/nicescroll/jquery.nicescroll.min.js"></script>
     <script src="{%BASEDIR%}/simplicity/assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="{%BASEDIR%}/simplicity/assets/jquery-ui/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="{%BASEDIR%}/simplicity/assets/datatables/jquery.dataTables.min.js"></script>
+
 
     <!-- Sidebar Stuff -->
     <script src="{%BASEDIR%}/js/sidr-1.2.1/jquery.sidr.min.js"></script>

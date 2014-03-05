@@ -1,0 +1,11 @@
+{
+    "name": "db",
+    "description": "Provides mongodb support",
+    "version" : "0.0.1",
+    "main" : "./db.js",
+    "plugin" : {
+        "provides" : [
+            "db"
+        ]
+    }
+}

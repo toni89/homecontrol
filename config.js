@@ -37,5 +37,11 @@ module.exports = [
     {
         "packagePath" : "./modules/server",
         "port" : port
+    },
+
+    // db
+    {
+        "packagePath" : "./modules/db",
+        "database" : "homecontrol"
     }
 ]
