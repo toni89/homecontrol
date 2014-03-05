@@ -1,4 +1,5 @@
-var server = "192.168.178.36",
+var ip = require("ip"),
+    server = ip.address(),
     port = 8000;
 
 
@@ -19,7 +20,7 @@ module.exports = [
     {
         "packagePath" : "./modules/meta",
         "default" : {
-            "title" : "MyPage",
+            "title" : "Homecontrol",
             "description" : "Pagedescription",
             "keywords" : "Pagekeywords",
             "robots" : "index,follow"

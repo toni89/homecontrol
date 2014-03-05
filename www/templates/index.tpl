@@ -63,7 +63,7 @@
             <ul>
                 <li><a href="#">List 1</a></li>
                 <li><a href="#">List 2</a></li>
-                <li><a href="#">List 3</a></li>
+                <li><a href="settings/">Settings</a></li>
             </ul>
         </div>
         <!-- Sidebar End -->

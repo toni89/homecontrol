@@ -3,9 +3,9 @@ module.exports = {
         tpl.parse("PAGE", "main.tpl");
         tpl.template("index.tpl");
     },
-    "tarif" : function(tpl, meta, req, res, next) {
-        meta.title("tarife");
-        tpl.parse("PAGE", "tarif.tpl");
+    "settings" : function(tpl, meta, req, res, next) {
+        meta.title("Settings");
+        tpl.parse("PAGE", "settings.tpl");
         tpl.template("index.tpl");
     }
 }

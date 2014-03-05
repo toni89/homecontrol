@@ -1,7 +1,7 @@
 module.exports = {
     "GET" : {
         "/" : "main",
-        "/tarif/:tarif" : "tarif"
+        "/settings" : "settings"
     },
     "POST" : {
 
