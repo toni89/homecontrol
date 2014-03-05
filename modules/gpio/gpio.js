@@ -1,6 +1,8 @@
 var assert = require("assert");
 
+
 var gpio = {};
+var i = 0;
 
 module.exports = function(options, imports, register) {
     assert(imports.server, "Package 'server' is required");
@@ -13,6 +15,7 @@ module.exports = function(options, imports, register) {
 
         var state = new Boolean(false);
         var states = {};
+
         socket.on('setPin', function(pin) {
             state = !state;
 
@@ -22,7 +25,7 @@ module.exports = function(options, imports, register) {
 
             */
 
-            console.log('setPin ' + pin);
+            console.log('change Pin: ' + pin);
 
             var data = {
                 id : pin,
