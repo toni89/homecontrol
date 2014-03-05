@@ -46,13 +46,28 @@
     <script src="{%BASEDIR%}/js/socket.io.min.js"></script>
 
 
+    <!-- Javascripts -->
+    <script src="{%BASEDIR%}/simplicity/assets/jquery/jquery.min.js"></script>
+    <script src="{%BASEDIR%}/simplicity/assets/nicescroll/jquery.nicescroll.min.js"></script>
+    <script src="{%BASEDIR%}/simplicity/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{%BASEDIR%}/simplicity/assets/jquery-ui/jquery-ui-1.10.3.custom.min.js"></script>
+    <script src="{%BASEDIR%}/simplicity/assets/datatables/jquery.dataTables.min.js"></script>
+
+    <!-- Sidebar Stuff -->
+    <script src="{%BASEDIR%}/js/sidr-1.2.1/jquery.sidr.min.js"></script>
+    <script src="{%BASEDIR%}/js/jquery.touchwipe.min.js"></script>
+    <script src="{%BASEDIR%}/js/sidebar.js"></script>
+
     <script>
-        var socket = io.connect('http://localhost');
-        socket.on('hello', function (data) {
-            console.log(data);
+        $(document).ready(function(){
+            var socket = io.connect('http://localhost');
+
+            $('#test').click(function(){
+                socket.emit("setPin", '1');
+                console.log('Pin 1 geschickt');
+            });
         });
     </script>
-
 
 </head>
 <body>
@@ -89,19 +104,5 @@
             </div>
         </div>
     </section>
-
-    <!-- Javascripts -->
-    <script src="{%BASEDIR%}/simplicity/assets/jquery/jquery.min.js"></script>
-    <script src="{%BASEDIR%}/simplicity/assets/nicescroll/jquery.nicescroll.min.js"></script>
-    <script src="{%BASEDIR%}/simplicity/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="{%BASEDIR%}/simplicity/assets/jquery-ui/jquery-ui-1.10.3.custom.min.js"></script>
-    <script src="{%BASEDIR%}/simplicity/assets/datatables/jquery.dataTables.min.js"></script>
-
-
-    <!-- Sidebar Stuff -->
-    <script src="{%BASEDIR%}/js/sidr-1.2.1/jquery.sidr.min.js"></script>
-    <script src="{%BASEDIR%}/js/jquery.touchwipe.min.js"></script>
-    <script src="{%BASEDIR%}/js/sidebar.js"></script>
-
 </body>
 </html>

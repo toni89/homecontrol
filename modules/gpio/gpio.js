@@ -9,8 +9,11 @@ module.exports = function(options, imports, register) {
 
     io.sockets.on('connection', function(socket) {
 
-        socket.emit('hello', { hello: 'braa' });
+        socket.emit('hello', { hello: 'Hallo GPIOs' });
 
+        socket.on('setPin', function(pin) {
+            console.log(pin + 'PIN geschalten');
+        });
     });
 
     register(null, {
