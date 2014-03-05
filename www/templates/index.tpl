@@ -32,19 +32,15 @@
     <link rel="stylesheet" type="text/css" href="{%BASEDIR%}/css/sidebar.css" />
     <link rel="stylesheet" type="text/css" href="{%BASEDIR%}/css/style.css" />
 
-
-
     <!-- IE9 Compatibility -->
     <!--[if lt IE 9]>
     <script src="{%BASEDIR%}/simplicity/js/html5shiv.js"></script>
     <script src="{%BASEDIR%}/simplicity/js/respond.min.js"></script>
     <![endif]-->
 
-
     <!-- JavaScripts -->
     <script src="{%BASEDIR%}/js/enquire.min.js"></script>
     <script src="{%BASEDIR%}/js/socket.io.min.js"></script>
-
 
     <!-- Javascripts -->
     <script src="{%BASEDIR%}/simplicity/assets/jquery/jquery.min.js"></script>
@@ -62,9 +58,21 @@
         $(document).ready(function(){
             var socket = io.connect('http://localhost');
 
-            $('#test').click(function(){
-                socket.emit("setPin", '1');
-                console.log('Pin 1 geschickt');
+            $('.col-lg-2').click(function(event){
+                socket.emit("setPin", this.id);
+                //console.log('Pin ' + this.id + 'aktiviert');
+            });
+
+            socket.on('changeState', function (data) {
+
+                console.log(data);
+                $('#' + data.id).children().removeClass();
+
+                if(data.state == true){
+                    $('#' + data.id).children().addClass("effect-button bounce-button");
+                }else if(data.state == false){
+                    $('#' + data.id).children().addClass("effect-button pulse-button");
+                }
             });
         });
     </script>
@@ -84,7 +92,6 @@
             </ul>
         </div>
         <!-- Sidebar End -->
-
 
         <div class="content-liquid-full">
             <div class="container">
