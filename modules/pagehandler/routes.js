@@ -2,7 +2,8 @@ module.exports = {
     "GET" : {
         "/" : "main",
         "/login" : "login",
-        "/settings" : "settings"
+        "/settings" : "settings",
+        "/gpio" : "gpio"
     },
     "POST" : {
 

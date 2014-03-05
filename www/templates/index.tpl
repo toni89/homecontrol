@@ -65,6 +65,7 @@
                 <li><a href="{%BASEDIR%}/">Home</a></li>
                 <li><a href="#">List 2</a></li>
                 <li><a href="{%BASEDIR%}/settings/">Settings</a></li>
+                <li><a href="{%BASEDIR%}/gpio/">GPIO Control</a></li>
             </ul>
         </div>
         <!-- Sidebar End -->
