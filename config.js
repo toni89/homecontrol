@@ -43,5 +43,10 @@ module.exports = [
     {
         "packagePath" : "./modules/db",
         "database" : "homecontrol"
+    },
+
+    // gpio
+    {
+        "packagePath" : "./modules/gpio"
     }
 ]
