@@ -10,16 +10,13 @@
         socket.on('initPins', function (pins) {
             $('.row').empty();
             pins.forEach(function(pin) {
-
                 if (pin.State == true){
                     var $element = $("<div id = " + pin._id + " + onclick = switchPin(" + pin._id + ") class=\"col-lg-2 col-md-4 col-sm-4 col-xs-6\"><div data-effect=\"bounce\" class=\"effect-button pulse-button\"><i class=\"fa fa-star\"></i>" + pin.Name + "</div></div>");
                     $($element).appendTo('.row');
-
                 }else{
                     var $element = $("<div id = " + pin._id + " + onclick = switchPin(" + pin._id + ") class=\"col-lg-2 col-md-4 col-sm-4 col-xs-6\"><div data-effect=\"bounce\" class=\"effect-button bounce-button\"><i class=\"fa fa-star\"></i>" + pin.Name + "</div></div>");
                     $($element).appendTo('.row');
                 }
-
             });
         });
 
