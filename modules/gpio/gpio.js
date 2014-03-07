@@ -1,63 +1,51 @@
 var assert = require("assert");
 var RaspberryPinInfo = require('./RaspberryPinInfo.json');
-
+var db = require("./db.js");
 var gpio = {};
-var i = 0;
-
-function PinStore() {
-    this.pins = {};
-}
-
-PinStore.prototype.add = function (pin, callback) {
-    pin._id = i++;
-    pin.State = new Boolean(false);
-
-    this.pins[pin._id] = pin;
-    setImmediate(callback, null);
-};
 
 module.exports = function(options, imports, register) {
     assert(imports.server, "Package 'server' is required");
 
-    var io = imports.server.io;
+    db.connect(function (err) {
+        db = db.getInstance();
 
-    //var gpio = require('rpi-gpio');
-    var pin_state = new Boolean(false);
+        //Auslesen einer json Datei mit Informationen über die GPIO Pins
+        //for (pin in RaspberryPinInfo)
+        //{
+            //db.add({name:pin},function(err){});
+        //}
+        db.add({Name : 'Pin 13', Nr: 13},function(err){});
+        db.add({Name : 'Pin 16', Nr: 16},function(err){});
+        db.add({Name : 'Pin 17', Nr: 17},function(err){});
+        db.add({Name : 'Pin 18', Nr: 18},function(err){});
 
-    var PinStore = new PinStore();
-    for (pin in RaspberryPinInfo)
-    {
-        //PinStore.add({pin:pin},function(err){});
-    }
+        //Alles frisch initialisieren
+        function initFresh(socket){
+            db.findAll(function(err, pins){
+                console.log(pins);
+                socket.emit('initPins', pins);
+            });
+        }
 
-    io.sockets.on('connection', function(socket) {
+        var io = imports.server.io;
+        io.sockets.on('connection', function(socket) {
 
-        socket.emit('hello', { hello: 'Hallo GPIOs' });
+            //Alle Pins aus dem Arbeitsspeicher auslesen
+            initFresh(socket);
 
-        socket.on('setPin', function(pin_id) {
-
-            /*
-            gpio.setup(pin_id, gpio.DIR_OUT, write);
-            pin_state = !pin_state;
-
-            function write() {
-                gpio.write(pin_id, pin_state, function(err) {
+            socket.on('switchPin', function(pin_id) {
+                function onUpdate(err) {
                     if (err) throw err;
-                    console.log('Written to Pin: ' + pin_id + ' State: ' + pin_state);
+                }
+
+                db.findById(pin_id, function(err, pin){
+                    pin.State = !pin.State;
+                    db.update(pin, onUpdate);
                 });
-            }
-            */
-
-            var data = {
-                id : pin,
-                state : state
-            }
-
-            //Emit + Broadcast
-            socket.emit('changeState', data);
-            socket.broadcast.emit('changeState', data);
-
+                initFresh(socket);
+            });
         });
+
     });
 
     register(null, {

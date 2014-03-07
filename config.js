@@ -44,12 +44,12 @@ module.exports = [
         "packagePath" : "./modules/db",
         "database" : "homecontrol"
     },
-/*
-    // gpio
+
+    //gpio
     {
         "packagePath" : "./modules/gpio"
     },
-*/
+
     // user
     {
         "packagePath" : "./modules/user",
