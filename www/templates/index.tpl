@@ -41,6 +41,7 @@
     <!-- JavaScripts -->
     <script src="{%BASEDIR%}/js/enquire.min.js"></script>
     <script src="{%BASEDIR%}/js/socket.io.min.js"></script>
+    <script src="{%BASEDIR%}/js/homecontrol/core.js"></script>
 
     <!-- Javascripts -->
     <script src="{%BASEDIR%}/simplicity/assets/jquery/jquery.min.js"></script>
@@ -53,29 +54,6 @@
     <script src="{%BASEDIR%}/js/sidr-1.2.1/jquery.sidr.min.js"></script>
     <script src="{%BASEDIR%}/js/jquery.touchwipe.min.js"></script>
     <script src="{%BASEDIR%}/js/sidebar.js"></script>
-
-    <script>
-        $(document).ready(function(){
-            var socket = io.connect('http://localhost');
-
-            $('.col-lg-2').click(function(event){
-                socket.emit("setPin", this.id);
-                //console.log('Pin ' + this.id + 'aktiviert');
-            });
-
-            socket.on('changeState', function (data) {
-
-                console.log(data);
-                $('#' + data.id).children().removeClass();
-
-                if(data.state == true){
-                    $('#' + data.id).children().addClass("effect-button bounce-button");
-                }else if(data.state == false){
-                    $('#' + data.id).children().addClass("effect-button pulse-button");
-                }
-            });
-        });
-    </script>
 
 </head>
 <body>

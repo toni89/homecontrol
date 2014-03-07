@@ -1,0 +1,15 @@
+{
+    "name": "user",
+    "description": "Handles user authentication",
+    "version" : "0.0.1",
+    "main" : "./user.js",
+    "plugin" : {
+        "consumes" : [
+            "db",
+            "server"
+        ],
+        "provides" : [
+            "user"
+        ]
+    }
+}

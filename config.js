@@ -44,9 +44,20 @@ module.exports = [
         "packagePath" : "./modules/db",
         "database" : "homecontrol"
     },
-
+/*
     // gpio
     {
         "packagePath" : "./modules/gpio"
+    },
+*/
+    // user
+    {
+        "packagePath" : "./modules/user",
+        "defaultUser" : {
+            "name" : "admin",
+            "password" : "admin"
+        },
+        "failureRoute" : "/login",
+        "lifetime" : "600"  // Logouts after 10 minutes
     }
 ]
