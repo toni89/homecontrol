@@ -10,20 +10,19 @@ module.exports = function(options, imports, register) {
         db = db.getInstance();
 
         //Auslesen einer json Datei mit Informationen über die GPIO Pins
-        //for (pin in RaspberryPinInfo)
-        //{
-            //db.add({name:pin},function(err){});
-        //}
-        db.add({Name : 'Pin 13', Nr: 13},function(err){});
-        db.add({Name : 'Pin 16', Nr: 16},function(err){});
-        db.add({Name : 'Pin 17', Nr: 17},function(err){});
-        db.add({Name : 'Pin 18', Nr: 18},function(err){});
+        for (pin in RaspberryPinInfo)
+        {
+            var name = pin
+            var nr = RaspberryPinInfo[pin];
+            db.add({Name : name, Nr: nr},function(err){});
+        }
 
         //Alles frisch initialisieren
         function initFresh(socket){
             db.findAll(function(err, pins){
                 console.log(pins);
                 socket.emit('initPins', pins);
+                socket.broadcast.emit('initPins', pins);
             });
         }
 
