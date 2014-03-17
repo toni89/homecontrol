@@ -1,5 +1,5 @@
 var assert = require("assert");
-var RaspberryPinInfo = require('./RaspberryPinInfo.json');
+var RaspberryPinInfo = require('./PinInfo.json');
 var db = require("./db.js");
 var gpio = {};
 
