@@ -44,7 +44,6 @@ module.exports = function(options, imports, register) {
                 initFresh(socket);
             });
         });
-
     });
 
     register(null, {
