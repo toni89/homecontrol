@@ -1,7 +1,19 @@
 var assert = require("assert");
 var RaspberryPinInfo = require('./PinInfo.json');
 var db = require("./db.js");
-var gpio = {};
+gpio = require('rpi-gpio');
+
+function changePin(nr, name, state){
+
+    gpio.setup(nr, gpio.DIR_OUT, write);
+
+    function write() {
+        gpio.write(nr, state, function(err) {
+            /*if (err) throw err;*/
+            console.log('Written to Pin: ' + name + ' State: ' + state);
+        });
+    }
+}
 
 module.exports = function(options, imports, register) {
     assert(imports.server, "Package 'server' is required");
@@ -17,10 +29,20 @@ module.exports = function(options, imports, register) {
             db.add({Name : name, Nr: nr},function(err){});
         }
 
-        //Alles frisch initialisieren
+        //Initialisiert Pins
         function initFresh(socket){
             db.findAll(function(err, pins){
-                console.log(pins);
+
+                //Pins einstellen
+                var i = 0;
+                while(i < pins.length){
+
+                    changePin(pins[i].Nr, pins[i].Name, pins[i].State);
+
+                    i += 1;
+                }
+
+                //Pins ausgeben
                 socket.emit('initPins', pins);
                 socket.broadcast.emit('initPins', pins);
             });
