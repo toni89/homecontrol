@@ -1,0 +1,13 @@
+.content-liquid-full {
+    margin: auto 0px;
+}
+
+
+.header-bar {
+    padding-top: 0px !important;
+}
+
+ul.left-icons {
+    display: block;
+    float: left !important;
+}

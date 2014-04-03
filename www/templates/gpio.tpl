@@ -1,6 +1,6 @@
 <script>
 
-    var socket = io.connect('http://192.168.0.109');
+    var socket = io.connect('http://localhost');
 
     function switchPin(id){
         socket.emit("switchPin", id);

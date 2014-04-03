@@ -43,7 +43,7 @@ module.exports = function(options, imports, register) {
             });
         }
 
-        /*
+
         if(method == "POST") {
             Object.keys(mapping).forEach(function(route) {
                 var code = mapping[route];
@@ -55,7 +55,7 @@ module.exports = function(options, imports, register) {
                 });
             });
         }
-        */
+
     });
 
     register();

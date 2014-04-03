@@ -1,0 +1,9 @@
+* Gruppe zuweisen (Mehrfachauswahl) und erstellen -> Modal
+* Scheduler
+* Gruppen ordnen
+
+New Form:
+* Set State on Reboot ON / OFF
+
+
+

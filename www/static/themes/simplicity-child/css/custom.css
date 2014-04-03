@@ -1,0 +1,12 @@
+#login-layer {
+    position: absolute;
+    overflow: visible;
+    z-index: 999;
+    width: 100px;
+    height: 100px;
+    background-color: green;
+}
+
+#easymodal-window {
+    background:url('../../simplicity/_demo/images/login-background.jpg')
+}
