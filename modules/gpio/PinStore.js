@@ -6,7 +6,7 @@ function PinStore() {
 
 PinStore.prototype.add = function (pin, callback) {
     pin._id = i++;
-    pin.State = false;
+    pin.State = true;
 
     this.pins[pin._id] = pin;
     setImmediate(callback, null);

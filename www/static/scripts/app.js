@@ -9,7 +9,8 @@ require.config({
         jquery: 'libs/jquery/jquery-2.1.0.min',
         'jquery.sidr': 'libs/jquery.sidr/jquery.sidr.min',
         'jquery.touchwipe': 'libs/jquery.touchwipe/jquery.touchwipe-1.1.1.min',
-        enquire: 'libs/enquire/enquire-2.1.0.min'
+        enquire: 'libs/enquire/enquire-2.1.0.min',
+        socketio: 'libs/socketio/socket.io'
     },
 
     // Lib Configuration
@@ -40,6 +41,8 @@ define('App',['ember', 'hbs'],
         });
 });
 
+
+
 require(["App"], function(App) {
 
     // Release Control to User
@@ -52,6 +55,7 @@ require(["App"], function(App) {
         this.route("dashboard");        // /#/dashboard
         this.route("settings");         // /#/settings
         this.route("remotesockets");    // /#/remotesockets
+        this.route("gpio");
     });
 
     require([
@@ -62,9 +66,10 @@ require(["App"], function(App) {
         "main/views/SettingsView",
 
         // Load Plugins
-        "plugins/remotesockets/loader"
+        "plugins/remotesockets/loader",
+        "plugins/gpio/loader"
 
-    ], function(ApplicationView, SidebarView, DashboardView, SettingsView , remotesockets) {
+    ], function(ApplicationView, SidebarView, DashboardView, SettingsView , remotesockets, gpio) {
 
         // Application Base
         App.ApplicationView = ApplicationView;  // Load ApplicationTemplate
@@ -74,6 +79,9 @@ require(["App"], function(App) {
 
         // Load Plugin into App
         App.reopen(remotesockets);
+        App.reopen(gpio);
+
+        console.log(App);
 
         // Give Control back to Ember
         App.advanceReadiness();
