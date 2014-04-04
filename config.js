@@ -45,6 +45,11 @@ module.exports = [
         "database" : "homecontrol"
     },
 
+    //sqldb
+    /*{
+        "packagePath" : "./modules/mysql"
+    },*/
+
     //gpio
     {
         "packagePath" : "./modules/gpio"
