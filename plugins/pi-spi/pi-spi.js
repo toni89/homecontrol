@@ -24,6 +24,7 @@ module.exports = function(options, imports, register) {
         }
     });
 
+
     // Modul freigeben
     register(null, {
         "spi" : spi

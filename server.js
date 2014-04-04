@@ -12,7 +12,11 @@ var pluginPath,
 for(var i in plugins) {
     pluginPath =  path.join(__dirname, "plugins/" + plugins[i] + "/config.js");
     if (fs.existsSync(pluginPath)){
-        config = config.concat(architect.loadConfig(pluginPath));
+        var pluginConfig = architect.loadConfig(pluginPath);
+
+
+        if(!(pluginConfig[0].hasOwnProperty('disabled') && pluginConfig[0].disabled == true))
+            config = config.concat(pluginConfig);
     }
 }
 

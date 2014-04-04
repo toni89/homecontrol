@@ -5,7 +5,7 @@
     "main" : "./pi-spi.js",
     "plugin" : {
         "provides" : [
-            "gpio"
+            "spi"
         ]
     }
 }
