@@ -2,8 +2,8 @@ require.config({
     paths: {
         // Libs
         ember: 'libs/emberjs/emberjs-1.5.0',
-        'ember.ds': 'libs/emberjs.ds/ember-data.min',
-        'ember.states': 'libs/emberjs.states/main',
+        'ember.ds': 'libs/emberjs.ds/ember-data',
+        'ember.states': 'libs/emberjs.states/ember-states',
         'ember.view': 'libs/emberjs/View',
         handlebars: 'libs/handlebars/handlebars-1.3.0',
         hbs: 'libs/handlebars.hbs/hbs',
@@ -29,7 +29,11 @@ require.config({
         },
 
         "ember.ds": {
-            deps: ["ember", 'ember.states']
+            deps: ["ember"]
+        },
+
+        "ember.states": {
+            deps: ["ember"]
         },
 
         // Handlebar Compilation Plugin
@@ -41,7 +45,7 @@ require.config({
 
 
 // First: Base with Ember / hbs-Plugin and App instance
-define('App',['ember', 'ember.ds', 'hbs'],
+define('App',['ember', 'ember.states', 'ember.ds', 'hbs'],
     function () {
         return window.App = Ember.Application.create({
             LOG_TRANSITIONS: true
