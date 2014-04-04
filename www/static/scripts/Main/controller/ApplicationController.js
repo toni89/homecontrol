@@ -1,3 +1,4 @@
+/* App */
 define("main/controller/ApplicationController",
 [
 
