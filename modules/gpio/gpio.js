@@ -3,15 +3,12 @@ var RaspberryPinInfo = require('./PinInfo.json');
 var db = require("./db.js");
 gpio = require('rpi-gpio');
 
-/*if (err) throw err;*/
-
 function changePin(nr, name, state){
 
     gpio.setup(nr, gpio.DIR_OUT, write);
 
     function write() {
         gpio.write(nr, state, function(err) {
-
             console.log('Written to Pin: ' + name + ' State: ' + state);
         });
     }
@@ -31,8 +28,23 @@ module.exports = function(options, imports, register) {
             db.add({Name : name, Nr: nr},function(err){});
         }
 
-        function giveAllPins(socket){
+        //Initialisiert Pins
+        function initFresh(socket){
             db.findAll(function(err, pins){
+
+                //Pins einstellen
+                var i = 0;
+                while(i < pins.length){
+
+                    var nr = pins[i].Nr;
+                    var name = pins[i].Name;
+                    var state = pins[i].State;
+
+                    changePin(nr, name, state);
+
+                    i += 1;
+                }
+
                 //Pins ausgeben
                 socket.emit('initPins', pins);
                 socket.broadcast.emit('initPins', pins);
@@ -43,8 +55,7 @@ module.exports = function(options, imports, register) {
         io.sockets.on('connection', function(socket) {
 
             //Alle Pins aus dem Arbeitsspeicher auslesen
-            //initFresh(socket);
-            giveAllPins(socket);
+            initFresh(socket);
 
             socket.on('switchPin', function(pin_id) {
                 function onUpdate(err) {
@@ -54,12 +65,8 @@ module.exports = function(options, imports, register) {
                 db.findById(pin_id, function(err, pin){
                     pin.State = !pin.State;
                     db.update(pin, onUpdate);
-
-                    //Am Ende der Funktion initalisieren
-                    //initFresh(socket);
-                    changePin(pin.Nr, pin.Name, pin.State);
-                    giveAllPins(socket);
                 });
+                initFresh(socket);
             });
         });
     });
