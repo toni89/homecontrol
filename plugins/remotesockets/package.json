@@ -1,0 +1,11 @@
+{
+    "name": "remotesockets",
+    "description": "Povides control layer for 433Mhz power sockets",
+    "version" : "0.0.1",
+    "main" : "./remotesockets.js",
+    "plugin" : {
+        "consumes" : [
+            "server"
+        ]
+    }
+}

@@ -3,14 +3,12 @@ define(
     // Define Routes, Controller, Views, etc.
     ["./routes/RemotesocketsRoute",
      "./controller/RemotesocketsController",
-     "./views/RemotesocketsView",
-     "./views/TriggerSocketView"]
-, function(RemotesocketsRoute, RemotesocketsController, RemotesocketsView, TriggerSocketView) {
+     "./views/RemotesocketsView"]
+, function(RemotesocketsRoute, RemotesocketsController, RemotesocketsView) {
     // Build Object Package an return it to App
     return {
         RemotesocketsRoute: RemotesocketsRoute,
         RemotesocketsController: RemotesocketsController,
-        RemotesocketsView: RemotesocketsView,
-        TriggerSocketView: TriggerSocketView
+        RemotesocketsView: RemotesocketsView
     }
 });

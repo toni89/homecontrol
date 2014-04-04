@@ -1,6 +1,7 @@
 define(
     [],
     function() {
+
         return Ember.Route.extend({
             model: function() {
                 return [
@@ -8,6 +9,17 @@ define(
                     {name: "GPIO 15", gpio: 10},
                     {name: "GPIO 14", gpio: 8}
                 ];
-            }
+            }/*,
+
+            setupController: function(controller, data) {
+            /*
+                App.io.on('initPins', function(pins) {
+                    console.log(pins);
+                });
+
+                App.io.emit('m/gpio/list');
+
+            }*/
+
         });
     });

@@ -2,12 +2,15 @@ define(
     [],
     function() {
         return Ember.Route.extend({
-            model: function() {
-                return [
-                    {name: "Kaffeemaschine", group: "generated", code: "001"},
-                    {name: "Waschmaschine", group: "generated", code: "010"},
-                    {name: "Wassersprengler", group: "generated", code: "011"}
-                ];
+
+            setupController: function(controller, model) {
+
+
+                App.io.on('p/remotesockets/list', function(data) {
+                    controller.set('model', data);
+                });
+
+                App.io.emit('p/remotesockets/list');
             }
         });
     });

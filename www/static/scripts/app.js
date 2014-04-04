@@ -45,7 +45,7 @@ require.config({
 
 
 // First: Base with Ember / hbs-Plugin and App instance
-define('App',['ember', 'ember.states', 'ember.ds', 'hbs'],
+define('App',['ember', 'ember.states', 'ember.ds', 'hbs', 'socketio'],
     function () {
         return window.App = Ember.Application.create({
             LOG_TRANSITIONS: true
@@ -55,6 +55,9 @@ define('App',['ember', 'ember.states', 'ember.ds', 'hbs'],
 
 
 require(["App"], function(App) {
+
+    App.io = io.connect();
+
 
     // Release Control to User
     App.deferReadiness();
@@ -91,8 +94,6 @@ require(["App"], function(App) {
         // Load Plugin into App
         App.reopen(remotesockets);
         App.reopen(gpio);
-
-        console.log(App);
 
         // Give Control back to Ember
         App.advanceReadiness();

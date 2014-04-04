@@ -25,7 +25,7 @@
         <div class="inner no-radius">
 
             {{#each controller}}
-                {{#view App.TriggerSocketView}}<button type="button" class="btn btn-lg btn-primary">{{name}} - {{code}}</button>{{/view}}
+                <button {{action 'triggerSocket' id}} type="button" class="btn btn-lg btn-primary">{{name}} - {{code}}</button>
             {{/each}}
 
         </div>
