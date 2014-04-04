@@ -1,0 +1,11 @@
+{
+    "name" : "pi-spi",
+    "description" : "Provides api for controlling Raspberry SPIDEV",
+    "version" : "0.8.7",
+    "main" : "./pi-spi.js",
+    "plugin" : {
+        "provides" : [
+            "gpio"
+        ]
+    }
+}
