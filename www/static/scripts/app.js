@@ -2,6 +2,8 @@ require.config({
     paths: {
         // Libs
         ember: 'libs/emberjs/emberjs-1.5.0',
+        'ember.ds': 'libs/emberjs.ds/ember-data.min',
+        'ember.states': 'libs/emberjs.states/main',
         'ember.view': 'libs/emberjs/View',
         handlebars: 'libs/handlebars/handlebars-1.3.0',
         hbs: 'libs/handlebars.hbs/hbs',
@@ -10,6 +12,7 @@ require.config({
         'jquery.sidr': 'libs/jquery.sidr/jquery.sidr.min',
         'jquery.touchwipe': 'libs/jquery.touchwipe/jquery.touchwipe-1.1.1.min',
         enquire: 'libs/enquire/enquire-2.1.0.min',
+        underscore: 'libs/underscore/underscore.min',
         socketio: 'libs/socketio/socket.io'
     },
 
@@ -17,12 +20,16 @@ require.config({
     shim: {
 
         ember: {
-            deps: ["jquery", "handlebars"]
+            deps: ["jquery", "handlebars", "underscore"]
         },
 
         // Extends default view with some Extramethods-/hooks like 'afterRender'
         "ember.view": {
             deps: ["ember"]
+        },
+
+        "ember.ds": {
+            deps: ["ember", 'ember.states']
         },
 
         // Handlebar Compilation Plugin
@@ -34,7 +41,7 @@ require.config({
 
 
 // First: Base with Ember / hbs-Plugin and App instance
-define('App',['ember', 'hbs'],
+define('App',['ember', 'ember.ds', 'hbs'],
     function () {
         return window.App = Ember.Application.create({
             LOG_TRANSITIONS: true

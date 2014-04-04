@@ -37,7 +37,8 @@
 <h2>GPIO Control</h2>
 
 <div class="row">
+
     {{#each controller}}
-        {{#view App.GpioClickedView}}<button type="button" class="btn btn-lg btn-primary">{{name}} - {{gpio}}</button>{{/view}}
+        <button {{action 'switchValue'}} type="button" class="btn btn-lg btn-primary">{{name}} - {{gpio}}</button>
     {{/each}}
 </div>
