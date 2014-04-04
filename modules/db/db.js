@@ -1,10 +1,6 @@
 var assert = require("assert"),
     mongoose = require("mongoose");
 
-
-
-
-
 module.exports = function(options, imports, register) {
     assert(options.database, "Option 'database' is required");
 
@@ -29,7 +25,6 @@ module.exports = function(options, imports, register) {
             process.exit(0);
         });
     });
-
 
     register(null, {
         "db" : {
