@@ -57,6 +57,10 @@ module.exports = function(options, imports, register) {
             //Alle Pins aus dem Arbeitsspeicher auslesen
             initFresh(socket);
 
+            socket.on('list', function() {
+                initFresh(socket);
+            });
+
             socket.on('switchPin', function(pin_id) {
                 function onUpdate(err) {
                     if (err) throw err;

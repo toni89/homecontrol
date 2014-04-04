@@ -51,9 +51,9 @@ module.exports = [
     },*/
 
     //gpio
-    {
+    /*{
         "packagePath" : "./modules/gpio"
-    },
+    },*/
 
     // user
     {

@@ -5,8 +5,7 @@ SPI = require('pi-spi');
 // imports - enthält alle in der package.json mit 'consumes' referenzierten Module
 // register - Mithilfe register kann das komplette Modul oder nur Teilfunktionen verfügbar gemacht werden
 module.exports = function(options, imports, register) {
-    assert(imports.module1, "Package 'module1' is required");   // Module1 auf Verfügbarkeit prüfen
-    assert(options.port, "Option 'port' is required");          // Option 'port' auf Verfügbarkeit prüfen
+
 
     var spi = SPI.initialize("/dev/spidev0.0"),
         test = Buffer("Hello, World!");
@@ -29,6 +28,7 @@ module.exports = function(options, imports, register) {
     register(null, {
         "spi" : spi
     });
+
 }
 
 
