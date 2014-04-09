@@ -11,6 +11,11 @@
 
     <div class="boxed">
 
+        {{#link-to 'remotesockets.new'}}<button type="button" class="btn btn-lg btn-success">New Socket</button>{{/link-to}}
+        <br><br>
+
+        {{outlet}}
+
         <!-- Title Bart Start -->
         <div class="title-bar white">
             <h4>Generated Content</h4>
@@ -24,7 +29,7 @@
 
         <div class="inner no-radius">
 
-            {{#each controller}}
+            {{#each controller.index}}
                 <button {{action 'triggerSocket' id}} type="button" class="btn btn-lg btn-primary">{{name}} - {{code}}</button>
             {{/each}}
 

@@ -1,7 +1,7 @@
 var assert = require("assert");
 var RaspberryPinInfo = require('./PinInfo.json');
 var db = require("./db.js");
-gpio = require('rpi-gpio');
+    gpio = require('rpi-gpio');
 
 function changePin(nr, name, state){
 
@@ -14,53 +14,69 @@ function changePin(nr, name, state){
     }
 }
 
+/*
+function initFresh(mydb){
+    mydb.findAll(function(err, pins){
+
+        //Pins einstellen
+        var i = 0;
+        while(i < pins.length){
+
+            var nr = pins[i].Nr;
+            var name = pins[i].Name;
+            var state = pins[i].State;
+
+            //changePin(nr, name, state);
+
+            i += 1;
+        }
+    });
+}
+
+function listPins(mydb) {
+    mydb.findAll(function(err, pins){
+       return pins;
+    });
+}
+*/
+
+function initPins(pins) {
+    for(pin in pins) {
+        //changePin(pin.pin, pin.name, pin.state);
+    }
+}
+
 module.exports = function(options, imports, register) {
     assert(imports.server, "Package 'server' is required");
 
     db.connect(function (err) {
         db = db.getInstance();
 
+        var pins = RaspberryPinInfo;
+
         //Auslesen einer json Datei mit Informationen über die GPIO Pins
         for (pin in RaspberryPinInfo)
         {
-            var name = pin
-            var nr = RaspberryPinInfo[pin];
-            db.add({Name : name, Nr: nr},function(err){});
+            db.add({ id: pin.id, name : pin.name, pin: pin.pin, state: pin.state },
+                function(err){
+                    console.log("Can't write pin to db");
+                }
+            );
         }
 
         //Initialisiert Pins
-        function initFresh(socket){
-            db.findAll(function(err, pins){
-
-                //Pins einstellen
-                var i = 0;
-                while(i < pins.length){
-
-                    var nr = pins[i].Nr;
-                    var name = pins[i].Name;
-                    var state = pins[i].State;
-
-                    changePin(nr, name, state);
-
-                    i += 1;
-                }
-
-                //Pins ausgeben
-                socket.emit('initPins', pins);
-                socket.broadcast.emit('initPins', pins);
-            });
-        }
+        //initFresh(db);
+        initPins(pins)
 
         var io = imports.server.io;
         io.sockets.on('connection', function(socket) {
 
-            //Alle Pins aus dem Arbeitsspeicher auslesen
-            initFresh(socket);
 
-            socket.on('list', function() {
-                initFresh(socket);
+            socket.on('p/gpio/list', function() {
+                socket.emit('p/gpio/list', pins);
             });
 
+            /*
             socket.on('switchPin', function(pin_id) {
                 function onUpdate(err) {
                     if (err) throw err;
@@ -72,6 +88,8 @@ module.exports = function(options, imports, register) {
                 });
                 initFresh(socket);
             });
+            */
+
         });
     });
 

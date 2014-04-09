@@ -1,6 +1,6 @@
 module.exports = [
     {
         "packagePath" : ".",
-        "disabled": true
+        "disabled": false
     }
 ]

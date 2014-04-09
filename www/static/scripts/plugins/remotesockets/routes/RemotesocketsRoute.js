@@ -5,9 +5,8 @@ define(
 
             setupController: function(controller, model) {
 
-
-                App.io.on('p/remotesockets/list', function(data) {
-                    controller.set('model', data);
+                App.io.on('p/remotesockets/list', function(rsockets) {
+                    controller.set('model', rsockets);
                 });
 
                 App.io.emit('p/remotesockets/list');
