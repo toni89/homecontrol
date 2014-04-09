@@ -21,8 +21,6 @@ function setGPIO(gpio, state) {
             });
         });
     }
-
-
 }
 
 function switchGPIO(gpio) {
@@ -32,9 +30,8 @@ function switchGPIO(gpio) {
     if(debug)
         console.log("Switch GPIO " + gpio.name + " from " + oldState + " to " + newState);
 
-    if(rpi_debug) {
-        setGPIO(gpio, newState);
-    }
+    setGPIO(gpio, newState);
+
 }
 
 
