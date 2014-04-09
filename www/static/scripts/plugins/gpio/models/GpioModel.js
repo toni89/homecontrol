@@ -4,7 +4,8 @@ function() {
 
     return DS.Model.extend({
         name: attr(),
-        gpio: attr()
+        gpio: attr(),
+        state: attr()
     });
 
 });

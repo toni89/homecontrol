@@ -1,6 +1,6 @@
 [
-    { "id": 0, "name": "18", "pin": 12, "state": 1 },
-    { "id": 0, "name": "15", "pin": 10, "state": 0 },
-    { "id": 0, "name": "14", "pin": 8, "state": 1 }
+    { "id": 0, "name": "18", "pin": 12, "initState": true, "state": false },
+    { "id": 1, "name": "15", "pin": 10, "initState": false, "state": false },
+    { "id": 2, "name": "14", "pin": 8, "initState": true, "state": false }
 ]
 

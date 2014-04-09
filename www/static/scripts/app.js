@@ -5,7 +5,6 @@ require.config({
         'ember.ds': 'libs/emberjs.ds/ember-data',
         'ember.states': 'libs/emberjs.states/ember-states',
         'ember.view': 'libs/emberjs/View',
-        'ember.radiobutton' : 'libs/emberjs/RadioButton',
         handlebars: 'libs/handlebars/handlebars-1.3.0',
         hbs: 'libs/handlebars.hbs/hbs',
         text: 'libs/requirejs.text/requirejs.text-2.0.10',
@@ -74,7 +73,6 @@ require(["App"], function(App) {
         this.route("dashboard", { path: '/' }); // Route index to DasboardView -> /
         this.route("dashboard");        // /#/dashboard
         this.route("settings");         // /#/settings
-        //this.route("gpio");
     });
 
     require([
@@ -85,10 +83,10 @@ require(["App"], function(App) {
         "main/views/SettingsView",
 
         // Load Plugins
-        "plugins/remotesockets/loader"
-        //"plugins/gpio/loader"
+        "plugins/remotesockets/loader",
+        "plugins/gpio/loader"
 
-    ], function(ApplicationView, SidebarView, DashboardView, SettingsView , remotesockets/*,gpio*/) {
+    ], function(ApplicationView, SidebarView, DashboardView, SettingsView , remotesockets, gpio) {
 
         // Application Base
         App.ApplicationView = ApplicationView;  // Load ApplicationTemplate
@@ -98,7 +96,7 @@ require(["App"], function(App) {
 
         // Load Plugin into App
         App.reopen(remotesockets);
-        //App.reopen(gpio);
+        App.reopen(gpio);
 
         // Give Control back to Ember
         App.advanceReadiness();

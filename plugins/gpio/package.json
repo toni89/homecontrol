@@ -2,7 +2,7 @@
     "name" : "gpio",
     "description" : "Provides api for controlling Raspberry Gpio's",
     "version" : "0.0.1",
-    "main" : "./gpio.js",
+    "main" : "./gpio2.js",
     "plugin" : {
         "consumes" : [
             "server"
