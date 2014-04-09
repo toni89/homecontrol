@@ -39,6 +39,6 @@
 <div class="row">
 
     {{#each controller}}
-        <button {{action 'switchGpio' id }} {{bind-attr class=":btn btn-lg state:btn-success:btn-primary"}} type="button">{{name}} - {{pin}}</button>
+        <button {{action 'switchGpio' id }} {{bind-attr class=":btn btn-lg state:btn-success:btn-primary"}} type="button">GPIO {{name}}</button>
     {{/each}}
 </div>
