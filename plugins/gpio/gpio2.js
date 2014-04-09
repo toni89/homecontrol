@@ -51,7 +51,7 @@ module.exports = function(options, imports, register) {
     io.sockets.on('connection', function(socket) {
 
         socket.on('p/gpio/list', function() {
-            socket.emit('p/gpio/list', gpios);
+            io.sockets.emit('p/gpio/list', gpios);
         });
 
         socket.on('p/gpio/switch', function(gpioId) {
@@ -61,7 +61,7 @@ module.exports = function(options, imports, register) {
                     switchGPIO(gpio);
             });
 
-            socket.emit('p/gpio/list', gpios);
+            io.sockets.emit('p/gpio/list', gpios);
         });
 
     });
