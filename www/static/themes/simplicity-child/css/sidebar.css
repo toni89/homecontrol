@@ -3,7 +3,7 @@
     box-shadow: none;
     font-family: 'Lato', sans-serif;
     font-size: 14px !important;
-
+    width: 250px;
 }
 .sidr ul li {
     border-bottom: 1px solid #252f40;

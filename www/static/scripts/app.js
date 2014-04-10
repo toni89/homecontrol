@@ -5,6 +5,7 @@ require.config({
         'ember.ds': 'libs/emberjs.ds/ember-data',
         'ember.states': 'libs/emberjs.states/ember-states',
         'ember.view': 'libs/emberjs/View',
+        'ember.jsonable': 'libs/emberjs/Jsonable',
         handlebars: 'libs/handlebars/handlebars-1.3.0',
         hbs: 'libs/handlebars.hbs/hbs',
         text: 'libs/requirejs.text/requirejs.text-2.0.10',
@@ -34,6 +35,10 @@ require.config({
         },
 
         "ember.states": {
+            deps: ["ember"]
+        },
+
+        "ember.jsonable": {
             deps: ["ember"]
         },
 

@@ -2,45 +2,62 @@
 define(
     // Define Routes, Controller, Views, etc.
     [
-     "./model/RemotesocketModel",
+        "./model/RSSocketModel",
 
-     // remotesockets/
-     "./routes/RemotesocketsRoute",
-     "./controller/RemotesocketsController",
-     "./views/RemotesocketsView",
+        // remotesockets/
+        "./routes/RSIndexRoute",
+        "./controller/RSIndexController",
+        "./views/RSIndexView",
 
-     // remotesockets/new
-     "./routes/RemotesocketsNewRoute",
-     "./controller/RemotesocketsNewController",
-     "./views/RemotesocketsNewView"]
+        // remotesockets/new
+        "./routes/RSNewRoute",
+        "./controller/RSNewController",
+        "./views/RSNewView",
+
+        // remotesockets/edit
+        "./routes/RSEditRoute",
+
+        "./views/RSButtonView"
+     ]
 , function(
-    RemotesocketModel,
+    RSSocketModel,
 
-    RemotesocketsRoute,
-    RemotesocketsController,
-    RemotesocketsView,
+    RSIndexRoute,
+    RSIndexController,
+    RSIndexView,
 
-    RemotesocketsNewRoute,
-    RemotesocketsNewController,
-    RemotesocketsNewView) {
+    RSNewRoute,
+    RSNewController,
+    RSNewView,
+
+    RSEditRoute,
+
+    RSButtonView
+    ) {
 
     // Add Route
     App.Router.map(function() {
-        this.resource("remotesockets", function() {         // /#/remotesockets
-            this.route("new");                              // /#/remotesockets/new
+        this.resource("remotesockets", function() {             // /#/remotesockets
+            this.route("new");                                  // /#/remotesockets/new
+            this.route("edit", { path: 'edit/:socket_id' });    // /#/remotesockets/edit/123456
         });
     });
 
     // Build Object Package an return it to App
     return {
-        //Remotesocket: RemotesocketModel,
+        //Remotesocket: RSSocketModel,
 
-        RemotesocketsRoute: RemotesocketsRoute,
-        RemotesocketsController: RemotesocketsController,
-        RemotesocketsIndexView: RemotesocketsView,
+        RemotesocketsIndexRoute: RSIndexRoute,
+        RemotesocketsIndexController: RSIndexController,
+        RemotesocketsIndexView: RSIndexView,
 
-        RemotesocketsNewRoute: RemotesocketsNewRoute,
-        RemotesocketsNewController: RemotesocketsNewController,
-        RemotesocketsNewView: RemotesocketsNewView
+        RemotesocketsNewRoute: RSNewRoute,
+        RemotesocketsNewController: RSNewController,
+        RemotesocketsNewView: RSNewView,
+
+        RemotesocketsEditRoute: RSEditRoute,
+        RemotesocketsEditView: RSNewView,
+
+        RemotesocketsButtonView: RSButtonView
     }
 });

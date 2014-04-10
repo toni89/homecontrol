@@ -1,12 +1,12 @@
 define(
 [
-    "hbs!plugins/remotesockets/templates/RemotesocketsNewTemplate",
+    "hbs!plugins/remotesockets/templates/RSNewTemplate",
     "jquery.icheck"
 ],
-function(RemotesocketsNewTemplate) {
+function(RSNewTemplate) {
 
     return Ember.View.extend({
-        defaultTemplate: RemotesocketsNewTemplate,
+        defaultTemplate: RSNewTemplate,
 
         didInsertElement: function() {
 

@@ -7,3 +7,4 @@ New Form:
 
 
 
+<button {{action 'triggerSocket' _id}} type="button" class="btn btn-lg btn-primary">{{name}} - {{code}}</button>

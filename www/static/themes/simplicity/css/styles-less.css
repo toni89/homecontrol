@@ -1523,39 +1523,39 @@ body.collapsed-sidebar .menu li.active a span {
   color: #ffffff;
 }
 /***** Task List *****/
-.task-list {
+.socket-list {
   margin: 15px 0px;
   padding: 0;
   list-style: none;
 }
-.task-list li {
+.socket-list li {
   margin-bottom: 15px;
 }
-.task-list li.nav a {
+.socket-list li.nav a {
   padding-right: 10px;
   padding-left: 10px;
   border-right: 1px solid #8ca2b7;
   color: #8ca2b7;
 }
-.task-list li.nav a:first-child {
+.socket-list li.nav a:first-child {
   padding-left: 0px;
 }
-.task-list li.nav a:last-child {
+.socket-list li.nav a:last-child {
   border-right: 0px !important;
 }
-.task-list li.nav a i {
+.socket-list li.nav a i {
   padding: 0px 7px 0px 0px;
 }
-.task-list li.nav a.create-task i {
+.socket-list li.nav a.create-task i {
   color: #109618;
 }
-.task-list li.nav a.delete-task {
+.socket-list li.nav a.delete-task {
   color: #f56333;
 }
-.task-list li.nav a.delete-task i {
+.socket-list li.nav a.delete-task i {
   color: #f56333;
 }
-.task-list li {
+.socket-list li {
   padding: 15px 20px;
   border-radius: 3px;
   background-color: #ffffff;
@@ -1563,33 +1563,33 @@ body.collapsed-sidebar .menu li.active a span {
   -moz-box-shadow: 0px 3px 0px #dbdfe0;
   box-shadow: 0px 3px 0px #dbdfe0;
 }
-.task-list li .icheckbox_flat-green {
+.socket-list li .icheckbox_flat-green {
   margin-right: 10px;
 }
-.task-list li span.checked {
+.socket-list li span.checked {
   text-decoration: line-through;
 }
-.task-list li span {
+.socket-list li span {
   color: #8ca2b7;
   line-height: 20px;
   padding-top: 2px;
   vertical-align: top;
   display: inline-block;
 }
-.task-list li .actions {
+.socket-list li .actions {
   float: right;
 }
-.task-list li .actions a {
+.socket-list li .actions a {
   font-size: 16px;
   margin-left: 15px;
 }
-.task-list li .actions .edit {
+.socket-list li .actions .edit {
   color: #00b6f1;
 }
-.task-list li .actions .delete {
+.socket-list li .actions .delete {
   color: #f56333;
 }
-.task-list li .actions .done {
+.socket-list li .actions .done {
   color: #f56333;
 }
 /***** Weather Widgets *****/
