@@ -1,6 +1,7 @@
 define([],
     function() {
         return Ember.ObjectController.extend({
+            title: "Edit Socket",
 
             actions: {
                 submit: function() {

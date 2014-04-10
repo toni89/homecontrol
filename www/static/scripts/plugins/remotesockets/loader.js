@@ -16,6 +16,7 @@ define(
 
         // remotesockets/edit
         "./routes/RSEditRoute",
+        "./controller/RSEditController",
 
         "./views/RSButtonView"
      ]
@@ -31,6 +32,7 @@ define(
     RSNewView,
 
     RSEditRoute,
+    RSEditController,
 
     RSButtonView
     ) {
@@ -56,6 +58,7 @@ define(
         RemotesocketsNewView: RSNewView,
 
         RemotesocketsEditRoute: RSEditRoute,
+        RemotesocketsEditController: RSEditController,
         RemotesocketsEditView: RSNewView,
 
         RemotesocketsButtonView: RSButtonView

@@ -12,6 +12,8 @@ function() {
 
 
                 App.io.emit("p/remotesockets/socket/create", newSocket);
+
+
                 this.transitionTo('remotesockets.index');
             }
         }
