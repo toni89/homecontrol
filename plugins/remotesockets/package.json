@@ -6,6 +6,7 @@
     "plugin" : {
         "consumes" : [
             "server",
+            "devices",
             "db"
         ]
     }

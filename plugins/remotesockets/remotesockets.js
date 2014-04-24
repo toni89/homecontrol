@@ -1,6 +1,8 @@
 var assert = require("assert");
 
 var io,
+    devices,
+    deviceType,
     mgs,
     socketSchema,
     mgsSocket;
@@ -15,9 +17,11 @@ var getSocketList = function(callback) {
 
 module.exports = function(options, imports, register) {
     assert(imports.server, "Package 'server' is required");
+    assert(imports.devices, "Package 'devices' is required");
     assert(imports.db, "Package 'db' is required");
 
     io = imports.server.io;
+    devices = imports.devices;
     mgs = imports.db.mongoose;
 
     // Mongoose Schemata
@@ -29,7 +33,12 @@ module.exports = function(options, imports, register) {
     mgsSocket = mgs.model('Socket', socketSchema);
 
 
+    deviceType = devices.createDeviceType({
+        name: 'remotesocket',
+        displayName: 'Remotesockets'
+    });
 
+    devices.addDeviceType(deviceType);
 
     io.sockets.on('connection', function(socket) {
 
@@ -37,7 +46,6 @@ module.exports = function(options, imports, register) {
             getSocketList(function(socketList) {
                 socket.emit('p/remotesockets/list', JSON.stringify(socketList));
             });
-
         });
 
 
@@ -54,14 +62,29 @@ module.exports = function(options, imports, register) {
             });
         });
 
-        socket.on('p/remotesockets/socket/create', function(socket) {
-            var newSocket = new mgsSocket({ name: socket.name, code: socket.code });
+        socket.on('p/remotesockets/socket/create', function(rsocket) {
+            var newSocket = new mgsSocket({ name: rsocket.name, code: rsocket.code });
+
+
             newSocket.save(function(err) {
                 if(err) throw err;
-                else
+                else {
+                    var device = devices.createDevice({
+                        name: '',
+                        description: '433Mhz Socket',
+                        type: deviceType,
+                        typeData: {
+                            name: rsocket.name,
+                            code: rsocket.code
+                        }
+                    });
+
+                    devices.addAndSave(device);
+
                     getSocketList(function(socketList) {
                         io.sockets.emit('p/remotesockets/list', JSON.stringify(socketList));
                     });
+                }
             });
         })
 

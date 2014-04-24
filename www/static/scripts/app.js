@@ -68,6 +68,9 @@ require(["App"], function(App) {
 
     App.io = io.connect();
 
+    App.ApplicationAdapter = DS.RESTAdapter.extend({
+        namespace: 'api'
+    });
 
     // Release Control to User
     App.deferReadiness();
@@ -88,10 +91,12 @@ require(["App"], function(App) {
         "main/views/SettingsView",
 
         // Load Plugins
+        "plugins/devices/loader",
         "plugins/remotesockets/loader",
         "plugins/gpio/loader"
 
-    ], function(ApplicationView, SidebarView, DashboardView, SettingsView , remotesockets, gpio) {
+    ], function(ApplicationView, SidebarView, DashboardView, SettingsView ,
+        devices, remotesockets, gpio) {
 
         // Application Base
         App.ApplicationView = ApplicationView;  // Load ApplicationTemplate
@@ -99,7 +104,9 @@ require(["App"], function(App) {
         App.DashboardView = DashboardView;      // Fill MainTemplate with Content
         App.SettingsView = SettingsView;        // Sample Page which replace Content (Dashboard) in ApplicationTemplate
 
+
         // Load Plugin into App
+        App.reopen(devices);
         App.reopen(remotesockets);
         App.reopen(gpio);
 

@@ -11,6 +11,7 @@ function() {
         },
 
         // Executes before model function above, we need this to register our socket.io - event
+        // More information: http://emberjs.com/guides/routing/asynchronous-routing/
         beforeModel: function() {
             var self = this;    // Very important, inside the App.io.on function we get an context change of this to Socket(.io)Namespace
 

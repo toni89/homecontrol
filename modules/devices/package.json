@@ -1,0 +1,15 @@
+{
+    "name": "devices",
+    "description": "Device control layer",
+    "version" : "0.0.1",
+    "main" : "./devices.js",
+    "plugin" : {
+        "consumes" : [
+            "server",
+            "db"
+        ],
+        "provides" : [
+            "devices"
+        ]
+    }
+}

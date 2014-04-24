@@ -1,0 +1,40 @@
+<h3>{{title}}</h3>
+
+<div class="row">
+    <div class="boxed no-padding col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+        <!-- Title Bart Start -->
+        <div class="title-bar white">
+            <h4>Generic</h4>
+        </div>
+        <!-- Title Bart End -->
+
+
+        <div class="inner">
+            <form method="post" action="#" class="basic-form">
+                <label for="name">Name</label>
+                {{input type=text name=name id=name placeholder="Enter Name" value=name}}
+
+
+                <label for="dropdown">Type</label>
+                {{view Ember.Select
+                    content=getCreatableTypes
+                    optionValuePath="content.name"
+                    optionLabelPath="content.displayName"
+                    selectionBinding="selectedType"
+                    prompt="Select Type"}}
+            </form>
+        </div>
+
+        {{outlet}}
+
+        {{#if selectedType}}
+        <div class="row">
+            <div class="col-md-6 text-right">
+                <button {{action 'submit'}} type="button" class="btn btn-sm btn-success">Save</button>
+            </div>
+        </div>
+        {{/if}}
+    </div>
+</div>
+

@@ -1,6 +1,6 @@
-var ip = require("ip"),
-    server = ip.address(),
-    port = 8000;
+var server = "localhost",
+    http_port = 8000,
+    rest_port = 8001;
 
 
 module.exports = [
@@ -12,7 +12,7 @@ module.exports = [
         "packagePath" : "./modules/template",
         "templateDirectory" : __dirname + "/www/templates",
         "default" : {
-            "BASEDIR" : "http://" + server + ":" + port
+            "BASEDIR" : "http://" + server + ":" + http_port
         }
     },
 
@@ -33,10 +33,22 @@ module.exports = [
         "staticFiles" : __dirname + "/www/static"
     },
 
-    // socket
+    // resthandler
+    {
+        "packagePath" : "./modules/resthandler"
+    },
+
+    // server
     {
         "packagePath" : "./modules/server",
-        "port" : port
+        "http" : {
+            server: server,
+            port: http_port
+        },
+        "rest" : {
+            server: server,
+            port: rest_port
+        }
     },
 
     // db
@@ -45,10 +57,10 @@ module.exports = [
         "database" : "homecontrol"
     },
 
-    //sqldb
-    /*{
-        "packagePath" : "./modules/mysql"
-    },*/
+    // devices
+    {
+        "packagePath" : "./modules/devices"
+    },
 
     //gpio
     /*{

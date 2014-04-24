@@ -1,3 +1,5 @@
+require('./libs/object-extend.js');
+
 var fs = require("fs"),
     path = require("path"),
     architect = require("architect");
@@ -24,4 +26,9 @@ for(var i in plugins) {
 architect.createApp(config, function(err, app) {
     if(err) throw(err);
     console.log("app ready");
+});
+
+
+process.on('SIGINT', function() {
+    process.exit(0);
 });

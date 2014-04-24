@@ -1,0 +1,8 @@
+Backend:
+
+* Start mongodb from node
+
+
+Frontend:
+
+* sidebar + scrolling aktivieren, ectl. sidr alternative suchen

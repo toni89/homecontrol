@@ -9,7 +9,7 @@ module.exports = function(options, imports, register) {
     mongoose.connect(server);
 
     mongoose.connection.on('connected', function() {
-        console.log("mongoose: Successful connected to '" + server + "'");
+        console.log("mongoose: Connected to '" + server + "'");
     });
 
     mongoose.connection.on('disconnected', function() {
@@ -21,9 +21,7 @@ module.exports = function(options, imports, register) {
     });
 
     process.on('SIGINT', function() {
-        mongoose.connection.close(function () {
-            process.exit(0);
-        });
+        mongoose.connection.close();
     });
 
     register(null, {

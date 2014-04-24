@@ -36,15 +36,16 @@ function(SidebarTemplate) {
                 source: this.sidr.content,
                 speed: 200,
                 onOpen: function() {
-                    if(this.recalculate)
-                        this.recalculateWidth();
+                    if(self.recalculate)
+                        self.recalculateWidth();
                 }
             });
 
             // Resize automatically content for desktops
             $(window).resize(function() {
-                if(this.recalculate)
-                    this.recalculateWidth();
+                if(self.recalculate)
+                    self.recalculateWidth();
+
             });
 
             // Handle automatic sidebar behaviour

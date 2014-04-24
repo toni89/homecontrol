@@ -1,0 +1,14 @@
+{
+    "name": "resthandler",
+    "description": "Configures restify service",
+    "version" : "0.0.1",
+    "main" : "./resthandler.js",
+    "plugin" : {
+        "consumes" : [
+            "server"
+        ],
+        "provides" : [
+            "resthandler"
+        ]
+    }
+}
