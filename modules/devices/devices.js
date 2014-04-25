@@ -92,7 +92,7 @@ var io,
         },
 
         findById: function(deviceid, callback) {
-            deviceModel.findOne({ _id : deviceid}, function(err, item) {
+            deviceModel.findOne({ _id : deviceid }, function(err, item) {
                 if(err) {
                     console.log(err);
                     if(callback) callback(err);

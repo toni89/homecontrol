@@ -5,25 +5,16 @@ define(
     function() {
         return Ember.Controller.extend({
             title: 'New Device',
+            defaultConfig: {
+                name: ''
+            },
             selectedType: null,
 
-            actions: {
-                'submit' : function() {
-
-                }
-            },
-
             selectedTypeChanged: function() {
-                this.setTypeTemplate(this.get('selectedType'));
+                this.send('setTypeTemplate', this.get('selectedType'));
             }.observes('selectedType'),
 
-            setTypeTemplate: function(selection) {
-                if(selection) {
-                    // render view to outlet
-                } else {
-                    // render Nothing1
-                }
-            },
+
 
             getCreatableTypes: function() {
                 var types = this.get('types'),

@@ -68,9 +68,8 @@ require(["App"], function(App) {
 
     App.io = io.connect();
 
-    App.ApplicationAdapter = DS.RESTAdapter.extend({
-        namespace: 'api'
-    });
+
+    App.ApplicationAdapter = DS.FixtureAdapter.extend();
 
     // Release Control to User
     App.deferReadiness();
@@ -93,10 +92,12 @@ require(["App"], function(App) {
         // Load Plugins
         "plugins/devices/loader",
         "plugins/remotesockets/loader",
-        "plugins/gpio/loader"
+        "plugins/gpio/loader",
+        "plugins/rsconfig/loader",
+        "plugins/events/loader"
 
-    ], function(ApplicationView, SidebarView, DashboardView, SettingsView ,
-        devices, remotesockets, gpio) {
+    ], function(ApplicationView, SidebarView, DashboardView, SettingsView,
+        devices, remotesockets, gpio, rsconfig, events) {
 
         // Application Base
         App.ApplicationView = ApplicationView;  // Load ApplicationTemplate
@@ -109,6 +110,10 @@ require(["App"], function(App) {
         App.reopen(devices);
         App.reopen(remotesockets);
         App.reopen(gpio);
+        App.reopen(rsconfig);
+        App.reopen(events);
+
+        console.log(App);
 
         // Give Control back to Ember
         App.advanceReadiness();

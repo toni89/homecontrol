@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-        <h3>Devices</h3>
+        <h3>Events</h3>
 
         <div class="container">
 
@@ -9,21 +9,21 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
                     <div class="boxed">
-                        {{#link-to 'devices.new'}}<button type="button" class="btn btn-xs btn-primary">New Device</button>{{/link-to}}
+                        {{#link-to 'events.new'}}<button type="button" class="btn btn-xs btn-primary">New Event</button>{{/link-to}}
                         <!-- Title Bart Start -->
                         <div class="title-bar white">
-                            <h4>Events</h4>
+                            <h4>Devices</h4>
                         </div>
                         <!-- Title Bart End -->
 
                         <div class="inner no-radius">
                             <ul class="socket-list">
-                                {{#each devices}}
+                                {{#each events}}
                                     <li>
                                         <span>
-                                            {{device.name}}
+                                            {{events.name}}
                                             {{device.description}}
-                                            <button {{action 'deleteDevice' _id}} type="button" class="btn btn-xs btn-danger">Delete</button>
+                                            <button {{action 'deleteEvent' _id}} type="button" class="btn btn-xs btn-danger">Delete</button>
                                         </span>
                                     </li>
                                 {{/each}}

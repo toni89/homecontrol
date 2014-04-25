@@ -13,7 +13,7 @@
         <div class="inner">
             <form method="post" action="#" class="basic-form">
                 <label for="name">Name</label>
-                {{input type=text name=name id=name placeholder="Enter Name" value=name}}
+                {{input type=text name=defaultConfig.name id=defaultConfig.name placeholder="Enter Name" value=defaultConfig.name}}
 
 
                 <label for="dropdown">Type</label>
@@ -25,16 +25,17 @@
                     prompt="Select Type"}}
             </form>
         </div>
-
-        {{outlet}}
-
-        {{#if selectedType}}
-        <div class="row">
-            <div class="col-md-6 text-right">
-                <button {{action 'submit'}} type="button" class="btn btn-sm btn-success">Save</button>
-            </div>
-        </div>
-        {{/if}}
     </div>
 </div>
+
+
+{{#if selectedType}}
+
+{{outlet typeconfig}}
+
+{{/if}}
+
+
+
+
 
