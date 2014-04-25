@@ -1,8 +1,8 @@
 define(
     [],
     function() {
-        return Ember.ObjectController.extend({
-
+        return Ember.Controller.extend({
+            events: []
         });
     });
 

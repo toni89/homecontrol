@@ -15,7 +15,11 @@ var io,
 
                 // Event Handlers for Frontend
                 socket.on('main/events/list', function() {
-                    //self._sendEventList();
+                    self.findAll({}, function(err, items){
+                        if(!err){
+                            io.sockets.emit('main/events/list', JSON.stringify(items));
+                        }
+                    })
                 });
 
                 socket.on('main/events/delete', function(deviceid) {
@@ -77,6 +81,8 @@ module.exports = function(options, imports, register) {
 
     events.addAndSave(testevent);
     */
+
+    events.init();
 
     events.findAll({}, function(err, items){
         console.log(items);
