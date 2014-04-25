@@ -1,11 +1,12 @@
-var assert = require("assert");
-zwave = require("./zwaveapi.js"),
+var assert = require("assert"),
     extend = require("xtend"),
     events = require('events');
+
 
 var io,
     devices,
     deviceType,
+    zwave,
     deviceTypeName = 'zwave device';
 
 
@@ -15,7 +16,8 @@ module.exports = function(options, imports, register) {
     assert(options.settings.device, "Option 'settings.device' is required");
 
     devices = imports.devices,
-        io = imports.server.io;
+        io = imports.server.io,
+        zwave = require("./zwaveapi.js");
 
     zwave.init(options.settings.device, { }, function() {
         deviceType = devices.createDeviceType({

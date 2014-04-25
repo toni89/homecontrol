@@ -12,7 +12,9 @@ define(
                     var defaultConfig = this.controllerFor('devices.new').get('defaultConfig'),
                         code = this.get('code');
 
-                    console.log(defaultConfig.name, code);
+                    if(defaultConfig.name != '' && code != '') {
+                        App.io.emit();
+                    }
                 }
             }
         });
