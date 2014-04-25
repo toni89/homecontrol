@@ -1,0 +1,12 @@
+{
+    "name": "zwave",
+    "description": "Povides control layer for z-wave protocol",
+    "version" : "0.0.1",
+    "main" : "./zwave.js",
+    "plugin" : {
+        "consumes" : [
+            "server",
+            "devices"
+        ]
+    }
+}

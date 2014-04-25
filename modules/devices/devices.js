@@ -42,9 +42,6 @@ var io,
                         }
                     });
                 });
-
-
-
             });
         },
 
@@ -227,8 +224,6 @@ module.exports = function(options, imports, register) {
     });
 
     deviceModel = mgs.model('Device', deviceSchema, 'devices');
-
-
 
     devices.init();
 
