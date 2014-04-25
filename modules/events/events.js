@@ -1,10 +1,12 @@
 var assert = require("assert"),
     Event = require("./libs/Event.js");
+    emitter = require("events");
 
 var io,
     mgs,
     eventSchema,
     eventModel,
+    push = new emitter.EventEmitter(),
     events = {
 
         init: function() {
@@ -13,19 +15,27 @@ var io,
             // Socket-Events to Frontend
             io.sockets.on('connection', function(socket) {
 
-                // Event Handlers for Frontend
-                socket.on('main/events/list', function() {
-                    self.findAll({}, function(err, items){
-                        if(!err){
-                            io.sockets.emit('main/events/list', JSON.stringify(items));
-                        }
-                    })
+                push.on('eventlist updated', function(){
+                    self._sendEventList();
                 });
 
-                socket.on('main/events/delete', function(deviceid) {
-                    //self.deleteEventById(deviceid);
+                // Event Handlers for Frontend
+                socket.on('main/events/list', function() {
+                    self._sendEventList();
+                });
+
+                socket.on('main/events/delete', function(eventid) {
+                    self.deleteEventById(eventid);
                 });
             });
+        },
+
+        _sendEventList : function(){
+            this.findAll({}, function(err, items){
+                if(!err){
+                    io.sockets.emit('main/events/list', JSON.stringify(items));
+                }
+            })
         },
 
         createEvent : function(options) {
@@ -58,6 +68,29 @@ var io,
                 } else if(callback)
                     callback(null, items);
             });
+        },
+        deleteEventById: function(eventid, callback) {
+            this.findById(eventid, function(err, item) {
+                if(err) {
+                    if(callback) callback(err);
+                }
+                else if(item) {
+                    item.remove(function() {
+                        push.emit('eventlist updated');
+                        if(callback) callback(null);
+                    });
+                }
+            })
+        },
+        findById: function(eventid, callback) {
+            eventModel.findOne({ _id : eventid }, function(err, item) {
+                if(err) {
+                    console.log(err);
+                    if(callback) callback(err);
+                } else if(callback)
+                    callback(null, item);
+
+            });
         }
     }
 
@@ -74,13 +107,17 @@ module.exports = function(options, imports, register) {
 
     eventModel = mgs.model('Event', eventSchema, 'events');
 
-    /*
+    /**/
     var testevent = events.createEvent({
        name : 'Testevent'
     });
 
     events.addAndSave(testevent);
-    */
+    events.addAndSave(testevent);
+    events.addAndSave(testevent);
+    events.addAndSave(testevent);
+    events.addAndSave(testevent);
+
 
     events.init();
 

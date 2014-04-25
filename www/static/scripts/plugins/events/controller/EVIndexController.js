@@ -2,7 +2,13 @@ define(
     [],
     function() {
         return Ember.Controller.extend({
-            events: []
+            events: [],
+
+            actions: {
+                'deleteEvent' : function(eventId) {
+                    App.io.emit('main/events/delete', eventId);
+                }
+            }
         });
     });
 

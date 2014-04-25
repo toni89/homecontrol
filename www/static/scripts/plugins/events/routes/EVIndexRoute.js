@@ -5,8 +5,8 @@ define(
 
             model: function() {
                 return new Ember.RSVP.Promise(function(resolve) {
-                    App.io.on('main/events/list', function(event) {
-                        var event = JSON.parse(event);
+                    App.io.on('main/events/list', function(events) {
+                        events = JSON.parse(events);
                         resolve({'events': events });
                     });
                     App.io.emit('main/events/list');
