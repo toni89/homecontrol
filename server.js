@@ -22,6 +22,8 @@ for(var i in plugins) {
     }
 }
 
+console.log(config);
+
 // Load plugins and start application
 architect.createApp(config, function(err, app) {
     if(err) throw(err);

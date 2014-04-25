@@ -5,7 +5,6 @@ var assert = require("assert"),
     rpi_debug = false;
 
 var gpio = {
-
 }
 
 function setGPIO(gpio, state) {
@@ -31,16 +30,12 @@ function switchGPIO(gpio) {
         console.log("Switch GPIO " + gpio.name + " from " + oldState + " to " + newState);
 
     setGPIO(gpio, newState);
-
 }
-
 
 function initGPIOS() {
     for(var i in gpios)
         setGPIO(gpios[i], gpios[i].initState);
 }
-
-
 
 module.exports = function(options, imports, register) {
     assert(imports.server, "Package 'server' is required");
@@ -63,9 +58,7 @@ module.exports = function(options, imports, register) {
 
             io.sockets.emit('p/gpio/list', gpios);
         });
-
     });
-
 
     register(null, {
         gpio: gpio
