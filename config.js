@@ -76,5 +76,10 @@ module.exports = [
         },
         "failureRoute" : "/login",
         "lifetime" : "600"  // Logouts after 10 minutes
+    },
+
+    //events
+    {
+        "packagePath" : "./modules/events"
     }
 ]
