@@ -8,7 +8,6 @@ var io,
     eventModel,
     push = new emitter.EventEmitter(),
     events = {
-
         init: function() {
             var self = this;
 
@@ -18,6 +17,8 @@ var io,
                 push.on('eventlist updated', function(){
                     self._sendEventList();
                 });
+
+
 
                 // Event Handlers for Frontend
                 socket.on('main/events/list', function() {
@@ -59,6 +60,7 @@ var io,
                 }
             });
         },
+
         findAll: function(params, callback) {
             eventModel.find(params, function(err, items) {
                 if(err) {
@@ -68,6 +70,7 @@ var io,
                     callback(null, items);
             });
         },
+
         deleteEventById: function(eventid, callback) {
             this.findById(eventid, function(err, item) {
                 if(err) {
@@ -81,6 +84,7 @@ var io,
                 }
             })
         },
+
         findById: function(eventid, callback) {
             eventModel.findOne({ _id : eventid }, function(err, item) {
                 if(err) {
@@ -91,9 +95,9 @@ var io,
 
             });
         },
-        checkTimeForEvent: function(callback){
 
-            this.findAll({}, function(err, items){
+        checkTimeForEvent: function(callback){
+            eventModel.find(function(err, items){
                 for (var itemkey in items) {
                     var item = items[itemkey];
 
@@ -105,12 +109,26 @@ var io,
                     var eventdate_start = item.event.start.split(":");
                     var eventdate_end = item.event.end.split(":");
 
-                    if(eventdate_start[0] == hour && eventdate_start[1] == minute && item.event.start_triggered === false){
+                    //console.log(item._id);
+                    //item.update({ _id: item._id }, { $set: { start_triggered: true }}, callback);
+                    //eventModel.update({ _id: item._id }, { $set: { "event.start_triggered": true, "event.end_triggered": true }}, callback);
+
+                    if(eventdate_start[0] == hour && eventdate_start[1] == minute){
                         console.log('anschalten');
-                        push.emit('Startup');
+
+                        /*eventModel.findOne({ _id: item._id }, function (err, doc){
+                            doc.event.start_triggered = true;
+
+                            var newEvent = new eventModel(doc);
+                            doc.remove();
+
+                            newEvent.save(function(err, item) {
+                                //console.log(err, item);
+                            });
+                        });*/
                     }
 
-                    if(eventdate_end[0] == hour && eventdate_end[1] == minute && item.event.end_triggered === false){
+                    if(eventdate_end[0] == hour && eventdate_end[1] == minute){
                         console.log('ausschalten');
                         push.emit('Shutdown');
                     }
@@ -118,7 +136,7 @@ var io,
             });
 
           if(callback) callback(null);
-          setTimeout(this.checkTimeForEvent.bind(this), 1000);
+          setTimeout(this.checkTimeForEvent.bind(this), 1000 * 60);
         }
     }
 
@@ -139,14 +157,16 @@ module.exports = function(options, imports, register) {
     var testevent = events.createEvent({
        name : 'Testevent',
        description: 'testeintrag',
-       start: '14:12',
-       end: '14:10',
+       start: '16:33',
+       end: '16:35',
        devices: [1,4,2]
     });
 
-    events.addAndSave(testevent);
     events.init();
-    events.checkTimeForEvent();
+
+    events.addAndSave(testevent, function(){
+        events.checkTimeForEvent();
+    });
 
     /*events.findAll({}, function(err, items){
         console.log(items);
