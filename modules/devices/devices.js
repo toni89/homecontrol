@@ -1,7 +1,8 @@
 var assert = require("assert"),
     Device = require("./libs/Device.js"),
     DeviceType = require("./libs/DeviceType.js"),
-    events = require('events');
+    events = require('events'),
+    deviceClasses = require('require-all')(__dirname + '/classes');
 
 var io,
     mgs,
@@ -207,6 +208,18 @@ var io,
 
         getDeviceTypes: function(callback) {
             if(callback) callback(null, this.deviceTypes);
+        },
+
+        getDeviceClass: function(className) {
+            return new deviceClasses[className];
+        },
+
+        configDeviceClass: function(className, options) {
+            var deviceClass = this.getDeviceClass(className);
+
+            if(deviceClass && options) {
+                return deviceClass.extend(options);
+            }
         }
 
 }

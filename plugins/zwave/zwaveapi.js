@@ -245,6 +245,14 @@ module.exports = {
     setLevel: function(nodeid, level) {
         if(level >= 0 && level <= 99)
             this.zwave.setLevel(nodeid, level);
+    },
+
+    setOn: function(nodeid) {
+        this.zwave.switchOn(nodeid);
+    },
+
+    setOff: function(nodeid) {
+        this.zwave.switchOff(nodeid);
     }
 
 }

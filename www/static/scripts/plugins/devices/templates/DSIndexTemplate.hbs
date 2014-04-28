@@ -24,6 +24,10 @@
                                             {{device.name}}
                                             {{device.description}}
                                             <button {{action 'deleteDevice' _id}} type="button" class="btn btn-xs btn-danger">Delete</button>
+                                            <button {{action 'switchOn' this}} type="button" class="btn btn-xs btn-danger">ON</button>
+                                            <button {{action 'switchOff' this}} type="button" class="btn btn-xs btn-danger">OFF</button>
+                                            <button {{action 'setLevel0' this}} type="button" class="btn btn-xs btn-danger">LEVEL 0</button>
+                                            <button {{action 'setLevel99' this}} type="button" class="btn btn-xs btn-danger">LEVEL 99</button>
                                         </span>
                                     </li>
                                 {{/each}}

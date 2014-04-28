@@ -134,7 +134,7 @@ module.exports = function(options, imports, register) {
     //events.checkTimeForEvent();
 
     events.findAll({}, function(err, items){
-        console.log(items);
+        //console.log(items);
     });
 
     register(null, {

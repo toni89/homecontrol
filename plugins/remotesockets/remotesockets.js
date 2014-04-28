@@ -8,6 +8,20 @@ var io,
 
             io.sockets.on('connection', function(socket) {
 
+                socket.on('p/remotesockets/CLASS_SWITCH_BINARY/setOn', function(rsocket) {
+                    this.setOn();
+                });
+
+                socket.on('p/remotesockets/CLASS_SWITCH_BINARY/setOff', function(rsocket) {
+                    this.setOff();
+                });
+
+                socket.on('p/remotesockets/CLASS_SWITCH_BINARY/getStatus', function(rsocket) {
+                    // TODO: vl. internen Status senden
+                    socket.emit('p/remotesockets/CLASS_SWITCH_BINARY/getStatus', -1);
+                });
+
+
                 socket.on('p/remotesockets/createSocket', function(config) {
                     var device = devices.createDevice({
                         name: config.name,
@@ -18,14 +32,32 @@ var io,
                         }
                     });
 
+                    var switch_binary = devices.configDeviceClass(
+                        'CLASS_SWITCH_BINARY', {
+                            setOn: 'p/remotesockets/CLASS_SWITCH_BINARY/setOn',
+                            setOff: 'p/remotesockets/CLASS_SWITCH_BINARY/setOff',
+                            getStatus: 'p/remotesockets/CLASS_SWITCH_BINARY/getStatus'
+                        }
+                    );
+
+                    device.addDeviceClass(switch_binary);
+
+
                     devices.addAndSave(device, function(err) {
                         socket.emit('p/remotesockets/createSocket', err);
                     });
                 });
 
             });
-        }
+        },
 
+        setOn: function() {
+            console.log("rs: setOn");
+        },
+
+        setOff: function() {
+            console.log("rs: setOff");
+        }
     };
 
 
@@ -46,6 +78,10 @@ module.exports = function(options, imports, register) {
     });
 
     devices.addDeviceType(deviceType);
+
+
+
+
 
 
     remotesockets.init();
