@@ -1,11 +1,11 @@
 define(
     [
-        "hbs!plugins/events/templates/EVIndexTemplate"
+        "hbs!plugins/events/templates/EVNewTemplate"
     ],
-    function(EVIndexTemplate) {
+    function(EVNewTemplate) {
 
         return Ember.View.extend({
-            defaultTemplate: EVIndexTemplate
+            defaultTemplate: EVNewTemplate
         });
     });
 

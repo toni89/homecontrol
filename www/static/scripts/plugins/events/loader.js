@@ -11,7 +11,11 @@ define(
     , function(
         EventsIndexRoute,
         EventsIndexController,
-        EventsIndexView
+        EventsIndexView,
+
+        EventsNewRoute,
+        EventsNewController,
+        EventsNewView
         ) {
 
         App.Router.map(function() {
@@ -23,6 +27,10 @@ define(
         return {
             EventsIndexRoute: EventsIndexRoute,
             EventsIndexController: EventsIndexController,
-            EventsIndexView: EventsIndexView
+            EventsIndexView: EventsIndexView,
+
+            EventsNewRoute: EventsNewRoute,
+            EventsNewController: EventsNewController,
+            EventsNewView: EventsNewView
         }
     });

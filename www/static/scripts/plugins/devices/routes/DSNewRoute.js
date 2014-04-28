@@ -24,7 +24,6 @@ define(
                         this.render(selection.configRoute , { into: 'devices.new', outlet: 'typeconfig'});
                     }
                 }
-
             }
 
 

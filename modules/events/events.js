@@ -114,23 +114,12 @@ var io,
                     //eventModel.update({ _id: item._id }, { $set: { "event.start_triggered": true, "event.end_triggered": true }}, callback);
 
                     if(eventdate_start[0] == hour && eventdate_start[1] == minute){
-                        console.log('anschalten');
-
-                        /*eventModel.findOne({ _id: item._id }, function (err, doc){
-                            doc.event.start_triggered = true;
-
-                            var newEvent = new eventModel(doc);
-                            doc.remove();
-
-                            newEvent.save(function(err, item) {
-                                //console.log(err, item);
-                            });
-                        });*/
+                        console.log('Alle Geräte von ' + item.event.name + ' anschalten');
                     }
 
                     if(eventdate_end[0] == hour && eventdate_end[1] == minute){
-                        console.log('ausschalten');
-                        push.emit('Shutdown');
+                        console.log('Alle Geräte von ' + item.event.name + ' ausschalten');
+                        //push.emit('p/zwave/CLASS_SWITCH_BINARY/setOn',zwaveObject);
                     }
                 }
             });
@@ -157,8 +146,8 @@ module.exports = function(options, imports, register) {
     var testevent = events.createEvent({
        name : 'Testevent',
        description: 'testeintrag',
-       start: '16:33',
-       end: '16:35',
+       start: '16:41',
+       end: '16:42',
        devices: [1,4,2]
     });
 

@@ -12,23 +12,23 @@
                         {{#link-to 'events.new'}}<button type="button" class="btn btn-xs btn-primary">New Event</button>{{/link-to}}
                         <!-- Title Bart Start -->
                         <div class="title-bar white">
-                            <h4>Devices</h4>
+                            <h4>Create new event</h4>
                         </div>
                         <!-- Title Bart End -->
 
                         <div class="inner no-radius">
-                            <ul class="socket-list">
-                                {{#each events}}
-                                    <li>
-                                        <span>
-                                            {{events.name}}
-                                            {{device.description}}
-                                            <button {{action 'deleteEvent' _id}} type="button" class="btn btn-xs btn-danger">Delete</button>
-                                        </span>
-                                    </li>
-                                {{/each}}
-                            </ul>
 
+                            <form method="post" action="#" class="basic-form">
+                                <label for="name">Name</label>
+                                {{input type=text name=defaultConfig.name id=defaultConfig.name placeholder="Eventname eingeben" value=defaultConfig.name}}
+
+                                <div class="row">
+                                    <div class="col-md-6 text-right">
+                                        <button {{action 'submit'}} type="button" class="btn btn-sm btn-success">Save</button>
+                                    </div>
+                                </div>
+
+                            </form>
 
                         </div>
                     </div>
