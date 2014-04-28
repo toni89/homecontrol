@@ -113,8 +113,6 @@ require(["App"], function(App) {
         App.reopen(rsconfig);
         App.reopen(events);
 
-        console.log(App);
-
         // Give Control back to Ember
         App.advanceReadiness();
     });

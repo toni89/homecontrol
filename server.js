@@ -16,8 +16,6 @@ for(var i in plugins) {
     if (fs.existsSync(pluginPath)){
         var pluginConfig = architect.loadConfig(pluginPath);
 
-        console.log(pluginConfig);
-
         if(!(pluginConfig[0].hasOwnProperty('disabled') && pluginConfig[0].disabled == true))
             config = config.concat(pluginConfig);
     }

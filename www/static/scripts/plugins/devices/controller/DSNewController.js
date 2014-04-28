@@ -14,8 +14,6 @@ define(
                 this.send('setTypeTemplate', this.get('selectedType'));
             }.observes('selectedType'),
 
-
-
             getCreatableTypes: function() {
                 var types = this.get('types'),
                     createableTypes = [];

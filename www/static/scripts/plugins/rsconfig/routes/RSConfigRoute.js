@@ -3,10 +3,12 @@ define(
     function() {
         return Ember.Route.extend({
 
-            actions: {
-                'submit' : function() {
-                    console.log("huhu");
-                }
+
+
+            setupController: function(controller, model) {
+                console.log("huhu11");
+
+
             }
         });
     });

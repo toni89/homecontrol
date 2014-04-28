@@ -19,9 +19,9 @@ define(
 
             actions: {
                 setTypeTemplate: function(selection) {
-                    console.log(selection);
-                    if(selection) {
-                        this.render('rsconfig' , { into: 'devices.new', outlet: 'typeconfig'});
+
+                    if(selection.configRoute != '') {
+                        this.render(selection.configRoute , { into: 'devices.new', outlet: 'typeconfig'});
                     }
                 }
 

@@ -9,11 +9,18 @@ define(
 
             actions: {
                 'submit' : function() {
-                    var defaultConfig = this.controllerFor('devices.new').get('defaultConfig'),
+                    var self = this,
+                        defaultConfig = this.controllerFor('devices.new').get('defaultConfig'),
                         code = this.get('code');
 
                     if(defaultConfig.name != '' && code != '') {
-                        App.io.emit();
+                        App.io.on('p/remotesockets/createSocket', function(err) {
+                            //if(err) TODO: Fehler abfangen und anzeigen
+                            self.transitionToRoute('devices');
+                        });
+
+
+                        App.io.emit('p/remotesockets/createSocket', { name: defaultConfig.name, code: code });
                     }
                 }
             }
