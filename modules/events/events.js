@@ -91,6 +91,22 @@ var io,
                     callback(null, item);
 
             });
+        },
+        checkTimeForEvent: function(callback){
+
+            this.findAll({}, function(err, items){
+                for (var itemkey in items) {
+                    var item = items[itemkey];
+                    console.log(item);
+
+                    /*
+                    IF DATUM === DATUM { EVENT EMITTER }
+                     */
+                }
+            });
+
+          if(callback) callback(null);
+          setTimeout(this.checkTimeForEvent.bind(this), 1000);
         }
     }
 
@@ -113,13 +129,9 @@ module.exports = function(options, imports, register) {
     });
 
     events.addAndSave(testevent);
-    events.addAndSave(testevent);
-    events.addAndSave(testevent);
-    events.addAndSave(testevent);
-    events.addAndSave(testevent);
-
 
     events.init();
+    //events.checkTimeForEvent();
 
     events.findAll({}, function(err, items){
         console.log(items);
