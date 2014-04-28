@@ -46,7 +46,6 @@ var io,
         },
 
         addAndSave: function(event, callback) {
-
             var newEvent = new eventModel({ event: event });
             var error = new Error('Cant save event');
 
@@ -106,12 +105,12 @@ var io,
                     var eventdate_start = item.event.start.split(":");
                     var eventdate_end = item.event.end.split(":");
 
-                    if(eventdate_start[0] == hour && eventdate_start[1] == minute){
+                    if(eventdate_start[0] == hour && eventdate_start[1] == minute && item.event.start_triggered === false){
                         console.log('anschalten');
                         push.emit('Startup');
                     }
 
-                    if(eventdate_end[0] == hour && eventdate_end[1] == minute){
+                    if(eventdate_end[0] == hour && eventdate_end[1] == minute && item.event.end_triggered === false){
                         console.log('ausschalten');
                         push.emit('Shutdown');
                     }
