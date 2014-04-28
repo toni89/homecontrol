@@ -97,11 +97,24 @@ var io,
             this.findAll({}, function(err, items){
                 for (var itemkey in items) {
                     var item = items[itemkey];
-                    console.log(item);
 
-                    /*
-                    IF DATUM === DATUM { EVENT EMITTER }
-                     */
+                    /*Date now*/
+                    var now = new Date();
+                    var hour = now.getHours();
+                    var minute = now.getMinutes();
+
+                    var eventdate_start = item.event.start.split(":");
+                    var eventdate_end = item.event.end.split(":");
+
+                    if(eventdate_start[0] == hour && eventdate_start[1] == minute){
+                        console.log('anschalten');
+                        push.emit('Startup');
+                    }
+
+                    if(eventdate_end[0] == hour && eventdate_end[1] == minute){
+                        console.log('ausschalten');
+                        push.emit('Shutdown');
+                    }
                 }
             });
 
@@ -125,17 +138,22 @@ module.exports = function(options, imports, register) {
 
     /**/
     var testevent = events.createEvent({
-       name : 'Testevent'
+       name : 'Testevent',
+       description: 'testeintrag',
+       start: '14:12',
+       end: '14:10',
+       devices: [1,4,2]
     });
 
     events.addAndSave(testevent);
-
     events.init();
-    //events.checkTimeForEvent();
+    events.checkTimeForEvent();
 
-    events.findAll({}, function(err, items){
+    /*events.findAll({}, function(err, items){
         console.log(items);
     });
+    *
+    */
 
     register(null, {
         "events" : events

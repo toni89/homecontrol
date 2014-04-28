@@ -3,6 +3,7 @@ function Event(){
     this.description = '';
     this.start = '';
     this.end = '';
+    this.devices = [];
 }
 
 module.exports = Event;
