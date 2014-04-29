@@ -1,6 +1,6 @@
 define(
     [
-        "hbs!plugins/devices/templates/DSNewTemplate",
+        "hbs!plugins/devices/templates/DSNewTemplate"
     ],
     function(DSNewTemplate) {
         return Ember.View.extend({

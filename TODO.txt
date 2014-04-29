@@ -6,3 +6,4 @@ Backend:
 Frontend:
 
 * sidebar + scrolling aktivieren, ectl. sidr alternative suchen
+* periodische Termine von google calendar kopieren

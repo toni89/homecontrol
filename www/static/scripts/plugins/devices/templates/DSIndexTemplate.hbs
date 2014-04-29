@@ -38,6 +38,32 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+
+                    <div class="boxed">
+                        <!-- Title Bart Start -->
+                        <div class="title-bar white">
+                            <h4>Devices</h4>
+                        </div>
+                        <!-- Title Bart End -->
+
+                        <div class="inner no-radius">
+                            <ul class="socket-list">
+                                {{#each devices}}
+                                    {{render "deviceItem" this}}
+                                {{/each}}
+                            </ul>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 </div>

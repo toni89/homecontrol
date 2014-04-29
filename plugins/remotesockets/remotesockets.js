@@ -5,20 +5,21 @@ var io,
     deviceType,
     remotesockets = {
         init: function() {
+            var self = this;
+
 
             io.sockets.on('connection', function(socket) {
 
                 socket.on('p/remotesockets/CLASS_SWITCH_BINARY/setOn', function(rsocket) {
-                    this.setOn();
+                    self.setOn(rsocket);
                 });
 
                 socket.on('p/remotesockets/CLASS_SWITCH_BINARY/setOff', function(rsocket) {
-                    this.setOff();
+                    self.setOff(rsocket);
                 });
 
-                socket.on('p/remotesockets/CLASS_SWITCH_BINARY/getStatus', function(rsocket) {
-                    // TODO: vl. internen Status senden
-                    socket.emit('p/remotesockets/CLASS_SWITCH_BINARY/getStatus', -1);
+                socket.on('p/remotesockets/CLASS_SWITCH_BINARY/getState', function(rsocket) {
+                    self.getState(rsocket);
                 });
 
 
@@ -36,12 +37,11 @@ var io,
                         'CLASS_SWITCH_BINARY', {
                             setOn: 'p/remotesockets/CLASS_SWITCH_BINARY/setOn',
                             setOff: 'p/remotesockets/CLASS_SWITCH_BINARY/setOff',
-                            getStatus: 'p/remotesockets/CLASS_SWITCH_BINARY/getStatus'
+                            getState: 'p/remotesockets/CLASS_SWITCH_BINARY/getState'
                         }
                     );
 
                     device.addDeviceClass(switch_binary);
-
 
                     devices.addAndSave(device, function(err) {
                         socket.emit('p/remotesockets/createSocket', err);
@@ -51,12 +51,60 @@ var io,
             });
         },
 
-        setOn: function() {
-            console.log("rs: setOn");
+        setState: function(rsocket, state, callback) {
+            devices.findById(rsocket._id, function(err, item) {
+                if(item) {
+                    var myDevice = item.device;
+
+                    console.log(myDevice.classes[0].properties);
+
+                    //item.device.properties.state = true;
+                    var binaryClass = item.device.classes.filter(function(el) { return el.id == 'CLASS_SWITCH_BINARY' });
+
+                    if(binaryClass.length > 0) {
+                        binaryClass[0].properties.state = state;
+                    }
+
+                    item.markModified('device');
+
+
+                    item.save(function(err, item) {
+                        if(err)
+                            if(callback)
+                                callback(err);
+                        else {
+                            if(callback)
+                                callback(null, item);
+                        }
+
+                    });
+                }
+            });
+
         },
 
-        setOff: function() {
-            console.log("rs: setOff");
+        setOn: function(rsocket) {
+            this.setState(rsocket._id, true, function(err) {
+                if(!err) {
+                    // TODO: Send Switch Command
+                }
+            });
+        },
+
+        setOff: function(rsocket) {
+            this.setState(rsocket._id, false, function(err) {
+                if(!err) {
+                    // TODO: Send Switch Command
+                }
+            });
+        },
+
+        getState: function(rsocket) {
+            devices.findById(rsocket._id, function(err, item) {
+                if(item) {
+                    // TODO: send 'item.device.properties.state' to frontend
+                }
+            })
         }
     };
 
@@ -78,11 +126,6 @@ module.exports = function(options, imports, register) {
     });
 
     devices.addDeviceType(deviceType);
-
-
-
-
-
 
     remotesockets.init();
 

@@ -10,12 +10,18 @@ define(
         // New
         "./controller/DSNewController",
         "./routes/DSNewRoute",
-        "./views/DSNewView"
+        "./views/DSNewView",
+
+        // DeviceItem
+        "./controller/DSItemController",
+        "./views/DSItemView"
     ]
     , function(
         DSIndexController, DSIndexRoute, DSIndexView,
 
-        DSNewController, DSNewRoute, DSNewView
+        DSNewController, DSNewRoute, DSNewView,
+
+        DSItemController, DSItemView
         ) {
 
         // Add Route
@@ -35,6 +41,9 @@ define(
 
             DevicesNewRoute: DSNewRoute,
             DevicesNewController: DSNewController,
-            DevicesNewView: DSNewView
+            DevicesNewView: DSNewView,
+
+            DeviceItemController: DSItemController,
+            DeviceItemView: DSItemView
         }
     });

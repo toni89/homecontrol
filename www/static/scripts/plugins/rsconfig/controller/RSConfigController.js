@@ -20,6 +20,7 @@ define(
                         });
 
 
+
                         App.io.emit('p/remotesockets/createSocket', { name: defaultConfig.name, code: code });
                     }
                 }

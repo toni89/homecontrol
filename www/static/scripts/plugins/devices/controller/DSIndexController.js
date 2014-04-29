@@ -14,12 +14,11 @@ function() {
             },
 
             'switchOn' : function(device) {
-
-                App.io.emit('p/zwave/CLASS_SWITCH_BINARY/setOn', device);
+                App.io.emit('p/remotesockets/CLASS_SWITCH_BINARY/setOn', device);
             },
 
             'switchOff' : function(device) {
-                App.io.emit('p/zwave/CLASS_SWITCH_BINARY/setOff', device);
+                App.io.emit('p/remotesockets/CLASS_SWITCH_BINARY/setOff', device);
             },
 
             'setLevel0' : function(device) {

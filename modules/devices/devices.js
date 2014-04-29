@@ -220,6 +220,26 @@ var io,
             if(deviceClass && options) {
                 return deviceClass.extend(options);
             }
+        },
+
+        hasDeviceClass: function(deviceId, className, callback) {
+            this.findById(deviceId, function(err, item) {
+                if(item) {
+                    if(item.device.classes.length > 0) {
+                        var found = item.device.classes.filter(function(el) {
+                            return el.id == className;
+                        });
+
+                        if(found.length > 0){
+                            if(callback)
+                                return callback(true);
+                        }
+                    }
+                }
+                if(callback)
+                    return callback(false);
+
+            })
         }
 
 }
