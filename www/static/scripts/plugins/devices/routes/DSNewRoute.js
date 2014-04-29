@@ -4,17 +4,19 @@ define(
         return Ember.Route.extend({
 
             model: function() {
+                /*
                 return new Ember.RSVP.Promise(function(resolve) {
-                        App.io.on('main/devices/listtypes', function(types) {
-                            var types = JSON.parse(types);
-                            resolve({'types': types });
-                        });
-                        App.io.emit('main/devices/listtypes');
+                    App.io.on('main/devices/listtypes', function(types) {
+                        var types = JSON.parse(types);
+                        resolve({'types': types });
+                    });
+                    App.io.emit('main/devices/listtypes');
                 }, 3000);
+                */
             },
 
             setupController: function(controller, model) {
-                controller.set('types', model.types);
+                //controller.set('types', model.types);
             },
 
             actions: {
