@@ -39,6 +39,15 @@
                                     </div>
                                 </div>
 
+                                {{#each devices}}
+                                    <li>
+                                        <span>
+                                            {{device.name}}
+                                            {{device.description}}
+                                        </span>
+                                    </li>
+                                {{/each}}
+
                             </form>
 
                         </div>
