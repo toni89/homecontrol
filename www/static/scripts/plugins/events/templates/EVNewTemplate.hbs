@@ -19,8 +19,19 @@
                         <div class="inner no-radius">
 
                             <form method="post" action="#" class="basic-form">
-                                <label for="name">Name</label>
+                                <label for="name">Name & Beschreibung:</label>
                                 {{input type=text name=defaultConfig.name id=defaultConfig.name placeholder="Eventname eingeben" value=defaultConfig.name}}
+                                {{input type=text name=defaultConfig.description id=defaultConfig.description placeholder="Beschreibung eingeben" value=defaultConfig.description}}
+
+                                <label for="name">Start Uhrzeit</label>
+                                {{input type=text name=defaultConfig.start_hh id=defaultConfig.start_hh placeholder="hh" value=defaultConfig.start_hh}}
+                                {{input type=text name=defaultConfig.start_mm id=defaultConfig.start_mm placeholder="mm" value=defaultConfig.start_mm}}
+                                <label for="name">End Uhrzeit</label>
+                                {{input type=text name=defaultConfig.end_hh id=defaultConfig.end_hh placeholder="hh" value=defaultConfig.end_hh}}
+                                {{input type=text name=defaultConfig.end_mm id=defaultConfig.end_mm placeholder="mm" value=defaultConfig.end_mm}}
+
+                                <label for="name">Täglich wiederholen?</label>
+                                {{input type="checkbox" name=defaultConfig.repeat_daily checked=defaultConfig.repeat_daily}}
 
                                 <div class="row">
                                     <div class="col-md-6 text-right">

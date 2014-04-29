@@ -18,7 +18,28 @@ var io,
                     self._sendEventList();
                 });
 
+                // Event Handlers for creation of new Events
+                socket.on('events/createEvent', function(event) {
+                    console.log(event);
 
+                    var newevent = events.createEvent({
+                        name : event.name,
+                        description: event.description,
+                        start: event.start_hh + ':' + event.start_mm,
+                        end: event.end_hh + ':' + event.end_mm,
+                        repeat_daily: event.repeat_daily,
+                        devices: []
+                    });
+
+                    events.addAndSave(newevent, function(err, item){
+                        //console.log('err:=> '+ err + 'item: '+ item);
+                        if(err){
+                            console.log('Safe Error ' + err);
+                        }else{
+                            socket.emit('eventobject saved', {});
+                        }
+                    });
+                });
 
                 // Event Handlers for Frontend
                 socket.on('main/events/list', function() {
@@ -142,20 +163,8 @@ module.exports = function(options, imports, register) {
 
     eventModel = mgs.model('Event', eventSchema, 'events');
 
-    /**/
-    var testevent = events.createEvent({
-       name : 'Testevent',
-       description: 'testeintrag',
-       start: '16:41',
-       end: '16:42',
-       devices: [1,4,2]
-    });
-
     events.init();
-
-    events.addAndSave(testevent, function(){
-        events.checkTimeForEvent();
-    });
+    events.checkTimeForEvent();
 
     /*events.findAll({}, function(err, items){
         console.log(items);
