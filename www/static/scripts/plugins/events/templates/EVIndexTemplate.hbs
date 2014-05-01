@@ -23,6 +23,7 @@
                                         <span>
                                             {{event.name}}
                                             {{event.description}}
+                                            {{#link-to "events" }}{{event.name}} {{/link-to}}
                                             <button {{action 'deleteEvent' _id}} type="button" class="btn btn-xs btn-danger">Delete</button>
                                         </span>
                                     </li>

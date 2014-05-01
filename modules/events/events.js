@@ -11,9 +11,18 @@ var io,
         init: function() {
             var self = this;
 
+            push.on('manageDevices', function(eventid, state){
+                self.devicesManager(eventid, state);
+            });
+
+            push.on('eventlist updated', function(){
+                self._sendEventList();
+            });
+
             // Socket-Events to Frontend
             io.sockets.on('connection', function(socket) {
 
+                //????? SOLLTE HIER DRIN NICHT GEHN ?????
                 push.on('eventlist updated', function(){
                     self._sendEventList();
                 });
@@ -41,6 +50,10 @@ var io,
                     });
                 });
 
+                socket.on('events/addDeviceToEvent', function(data) {
+                    self._addDeviceToEvent(data);
+                });
+
                 // Event Handlers for Frontend
                 socket.on('main/events/list', function() {
                     self._sendEventList();
@@ -49,6 +62,31 @@ var io,
                 socket.on('main/events/delete', function(eventid) {
                     self.deleteEventById(eventid);
                 });
+            });
+        },
+
+        _addDeviceToEvent : function(data){
+            this.findById(data.eventid,function(err, item){
+                /*No double entries*/
+                var isUnique = true;
+                var deviceArray = item.event.devices;
+
+                for(var itemkey in deviceArray){
+                    var existingkey = deviceArray[itemkey];
+
+                    if(existingkey === data.deviceid){
+                        isUnique = false;
+                        //console.log('Device already in Event!');
+                        //console.log('=> ' + existingkey, data.deviceid);
+                    }
+                }
+
+                if(isUnique === true){
+                    item.event.devices.push(data.deviceid);
+                    item.markModified('event');
+                    item.save();
+                    //socket.emit('eventobject mo', {});
+                }
             });
         },
 
@@ -117,6 +155,24 @@ var io,
             });
         },
 
+        devicesManager: function(eventid, state){
+            this.findById(eventid,function(err, item){
+                var deviceArray = item.event.devices;
+
+                for(var itemkey in deviceArray){
+                    var deviceid = deviceArray[itemkey];
+
+                    if(state === 'on'){
+                        //Machirgendwas AN mit deviceID
+                        //push.emit('Device',deviceid,'on');
+                    }else if(state === 'off'){
+                        //Machirgendwas AUS mit deviceID
+                        //push.emit('Device',deviceid,'off');
+                    }
+                }
+            });
+        },
+
         checkTimeForEvent: function(callback){
             eventModel.find(function(err, items){
                 for (var itemkey in items) {
@@ -136,11 +192,12 @@ var io,
 
                     if(eventdate_start[0] == hour && eventdate_start[1] == minute){
                         console.log('Alle Geräte von ' + item.event.name + ' anschalten');
+                        push.emit('manageDevices',item._id,'on');
                     }
 
                     if(eventdate_end[0] == hour && eventdate_end[1] == minute){
                         console.log('Alle Geräte von ' + item.event.name + ' ausschalten');
-                        //push.emit('p/zwave/CLASS_SWITCH_BINARY/setOn',zwaveObject);
+                        push.emit('manageDevices',item._id,'off');
                     }
                 }
             });
@@ -165,12 +222,6 @@ module.exports = function(options, imports, register) {
 
     events.init();
     events.checkTimeForEvent();
-
-    /*events.findAll({}, function(err, items){
-        console.log(items);
-    });
-    *
-    */
 
     register(null, {
         "events" : events
