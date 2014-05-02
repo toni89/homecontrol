@@ -6,7 +6,11 @@ define(
 
         "./routes/EVNewRoute",
         "./controller/EVNewController",
-        "./views/EVNewView"
+        "./views/EVNewView",
+
+        // DeviceItem
+        "./controller/EVEventConroller",
+        "./views/EVEventView"
     ]
     , function(
         EventsIndexRoute,
@@ -15,14 +19,20 @@ define(
 
         EventsNewRoute,
         EventsNewController,
-        EventsNewView
+        EventsNewView,
+
+        EVEventController,
+        EVEventView
         ) {
 
         App.Router.map(function() {
             this.resource("events", function() {
                 this.route("new");
+                //this.route('event');
+                this.resource('event', { path:':id' });
             });
         });
+
 
         return {
             EventsIndexRoute: EventsIndexRoute,
@@ -31,6 +41,9 @@ define(
 
             EventsNewRoute: EventsNewRoute,
             EventsNewController: EventsNewController,
-            EventsNewView: EventsNewView
+            EventsNewView: EventsNewView,
+
+            EventController: EVEventController,
+            EventView: EVEventView
         }
     });

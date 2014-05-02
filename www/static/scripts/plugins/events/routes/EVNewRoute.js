@@ -4,9 +4,7 @@ define(
         return Ember.Route.extend({
 
             model: function() {
-
                 return new Ember.RSVP.Promise(function(resolve) {
-
                     App.io.on('main/devices/list', function(devices) {
                         devices = JSON.parse(devices);
                         resolve({'devices': devices });
@@ -41,10 +39,10 @@ define(
                     var end_hh = this.controller.get('defaultConfig').end_hh;
 
                     if(name != '') {
-                        App.io.on('eventobject saved', function(socket) {
+                        /*App.io.on('eventobject saved', function(socket) {
                             console.log('eventobject PING zurück ' + socket);
                             self.transitionToRoute('events.index');
-                        });
+                        });*/
 
                         App.io.emit('events/createEvent', {
                             name: name,
