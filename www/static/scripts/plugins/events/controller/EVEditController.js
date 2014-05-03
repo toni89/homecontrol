@@ -1,6 +1,6 @@
 define([],
     function() {
-        return Ember.ObjectController.extend({
+        return Ember.Controller.extend({
             title: "Edit Socket",
 
             actions: {

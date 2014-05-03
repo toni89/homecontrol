@@ -30,7 +30,7 @@ define(
         App.Router.map(function() {
             this.resource("events", function() {
                 this.route("new");
-                this.route('edit', { path: 'edit/:socket_id' });
+                this.route("edit", { path: 'edit/:event_id' });
             });
         });
 

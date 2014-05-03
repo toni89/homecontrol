@@ -6,7 +6,7 @@ define(
 
             model: function(params) {
                 return new Ember.RSVP.Promise(function(resolve) {
-                    App.io.on('event/getinfo', function(event) {
+                    App.io.on('event/info', function(event) {
                         event = JSON.parse(event);
                         resolve({'events': event });
                     });
