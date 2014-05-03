@@ -5,11 +5,11 @@ define(
 
             model: function() {
                 return new Ember.RSVP.Promise(function(resolve) {
-                    App.io.on('event/info', function(event) {
-                        //event = JSON.parse(event);
+                    App.io.on('main/events/info', function(event) {
+                        event = JSON.parse(event);
                         resolve({'event': event });
                     });
-                    App.io.emit('event/getinfo');
+                    App.io.emit('main/events/info');
                 }, 3000);
             },
 
