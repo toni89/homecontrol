@@ -50,6 +50,10 @@ var io,
                     });
                 });
 
+                socket.on('event/info', function(id) {
+                    self._eventInfo(id);
+                });
+
                 socket.on('events/addDeviceToEvent', function(data) {
                     self._addDeviceToEvent(data);
                 });
@@ -63,6 +67,12 @@ var io,
                     self.deleteEventById(eventid);
                 });
             });
+        },
+
+        _eventInfo : function(id){
+          this.findById(id, function(err, event){
+              io.sockets.emit('event/info', event);
+          });
         },
 
         _addDeviceToEvent : function(data){
