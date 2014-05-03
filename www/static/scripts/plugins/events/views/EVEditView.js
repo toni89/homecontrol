@@ -1,9 +1,9 @@
 define(
     [
-        "hbs!plugins/events/templates/EVEventTemplate"
+        "hbs!plugins/events/templates/EVEditTemplate"
     ],
-    function(EVEventTemplate) {
+    function(EVEditTemplate) {
         return Ember.View.extend({
-            defaultTemplate: EVEventTemplate
+            defaultTemplate: EVEditTemplate
         });
     });
