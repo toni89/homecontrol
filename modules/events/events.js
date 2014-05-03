@@ -50,7 +50,7 @@ var io,
                     });
                 });
 
-                socket.on('event/getinfo', function(id) {
+                socket.on('main/events/info', function(id) {
                     self._eventInfo(id);
                 });
 
@@ -71,7 +71,7 @@ var io,
 
         _eventInfo : function(id){
           this.findById(id, function(err, event){
-              io.sockets.emit('event/info', event);
+              io.sockets.emit('main/events/info', JSON.stringify(event));
           });
         },
 
