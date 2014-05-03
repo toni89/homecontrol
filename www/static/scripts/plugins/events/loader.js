@@ -11,7 +11,7 @@ define(
         // DeviceItem
         "./routes/EVEditRoute",
         "./controller/EVEditController",
-        "./views/EVEditView",
+        "./views/EVEditView"
     ]
     , function(
         EventsIndexRoute,

@@ -50,7 +50,7 @@ var io,
                     });
                 });
 
-                socket.on('event/info', function(id) {
+                socket.on('event/getinfo', function(id) {
                     self._eventInfo(id);
                 });
 

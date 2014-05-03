@@ -5,13 +5,12 @@ define(
 
             model: function() {
                 return new Ember.RSVP.Promise(function(resolve) {
-                    App.io.on('main/devices/list', function(devices) {
-                        devices = JSON.parse(devices);
-                        resolve({'devices': devices });
+                    App.io.on('event/info', function(event) {
+                        //event = JSON.parse(event);
+                        resolve({'event': event });
                     });
-                    App.io.emit('main/devices/list');
+                    App.io.emit('event/getinfo');
                 }, 3000);
-
             },
 
             setupController: function(controller, model) {
