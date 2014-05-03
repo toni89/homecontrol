@@ -14,8 +14,8 @@ define(
             beforeModel: function() {
                 var self = this;    // Very important, inside the App.io.on function we get an context change of this to Socket(.io)Namespace
 
-                App.io.on('event/info', function(socket) {
-                    socket = JSON.parse(socket);
+                App.io.on('event/info', function(event) {
+                    event = JSON.parse(event);
                     self.controller.set("model", self.store.createRecord('socket', {
                         event: event
                     }));
