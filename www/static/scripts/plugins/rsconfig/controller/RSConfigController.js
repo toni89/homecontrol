@@ -15,7 +15,8 @@ define(
 
                     if(defaultConfig.name != '' && code != '') {
                         App.io.on('p/remotesockets/createSocket', function(err) {
-                            //if(err) TODO: Fehler abfangen und anzeigen
+                            //TODO: Fehler abfangen und anzeigen
+                            //TODO: Bei Erfolg alle Eingaben zurücksetzen
                             self.transitionToRoute('devices');
                         });
 

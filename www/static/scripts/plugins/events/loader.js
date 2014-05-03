@@ -9,10 +9,9 @@ define(
         "./views/EVNewView",
 
         // DeviceItem
-        "./controller/EVEventConroller",
-        "./views/EVEventView",
-
-        "./controller/EVEditController"
+        "./routes/EVEditRoute",
+        "./controller/EVEditController",
+        "./views/EVEditView",
     ]
     , function(
         EventsIndexRoute,
@@ -23,16 +22,15 @@ define(
         EventsNewController,
         EventsNewView,
 
-        EVEventController,
-        EVEventView,
-
-        EVEventEditRoute
+        EventsEditRoute,
+        EventsEditController,
+        EventsEditView
         ) {
 
         App.Router.map(function() {
             this.resource("events", function() {
                 this.route("new");
-                this.resource('event', { path: 'edit/:socket_id' });
+                this.route('edit', { path: 'edit/:socket_id' });
             });
         });
 
@@ -45,9 +43,9 @@ define(
             EventsNewController: EventsNewController,
             EventsNewView: EventsNewView,
 
-            EventController: EVEventController,
-            EventView: EVEventView,
+            EventsEditRoute: EventsEditRoute,
+            EventsEditController: EventsEditController,
+            EventsEditView: EventsEditView
 
-            EventEditRoute: EVEventEditRoute
         }
     });
