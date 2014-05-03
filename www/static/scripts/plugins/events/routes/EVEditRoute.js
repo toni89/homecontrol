@@ -10,7 +10,7 @@ define(
                         event = JSON.parse(event);
                         resolve({'events': event });
                     });
-                    App.io.emit('event/info', params);
+                    App.io.emit('event/info', params.event_id);
                 }, 3000);
             },
 
