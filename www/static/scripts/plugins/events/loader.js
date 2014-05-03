@@ -46,6 +46,5 @@ define(
             EventsEditRoute: EventsEditRoute,
             EventsEditController: EventsEditController,
             EventsEditView: EventsEditView
-
         }
     });
