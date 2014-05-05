@@ -34,8 +34,8 @@ var io,
                     var newevent = events.createEvent({
                         name : event.name,
                         description: event.description,
-                        start: event.start_hh + ':' + event.start_mm,
-                        end: event.end_hh + ':' + event.end_mm,
+                        start: event.start,
+                        end: event.end,
                         repeat_daily: event.repeat_daily,
                         devices: []
                     });
@@ -65,6 +65,10 @@ var io,
 
                 socket.on('main/events/delete', function(eventid) {
                     self.deleteEventById(eventid);
+                });
+
+                socket.on('events/updateEvent', function(data){
+                   self.updateEvent(data);
                 });
             });
         },
@@ -106,6 +110,44 @@ var io,
                     io.sockets.emit('main/events/list', JSON.stringify(items));
                 }
             })
+        },
+
+        updateEvent : function(data){
+            console.log(data);
+
+            eventModel.update(
+                {_id: data.id},
+                { event : {
+                    name: data.name,
+                    description: data.description,
+                    start: data.start,
+                    end: data.end,
+                    repeat_daily: data.repeat_daily
+                }}
+            ,function(err, item) {
+                    if(err) {
+                        console.log(err);
+                    }
+            });
+
+            /*
+            this.findById(data.id,function(err, item){
+
+                console.log(item);
+                item.event.update(
+                    {
+                        name: data.name,
+                        description : data.description,
+                        start : data.start,
+                        end : data.end,
+                        repeat_daily : data.repeat_daily
+                    }
+                )
+
+                item.markModified('event');
+                item.save();
+            });
+            */
         },
 
         createEvent : function(options) {

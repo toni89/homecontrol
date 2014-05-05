@@ -1,2 +1,33 @@
 {{event._id}}
 
+<form method="post" action="#" class="basic-form">
+    <label for="name">Name & Beschreibung:</label>
+    {{input type=text name=defaultConfig.name id=defaultConfig.name placeholder="Eventname eingeben" value=event.event.name}}
+    {{input type=text name=defaultConfig.description id=defaultConfig.description placeholder="Beschreibung eingeben" value=event.event.description}}
+
+    <label for="name">Start Uhrzeit</label>
+    {{input type=text name=defaultConfig.start id=defaultConfig.start placeholder="hh" value=event.event.start}}
+    <label for="name">End Uhrzeit</label>
+    {{input type=text name=defaultConfig.end id=defaultConfig.end placeholder="hh" value=event.event.end}}
+
+    <label for="name">Täglich wiederholen?</label>
+    {{input type="checkbox" name=defaultConfig.repeat_daily checked=event.event.repeat_daily}}
+
+    <div class="row">
+        <div class="col-md-6 text-right">
+            <button {{action 'submit'}} type="button" class="btn btn-sm btn-success">Save</button>
+        </div>
+    </div>
+
+    {{#each devices}}
+        <li>
+            <span>
+                {{device.name}}
+                <ul>
+                    <li><a href="#" {{action 'addDeviceToEvent' _id}}>{{_id}}</a></li>
+                </ul>
+                {{device.description}}
+            </span>
+        </li>
+    {{/each}}
+</form>

@@ -32,10 +32,8 @@ define(
                     var description = this.controller.get('defaultConfig').description;
                     var repeat_daily = this.controller.get('defaultConfig').repeat_daily;
 
-                    var start_mm = this.controller.get('defaultConfig').start_mm;
-                    var start_hh = this.controller.get('defaultConfig').start_hh;
-                    var end_mm = this.controller.get('defaultConfig').end_mm;
-                    var end_hh = this.controller.get('defaultConfig').end_hh;
+                    var start = this.controller.get('defaultConfig').start;
+                    var end = this.controller.get('defaultConfig').end;
 
                     if(name != '') {
                         /*App.io.on('eventobject saved', function(socket) {
@@ -47,12 +45,9 @@ define(
                             name: name,
                             description: description,
                             repeat_daily: repeat_daily,
-                            start_mm: start_mm,
-                            start_hh: start_hh,
-                            end_mm: end_mm,
-                            end_hh: end_hh});
+                            start: start,
+                            end: end});
                     }
-
                 }
             }
 

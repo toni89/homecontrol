@@ -1,10 +1,14 @@
 define([],
     function() {
         return Ember.Controller.extend({
-            title: "Edit Socket",
 
-            actions: {
-
+            defaultConfig: {
+                name: '',
+                description: '',
+                repeat_daily: false,
+                start: '',
+                end: ''
             }
+
         });
     });

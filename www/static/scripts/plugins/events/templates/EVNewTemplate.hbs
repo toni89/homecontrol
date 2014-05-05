@@ -24,11 +24,9 @@
                                 {{input type=text name=defaultConfig.description id=defaultConfig.description placeholder="Beschreibung eingeben" value=defaultConfig.description}}
 
                                 <label for="name">Start Uhrzeit</label>
-                                {{input type=text name=defaultConfig.start_hh id=defaultConfig.start_hh placeholder="hh" value=defaultConfig.start_hh}}
-                                {{input type=text name=defaultConfig.start_mm id=defaultConfig.start_mm placeholder="mm" value=defaultConfig.start_mm}}
+                                {{input type=text name=defaultConfig.start id=defaultConfig.start placeholder="hh:mm" value=defaultConfig.start}}
                                 <label for="name">End Uhrzeit</label>
-                                {{input type=text name=defaultConfig.end_hh id=defaultConfig.end_hh placeholder="hh" value=defaultConfig.end_hh}}
-                                {{input type=text name=defaultConfig.end_mm id=defaultConfig.end_mm placeholder="mm" value=defaultConfig.end_mm}}
+                                {{input type=text name=defaultConfig.end id=defaultConfig.end placeholder="hh:mm" value=defaultConfig.end}}
 
                                 <label for="name">Täglich wiederholen?</label>
                                 {{input type="checkbox" name=defaultConfig.repeat_daily checked=defaultConfig.repeat_daily}}
@@ -50,7 +48,6 @@
                                         </span>
                                     </li>
                                 {{/each}}
-
                             </form>
 
                         </div>

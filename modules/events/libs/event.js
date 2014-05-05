@@ -3,9 +3,7 @@ function Event(){
     this.description = '';
 
     this.start = '';
-    this.start_triggered = false;
     this.end = '';
-    this.end_triggered = false;
 
     this.repeat_daily = false;
     this.devices = [];
