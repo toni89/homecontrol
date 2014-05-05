@@ -22,11 +22,9 @@
     {{#each devices}}
         <li>
             <span>
-                {{device.name}}
                 <ul>
-                    <li><a href="#" {{action 'addDeviceToEvent' _id}}>{{_id}}</a></li>
+                    <li><a href="#" {{action 'addDeviceToEvent' _id}}>{{device.name}}</a></li>
                 </ul>
-                {{device.description}}
             </span>
         </li>
     {{/each}}

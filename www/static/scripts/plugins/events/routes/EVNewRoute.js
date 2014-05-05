@@ -18,12 +18,6 @@ define(
             },
 
             actions: {
-                addDeviceToEvent: function(deviceid) {
-                    App.io.emit('events/addDeviceToEvent', {
-                        eventid: "5362c30c1f2ee1cc0a0fa8a9",
-                        deviceid: deviceid
-                    });
-                },
 
                 submit: function() {
                     var self = this;
@@ -36,11 +30,6 @@ define(
                     var end = this.controller.get('defaultConfig').end;
 
                     if(name != '') {
-                        /*App.io.on('eventobject saved', function(socket) {
-                            console.log('eventobject PING zurück ' + socket);
-                            self.transitionToRoute('events.index');
-                        });*/
-
                         App.io.emit('events/createEvent', {
                             name: name,
                             description: description,

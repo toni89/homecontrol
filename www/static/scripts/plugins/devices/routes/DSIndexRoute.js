@@ -18,7 +18,6 @@ function() {
             });
         },
 
-
         model: function() {
                 App.io.emit('main/devices/list');
                 App.io.emit('main/devices/listtypes');

@@ -81,6 +81,9 @@ var io,
 
         _addDeviceToEvent : function(data){
             this.findById(data.eventid,function(err, item){
+
+                console.log(item);
+
                 /*No double entries*/
                 var isUnique = true;
                 var deviceArray = item.event.devices;
@@ -112,42 +115,23 @@ var io,
             })
         },
 
-        updateEvent : function(data){
-            console.log(data);
-
+        updateEvent: function (data) {
             eventModel.update(
                 {_id: data.id},
-                { event : {
+                { event: {
                     name: data.name,
                     description: data.description,
                     start: data.start,
                     end: data.end,
-                    repeat_daily: data.repeat_daily
-                }}
-            ,function(err, item) {
-                    if(err) {
+                    repeat_daily: data.repeat_daily,
+                    devices: []
+                    }
+                }
+                , function (err, item) {
+                    if (err) {
                         console.log(err);
                     }
-            });
-
-            /*
-            this.findById(data.id,function(err, item){
-
-                console.log(item);
-                item.event.update(
-                    {
-                        name: data.name,
-                        description : data.description,
-                        start : data.start,
-                        end : data.end,
-                        repeat_daily : data.repeat_daily
-                    }
-                )
-
-                item.markModified('event');
-                item.save();
-            });
-            */
+                });
         },
 
         createEvent : function(options) {

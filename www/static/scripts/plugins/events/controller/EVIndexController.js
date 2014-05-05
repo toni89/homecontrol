@@ -3,7 +3,7 @@ define(
     function() {
         return Ember.Controller.extend({
             events: [],
-
+            devices : [],
 
             actions: {
                 'deleteEvent' : function(eventId) {

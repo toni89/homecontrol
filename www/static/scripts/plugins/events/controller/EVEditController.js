@@ -7,7 +7,8 @@ define([],
                 description: '',
                 repeat_daily: false,
                 start: '',
-                end: ''
+                end: '',
+                devices: []
             }
 
         });

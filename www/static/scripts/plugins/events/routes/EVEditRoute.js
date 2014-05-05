@@ -3,7 +3,19 @@ define(
     function() {
         return Ember.Route.extend({
 
+            beforeModel: function() {
+                var self = this;
+
+                App.io.on('main/devices/list', function(devices) {
+                    console.log(devices);
+                    var devices = JSON.parse(devices);
+                    self.controller.set('devices', devices);
+                });
+            },
+
             model: function(params) {
+                eventid = params.event_id;
+                App.io.emit('main/devices/list');
 
                 return new Ember.RSVP.Promise(function(resolve) {
                     App.io.on('main/events/info', function(event) {
@@ -20,6 +32,14 @@ define(
             },
 
             actions: {
+
+                addDeviceToEvent: function(deviceid) {
+                    App.io.emit('events/addDeviceToEvent', {
+                        eventid: eventid,
+                        deviceid: deviceid
+                    });
+                },
+
                 submit: function() {
                     var self = this;
 
@@ -31,10 +51,10 @@ define(
                     var end = this.controller.get('event').event.end;
 
 
-                        /*App.io.on('eventobject saved', function(socket) {
-                         console.log('eventobject PING zurück ' + socket);
-                         self.transitionToRoute('events.index');
-                         });*/
+                    /*App.io.on('eventobject saved', function(socket) {
+                     console.log('eventobject PING zurück ' + socket);
+                     self.transitionToRoute('events.index');
+                     });*/
 
                     App.io.emit('events/updateEvent', {
                         id: id,
