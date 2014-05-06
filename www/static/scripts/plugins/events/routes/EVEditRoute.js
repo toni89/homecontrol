@@ -29,6 +29,7 @@ define(
             model: function(params) {
                 eventid = params.event_id;
                 App.io.emit('main/devices/list');
+                App.io.emit('event/devices/list', eventid);
 
                 return new Ember.RSVP.Promise(function(resolve) {
                     App.io.on('main/events/info', function(event) {
@@ -45,12 +46,13 @@ define(
             },
 
             actions: {
-                addDeviceToEvent: function(deviceid) {
+                addDeviceToEvent: function(deviceid, device) {
                     App.io.emit('events/addDeviceToEvent', {
                         eventid: eventid,
                         deviceid: deviceid
                     });
-                  
+
+                    console.log(device);
                 },
 
                 submit: function() {

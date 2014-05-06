@@ -103,9 +103,6 @@ var io,
                         //console.log('=> ' + existingkey, data.deviceid);
                     }
                 }
-
-                io.sockets.emit('event/deviceadded', JSON.stringify(item));
-
                 if(isUnique === true){
                     item.event.devices.push(data.deviceid);
                     item.markModified('event');
@@ -118,8 +115,11 @@ var io,
             this.findById(eventid, function(err, item){
                 var deviceArray = item.event.devices;
                 //console.log(JSON.stringify(deviceArray));
-                io.sockets.emit('main/devices/listbyids', JSON.stringify(deviceArray));
-                push.emit('eventlist updated');
+
+                /*Zugriff auf Devices?*/ /*Kann man das Besser lösen?*/
+
+                io.sockets.emit('test', JSON.stringify(deviceArray));
+                push.emit('test');
             });
         },
 
