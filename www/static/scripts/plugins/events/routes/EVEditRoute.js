@@ -11,6 +11,12 @@ define(
                     self.controller.set('devices', devices);
                 });
 
+                App.io.on('findDevicesById/currentDevice', function(currentDevices) {
+                    var currentDevices = JSON.parse(currentDevices);
+
+                    self.controller.set('currentDevices', currentDevices);
+                });
+
                 /*
                 App.io.on('event/deviceadded', function(device) {
 

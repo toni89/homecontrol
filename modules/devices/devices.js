@@ -129,8 +129,29 @@ var io,
             });
         },
 
-        findByType: function(type, callback) {
+        findByIdArray: function(id_array, callback) {
+            var array = [];
 
+            for(var itemkey in id_array){
+                var key = id_array[itemkey];
+
+                /*
+                deviceModel.findOne(params, function(err, item) {
+                    if(err) {
+                        console.log(err);
+                        if(callback) callback(err);
+                    } else if(callback)
+                        callback(null, item);
+
+                });
+
+                this.findOne(key, function(err, item){
+                    //console.log(item[0]._id);
+                    array.push(item);
+                });*/
+            }
+        },
+        findByType: function(type, callback) {
 
         },
 
@@ -158,6 +179,7 @@ var io,
 
         },
 
+        /*ÜBERFLÜSSIG? -> Dupliziert findAll*/
         getAll : function(callback) {
             deviceModel.find(function(err, items) {
                 if(err) {

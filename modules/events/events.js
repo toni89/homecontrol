@@ -7,6 +7,7 @@ var io,
     eventSchema,
     eventModel,
     push = new emitter.EventEmitter(),
+    devices,
     events = {
         init: function() {
             var self = this;
@@ -103,23 +104,22 @@ var io,
                         //console.log('=> ' + existingkey, data.deviceid);
                     }
                 }
-                if(isUnique === true){
+                //if(isUnique === true){
                     item.event.devices.push(data.deviceid);
                     item.markModified('event');
                     item.save();
-                }
+                //}
             });
         },
 
         _findDevicesById : function(eventid){
             this.findById(eventid, function(err, item){
                 var deviceArray = item.event.devices;
-                //console.log(JSON.stringify(deviceArray));
 
-                /*Zugriff auf Devices?*/ /*Kann man das Besser lösen?*/
+                devices.findByIdArray(deviceArray,function(err, items){
+                    io.sockets.emit('findDevicesById/currentDevice', JSON.stringify(items));
+                });
 
-                io.sockets.emit('test', JSON.stringify(deviceArray));
-                push.emit('test');
             });
         },
 
@@ -262,9 +262,11 @@ var io,
 module.exports = function(options, imports, register) {
     assert(imports.server, "Package 'server' is required");
     assert(imports.db, "Package 'db' is required");
+    assert(imports.devices, "Devices is required");
 
     io = imports.server.io;
     mgs = imports.db.mongoose;
+    devices = imports.devices;
 
     eventSchema = new mgs.Schema({
         event: 'Mixed'
