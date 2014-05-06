@@ -7,10 +7,23 @@ define(
                 var self = this;
 
                 App.io.on('main/devices/list', function(devices) {
-                    console.log(devices);
                     var devices = JSON.parse(devices);
                     self.controller.set('devices', devices);
                 });
+
+                /*
+                App.io.on('event/deviceadded', function(device) {
+
+                    console.log('===');
+                    console.log(device);
+                    console.log('===');
+                });
+                */
+
+                /*App.io.on('event/devices/list', function(event_devices) {
+                    var event_devices = JSON.parse(event_devices);
+                    self.controller.set('event_devices', event_devices);
+                });*/
             },
 
             model: function(params) {
@@ -32,12 +45,12 @@ define(
             },
 
             actions: {
-
                 addDeviceToEvent: function(deviceid) {
                     App.io.emit('events/addDeviceToEvent', {
                         eventid: eventid,
                         deviceid: deviceid
                     });
+                  
                 },
 
                 submit: function() {
@@ -49,7 +62,6 @@ define(
 
                     var start = this.controller.get('event').event.start;
                     var end = this.controller.get('event').event.end;
-
 
                     /*App.io.on('eventobject saved', function(socket) {
                      console.log('eventobject PING zurück ' + socket);

@@ -29,25 +29,7 @@ var io,
 
                 // Event Handlers for creation of new Events
                 socket.on('events/createEvent', function(event) {
-                    console.log(event);
-
-                    var newevent = events.createEvent({
-                        name : event.name,
-                        description: event.description,
-                        start: event.start,
-                        end: event.end,
-                        repeat_daily: event.repeat_daily,
-                        devices: []
-                    });
-
-                    events.addAndSave(newevent, function(err, item){
-                        //console.log('err:=> '+ err + 'item: '+ item);
-                        if(err){
-                            console.log('Safe Error ' + err);
-                        }else{
-                            socket.emit('eventobject saved', {});
-                        }
-                    });
+                    self._newEvent(event);
                 });
 
                 socket.on('main/events/info', function(id) {
@@ -70,6 +52,10 @@ var io,
                 socket.on('events/updateEvent', function(data){
                    self.updateEvent(data);
                 });
+
+                socket.on('event/devices/list', function(id){
+                    self._findDevicesById(id);
+                });
             });
         },
 
@@ -77,6 +63,26 @@ var io,
           this.findById(id, function(err, event){
               io.sockets.emit('main/events/info', JSON.stringify(event));
           });
+        },
+
+        _newEvent : function(event){
+            var newevent = events.createEvent({
+                name : event.name,
+                description: event.description,
+                start: event.start,
+                end: event.end,
+                repeat_daily: event.repeat_daily,
+                devices: []
+            });
+
+            events.addAndSave(newevent, function(err, item){
+                //console.log('err:=> '+ err + 'item: '+ item);
+                if(err){
+                    console.log('Safe Error ' + err);
+                }else{
+                    socket.emit('eventobject saved', {});
+                }
+            });
         },
 
         _addDeviceToEvent : function(data){
@@ -98,12 +104,22 @@ var io,
                     }
                 }
 
+                io.sockets.emit('event/deviceadded', JSON.stringify(item));
+
                 if(isUnique === true){
                     item.event.devices.push(data.deviceid);
                     item.markModified('event');
                     item.save();
-                    //socket.emit('eventobject mo', {});
                 }
+            });
+        },
+
+        _findDevicesById : function(eventid){
+            this.findById(eventid, function(err, item){
+                var deviceArray = item.event.devices;
+                //console.log(JSON.stringify(deviceArray));
+                io.sockets.emit('main/devices/listbyids', JSON.stringify(deviceArray));
+                push.emit('eventlist updated');
             });
         },
 
@@ -228,12 +244,12 @@ var io,
 
                     if(eventdate_start[0] == hour && eventdate_start[1] == minute){
                         console.log('Alle Geräte von ' + item.event.name + ' anschalten');
-                        push.emit('manageDevices',item._id,'on');
+                        push.emit('manageDevices', item._id,'on');
                     }
 
                     if(eventdate_end[0] == hour && eventdate_end[1] == minute){
                         console.log('Alle Geräte von ' + item.event.name + ' ausschalten');
-                        push.emit('manageDevices',item._id,'off');
+                        push.emit('manageDevices', item._id,'off');
                     }
                 }
             });

@@ -31,6 +31,15 @@ var io,
                     self._sendDeviceList();
                 });
 
+                socket.on('main/devices/listbyids', function(ids) {
+
+                    console.log('===');
+                    console.log(ids);
+                    console.log('===');
+
+                    self._listByIds(ids);
+                });
+
                 socket.on('main/devices/delete', function(deviceid) {
                     self.deleteDeviceById(deviceid);
                 });
@@ -44,6 +53,26 @@ var io,
                     });
                 });
             });
+        },
+
+        _listByIds : function(ids){
+
+            ids = JSON.parse(ids);
+
+            for(var itemkey in ids){
+                var deviceid = ids[itemkey];
+
+                console.log(deviceid);
+
+                this.findById(deviceid, function(err, item) {
+
+                    console.log('===');
+                    console.log(item);
+                    console.log('===');
+
+                });
+
+            }
         },
 
         _sendDeviceList: function() {
