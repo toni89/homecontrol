@@ -149,7 +149,6 @@ var io,
                 var deviceArray = item.event.devices;
 
                 devices.findAll({'_id': { $in: deviceArray }},function(err, items){
-                    //console.log(items);
                     io.sockets.emit('findDevicesByEventId/currentDevices', JSON.stringify(items));
                 });
             });
@@ -164,7 +163,21 @@ var io,
         },
 
         updateEvent: function (data) {
-            eventModel.update(
+            this.findById(data.id, function(err, item){
+                item.event.name = data.name;
+                item.event.description = data.description;
+                item.event.start = data.start;
+                item.event.end = data.end;
+                item.event.repeat_daily = data.repeat_daily;
+
+                item.markModified('event');
+                item.save(function(err, item){
+                    if(!err)
+                        io.sockets.emit('current event updated', data.eventid);
+                });
+            });
+
+            /*eventModel.update(
                 {_id: data.id},
                 { event: {
                     name: data.name,
@@ -179,7 +192,7 @@ var io,
                     if (err) {
                         console.log(err);
                     }
-                });
+                });*/
         },
 
         createEvent : function(options) {
@@ -246,13 +259,18 @@ var io,
                 for(var itemkey in deviceArray){
                     var deviceid = deviceArray[itemkey];
 
-                    if(state === 'on'){
-                        //Machirgendwas AN mit deviceID
-                        //push.emit('Device',deviceid,'on');
-                    }else if(state === 'off'){
-                        //Machirgendwas AUS mit deviceID
-                        //push.emit('Device',deviceid,'off');
-                    }
+                    devices.findById(deviceid, function(err, device){
+                        device.device.classes.forEach(function(item){
+                            if(item.id == 'CLASS_SWITCH_BINARY'){
+
+                                if(state === 'on'){
+                                    io.sockets.emit(item.setOn, this.device);
+                                }else if(state === 'off'){
+                                    io.sockets.emit(item.setOff, this.device);
+                                }
+                            }
+                        });
+                    });
                 }
             });
         },
@@ -287,7 +305,7 @@ var io,
             });
 
           if(callback) callback(null);
-          setTimeout(this.checkTimeForEvent.bind(this), 1000 * 60);
+          setTimeout(this.checkTimeForEvent.bind(this), 1000 * 5);
         }
     }
 
