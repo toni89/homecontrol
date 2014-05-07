@@ -163,6 +163,8 @@ var io,
         },
 
         updateEvent: function (data) {
+
+            /*
             this.findById(data.id, function(err, item){
                 item.event.name = data.name;
                 item.event.description = data.description;
@@ -175,9 +177,9 @@ var io,
                     if(!err)
                         io.sockets.emit('current event updated', data.eventid);
                 });
-            });
+            });*/
 
-            /*eventModel.update(
+            eventModel.update(
                 {_id: data.id},
                 { event: {
                     name: data.name,
@@ -192,7 +194,7 @@ var io,
                     if (err) {
                         console.log(err);
                     }
-                });*/
+                });
         },
 
         createEvent : function(options) {
@@ -264,9 +266,9 @@ var io,
                             if(item.id == 'CLASS_SWITCH_BINARY'){
 
                                 if(state === 'on'){
-                                    io.sockets.emit(item.setOn, this.device);
+                                    io.sockets.emit(item.setOn, device);
                                 }else if(state === 'off'){
-                                    io.sockets.emit(item.setOff, this.device);
+                                    io.sockets.emit(item.setOff, device);
                                 }
                             }
                         });
@@ -287,10 +289,6 @@ var io,
 
                     var eventdate_start = item.event.start.split(":");
                     var eventdate_end = item.event.end.split(":");
-
-                    //console.log(item._id);
-                    //item.update({ _id: item._id }, { $set: { start_triggered: true }}, callback);
-                    //eventModel.update({ _id: item._id }, { $set: { "event.start_triggered": true, "event.end_triggered": true }}, callback);
 
                     if(eventdate_start[0] == hour && eventdate_start[1] == minute){
                         console.log('Alle Geräte von ' + item.event.name + ' anschalten');
