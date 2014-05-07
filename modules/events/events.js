@@ -93,6 +93,7 @@ var io,
                 }
             });
         },
+
         _deleteDeviceFromEvent : function(data){
             this.findById(data.eventid, function(err, item){
 
@@ -250,7 +251,6 @@ var io,
                     if(callback) callback(err);
                 } else if(callback)
                     callback(null, item);
-
             });
         },
 
@@ -264,7 +264,6 @@ var io,
                     devices.findById(deviceid, function(err, device){
                         device.device.classes.forEach(function(item){
                             if(item.id == 'CLASS_SWITCH_BINARY'){
-
                                 if(state === 'on'){
                                     io.sockets.emit(item.setOn, device);
                                 }else if(state === 'off'){

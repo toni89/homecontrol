@@ -1,41 +1,46 @@
-<form method="post" action="#" class="basic-form">
-    <label for="name">Name & Beschreibung:</label>
-    {{input type=text name=defaultConfig.name id=defaultConfig.name placeholder="Eventname eingeben" value=event.event.name}}
-    {{input type=text name=defaultConfig.description id=defaultConfig.description placeholder="Beschreibung eingeben" value=event.event.description}}
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-    <label for="name">Start Uhrzeit</label>
-    {{input type=text name=defaultConfig.start id=defaultConfig.start placeholder="hh" value=event.event.start}}
-    <label for="name">End Uhrzeit</label>
-    {{input type=text name=defaultConfig.end id=defaultConfig.end placeholder="hh" value=event.event.end}}
+        <form method="post" action="#" class="basic-form">
+            <label for="name">Name & Beschreibung:</label>
+            {{input type=text name=defaultConfig.name id=defaultConfig.name placeholder="Eventname eingeben" value=event.event.name}}
+            {{input type=text name=defaultConfig.description id=defaultConfig.description placeholder="Beschreibung eingeben" value=event.event.description}}
 
-    <label for="name">Täglich wiederholen?</label>
-    {{input type="checkbox" name=defaultConfig.repeat_daily checked=event.event.repeat_daily}}
+            <label for="name">Start Uhrzeit</label>
+            {{input type=text name=defaultConfig.start id=defaultConfig.start placeholder="hh" value=event.event.start}}
+            <label for="name">End Uhrzeit</label>
+            {{input type=text name=defaultConfig.end id=defaultConfig.end placeholder="hh" value=event.event.end}}
 
-    <div class="row">
-        <div class="col-md-6 text-right">
-            <button {{action 'submit'}} type="button" class="btn btn-sm btn-success">Angaben Speichern!</button>
-        </div>
+            <label for="name">Täglich wiederholen?</label>
+            {{input type="checkbox" name=defaultConfig.repeat_daily checked=event.event.repeat_daily}}
+
+            <div class="row">
+                <div class="col-md-6 text-right">
+                    <button {{action 'submit'}} type="button" class="btn btn-sm btn-success">Angaben Speichern!</button>
+                </div>
+            </div>
+
+            <hr>
+            {{#each currentDevices}}
+                <li>
+                    <span>
+                        <ul>
+                            <li><a href="#" {{action 'deleteDeviceFromEvent' _id}}>{{device.name}} Delete</a></li>
+                        </ul>
+                    </span>
+                </li>
+            {{/each}}
+            <hr>
+            {{#each devices}}
+                <li>
+                    <span>
+                        <ul>
+                            <li><a href="#" {{action 'addDeviceToEvent' _id device}}>{{device.name}}</a></li>
+                        </ul>
+                    </span>
+                </li>
+            {{/each}}
+
+        </form>
     </div>
-
-    <hr>
-    {{#each currentDevices}}
-        <li>
-            <span>
-                <ul>
-                    <li><a href="#" {{action 'deleteDeviceFromEvent' _id}}>{{device.name}} Delete</a></li>
-                </ul>
-            </span>
-        </li>
-    {{/each}}
-    <hr>
-    {{#each devices}}
-        <li>
-            <span>
-                <ul>
-                    <li><a href="#" {{action 'addDeviceToEvent' _id device}}>{{device.name}}</a></li>
-                </ul>
-            </span>
-        </li>
-    {{/each}}
-
-</form>
+</div>
