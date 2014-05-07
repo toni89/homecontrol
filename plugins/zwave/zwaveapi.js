@@ -247,12 +247,18 @@ module.exports = {
             this.zwave.setLevel(nodeid, level);
     },
 
-    setOn: function(nodeid) {
+    setOn: function(nodeid, callback) {
         this.zwave.switchOn(nodeid);
+        if(callback) callback();
+     },
+
+    setOff: function(nodeid, callback) {
+        this.zwave.switchOff(nodeid);
+        if(callback) callback();
     },
 
-    setOff: function(nodeid) {
-        this.zwave.switchOff(nodeid);
+    getDevice:  function(nodeid, callback) {
+        if(callback && this.nodes[nodeid])
+            callback(this.nodes[nodeid]);
     }
-
 };
