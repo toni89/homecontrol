@@ -130,27 +130,39 @@ var io,
         },
 
         findByIdArray: function(id_array, callback) {
-            var array = [];
+
+            /*
+            console.log('1==');
+            console.log(id_array);
+
+            console.log('2==');
+            this.findAll(id_array, function(err, items){
+                console.log(items);
+            });*/
+            this.find({
+
+
+            }, function(err, docs){
+                console.log
+            });
+
 
             for(var itemkey in id_array){
                 var key = id_array[itemkey];
 
-                /*
-                deviceModel.findOne(params, function(err, item) {
-                    if(err) {
-                        console.log(err);
-                        if(callback) callback(err);
-                    } else if(callback)
-                        callback(null, item);
-
-                });
-
                 this.findOne(key, function(err, item){
                     //console.log(item[0]._id);
+                    console.log('=========');
                     array.push(item);
-                });*/
+                    callback();
+                },function(callback){
+                    console.log('=========');
+                    console.log(array);
+                    console.log('=========');
+                });
             }
         },
+
         findByType: function(type, callback) {
 
         },

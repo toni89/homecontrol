@@ -104,11 +104,11 @@ var io,
                         //console.log('=> ' + existingkey, data.deviceid);
                     }
                 }
-                //if(isUnique === true){
+                if(isUnique === true){
                     item.event.devices.push(data.deviceid);
                     item.markModified('event');
                     item.save();
-                //}
+                }
             });
         },
 
@@ -116,8 +116,9 @@ var io,
             this.findById(eventid, function(err, item){
                 var deviceArray = item.event.devices;
 
-                devices.findByIdArray(deviceArray,function(err, items){
-                    io.sockets.emit('findDevicesById/currentDevice', JSON.stringify(items));
+                devices.findAll(deviceArray,function(err, items){
+                    
+                    //io.sockets.emit('findDevicesById/currentDevice', JSON.stringify(items));
                 });
 
             });
