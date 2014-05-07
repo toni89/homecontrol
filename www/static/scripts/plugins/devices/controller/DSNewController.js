@@ -18,11 +18,12 @@ define(
                 var types = this.get('types'),
                     createableTypes = [];
 
-
-                types.forEach(function(item) {
-                    if(!item.autoDetect)
-                        createableTypes.push(item);
-                });
+                if(types) {
+                    types.forEach(function(item) {
+                        if(!item.autoDetect)
+                            createableTypes.push(item);
+                    });
+                }
 
                 return createableTypes;
             }.property('types')

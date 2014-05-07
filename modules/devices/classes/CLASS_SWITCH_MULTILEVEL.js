@@ -1,5 +1,7 @@
 function CLASS_SWITCH_MULTILEVEL() {
     this.id = 'CLASS_SWITCH_MULTILEVEL';
+    this.renderTarget = 'deviceClassSwitchMultilevel';
+
     this.setLevel = '';
     this.getLevel = '';
 

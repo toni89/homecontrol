@@ -8,34 +8,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 
-                    <div class="boxed">
-                        {{#link-to 'devices.new'}}<button type="button" class="btn btn-xs btn-primary">New Device</button>{{/link-to}}
-                        <!-- Title Bart Start -->
-                        <div class="title-bar white">
-                            <h4>Devices</h4>
-                        </div>
-                        <!-- Title Bart End -->
 
-                        <div class="inner no-radius">
-                            <ul class="socket-list">
-                                {{#each devices}}
-                                    <li>
-                                        <span>
-                                            {{device.name}}
-                                            {{device.description}}
-                                            <button {{action 'deleteDevice' _id}} type="button" class="btn btn-xs btn-danger">Delete</button>
-                                            <button {{action 'switchOn' this}} type="button" class="btn btn-xs btn-danger">ON</button>
-                                            <button {{action 'switchOff' this}} type="button" class="btn btn-xs btn-danger">OFF</button>
-                                            <button {{action 'setLevel0' this}} type="button" class="btn btn-xs btn-danger">LEVEL 0</button>
-                                            <button {{action 'setLevel99' this}} type="button" class="btn btn-xs btn-danger">LEVEL 99</button>
-                                        </span>
-                                    </li>
-                                {{/each}}
-                            </ul>
-
-
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -56,10 +29,6 @@
                                     {{render "deviceItem" this}}
                                 {{/each}}
                             </ul>
-
-
-
-
                         </div>
                     </div>
                 </div>

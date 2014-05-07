@@ -14,14 +14,27 @@ define(
 
         // DeviceItem
         "./controller/DSItemController",
-        "./views/DSItemView"
+        "./views/DSItemView",
+
+        // DeviceClasses
+        "./classes/controller/DSCSwitchBinaryController",
+        "./classes/views/DSCSwitchBinaryView",
+
+        "./classes/controller/DSCSwitchMultilevelController",
+        "./classes/views/DSCSwitchMultilevelView",
+
+        // Helper
+        "./helper/DSDeviceClassHelper"
     ]
     , function(
         DSIndexController, DSIndexRoute, DSIndexView,
 
         DSNewController, DSNewRoute, DSNewView,
 
-        DSItemController, DSItemView
+        DSItemController, DSItemView,
+
+        DSCSwitchBinaryController, DSCSwitchBinaryView,
+        DSCSwitchMultilevelController, DSCSwitchMultilevelView
         ) {
 
         // Add Route
@@ -44,6 +57,14 @@ define(
             DevicesNewView: DSNewView,
 
             DeviceItemController: DSItemController,
-            DeviceItemView: DSItemView
+            DeviceItemView: DSItemView,
+
+            // DeviceClasses
+            DeviceClassSwitchBinaryController: DSCSwitchBinaryController,
+            DeviceClassSwitchBinaryView: DSCSwitchBinaryView,
+
+            DeviceClassSwitchMultilevelController: DSCSwitchMultilevelController,
+            DeviceClassSwitchMultilevelView: DSCSwitchMultilevelView
+
         }
     });

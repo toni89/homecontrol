@@ -255,4 +255,4 @@ module.exports = {
         this.zwave.switchOff(nodeid);
     }
 
-}
+};

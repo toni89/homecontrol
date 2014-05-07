@@ -1,5 +1,6 @@
 var assert = require("assert");
 
+
 var io,
     devices,
     deviceType,
@@ -56,8 +57,6 @@ var io,
                 if(item) {
                     var myDevice = item.device;
 
-                    console.log(myDevice.classes[0].properties);
-
                     //item.device.properties.state = true;
                     var binaryClass = item.device.classes.filter(function(el) { return el.id == 'CLASS_SWITCH_BINARY' });
 
@@ -67,6 +66,8 @@ var io,
 
                     item.markModified('device');
 
+
+                    console.log("remotesockets: set state to " + state);
 
                     item.save(function(err, item) {
                         if(err)
@@ -84,7 +85,7 @@ var io,
         },
 
         setOn: function(rsocket) {
-            this.setState(rsocket._id, true, function(err) {
+            this.setState(rsocket, true, function(err) {
                 if(!err) {
                     // TODO: Send Switch Command
                 }
@@ -92,7 +93,7 @@ var io,
         },
 
         setOff: function(rsocket) {
-            this.setState(rsocket._id, false, function(err) {
+            this.setState(rsocket, false, function(err) {
                 if(!err) {
                     // TODO: Send Switch Command
                 }
@@ -131,3 +132,6 @@ module.exports = function(options, imports, register) {
 
     register();
 }
+
+
+
