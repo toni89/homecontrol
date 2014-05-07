@@ -13,12 +13,21 @@
 
     <div class="row">
         <div class="col-md-6 text-right">
-            <button {{action 'submit'}} type="button" class="btn btn-sm btn-success">Save</button>
+            <button {{action 'submit'}} type="button" class="btn btn-sm btn-success">Angaben Speichern!</button>
         </div>
     </div>
 
-    {{currentDevice.name}}
-
+    <hr>
+    {{#each currentDevices}}
+        <li>
+            <span>
+                <ul>
+                    <li><a href="#" {{action 'deleteDeviceFromEvent' _id}}>{{device.name}} Delete</a></li>
+                </ul>
+            </span>
+        </li>
+    {{/each}}
+    <hr>
     {{#each devices}}
         <li>
             <span>
@@ -28,4 +37,5 @@
             </span>
         </li>
     {{/each}}
+
 </form>

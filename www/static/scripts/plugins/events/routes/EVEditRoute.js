@@ -11,15 +11,13 @@ define(
                     self.controller.set('devices', devices);
                 });
 
-                App.io.on('findDevicesById/currentDevice', function(currentDevices) {
+                App.io.on('findDevicesByEventId/currentDevices', function(currentDevices) {
                     var currentDevices = JSON.parse(currentDevices);
-
                     self.controller.set('currentDevices', currentDevices);
                 });
 
                 /*
                 App.io.on('event/deviceadded', function(device) {
-
                     console.log('===');
                     console.log(device);
                     console.log('===');
@@ -34,7 +32,10 @@ define(
 
             model: function(params) {
                 eventid = params.event_id;
+
+                //ganze liste an devices
                 App.io.emit('main/devices/list');
+                //device nur für id
                 App.io.emit('event/devices/list', eventid);
 
                 return new Ember.RSVP.Promise(function(resolve) {
@@ -52,13 +53,18 @@ define(
             },
 
             actions: {
-                addDeviceToEvent: function(deviceid, device) {
+                addDeviceToEvent: function(deviceid) {
                     App.io.emit('events/addDeviceToEvent', {
                         eventid: eventid,
                         deviceid: deviceid
                     });
+                },
 
-                    console.log(device);
+                deleteDeviceFromEvent: function(deviceid) {
+                    App.io.emit('events/deleteDeviceFromEvent', {
+                        eventid: eventid,
+                        deviceid: deviceid
+                    });
                 },
 
                 submit: function() {
@@ -82,7 +88,8 @@ define(
                         description: description,
                         repeat_daily: repeat_daily,
                         start: start,
-                        end: end});
+                        end: end,
+                        devices: controllers.get('currentDevices')});
                 }
             }
         });

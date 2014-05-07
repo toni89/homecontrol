@@ -20,6 +20,10 @@ var io,
                 self._sendEventList();
             });
 
+            push.on('current event devices updated', function(id){
+                self._findDevicesByEventId(id);
+            });
+
             // Socket-Events to Frontend
             io.sockets.on('connection', function(socket) {
 
@@ -41,6 +45,10 @@ var io,
                     self._addDeviceToEvent(data);
                 });
 
+                socket.on('events/deleteDeviceFromEvent', function(data) {
+                    self._deleteDeviceFromEvent(data);
+                });
+
                 // Event Handlers for Frontend
                 socket.on('main/events/list', function() {
                     self._sendEventList();
@@ -55,7 +63,7 @@ var io,
                 });
 
                 socket.on('event/devices/list', function(id){
-                    self._findDevicesById(id);
+                    self._findDevicesByEventId(id);
                 });
             });
         },
@@ -81,13 +89,36 @@ var io,
                 if(err){
                     console.log('Safe Error ' + err);
                 }else{
-                    socket.emit('eventobject saved', {});
+                    //io.socket.emit('eventobject saved', {});
                 }
+            });
+        },
+        _deleteDeviceFromEvent : function(data){
+            this.findById(data.eventid, function(err, item){
+
+                //new array, because delete function produces null objects in array
+                var newArray = [];
+
+                for(var i = 0; i < item.event.devices.length; i++){
+                    if(item.event.devices[i] === data.deviceid){
+                        delete item.event.devices[i];
+                    }else{
+                        newArray.push(item.event.devices[i]);
+                    }
+                }
+
+                item.event.devices = newArray;
+
+                item.markModified('event');
+                item.save(function(err, item){
+                    if(!err)
+                    push.emit('current event devices updated', data.eventid);
+                });
             });
         },
 
         _addDeviceToEvent : function(data){
-            this.findById(data.eventid,function(err, item){
+            this.findById(data.eventid, function(err, item){
 
                 console.log(item);
 
@@ -100,27 +131,27 @@ var io,
 
                     if(existingkey === data.deviceid){
                         isUnique = false;
-                        //console.log('Device already in Event!');
-                        //console.log('=> ' + existingkey, data.deviceid);
                     }
                 }
                 if(isUnique === true){
                     item.event.devices.push(data.deviceid);
                     item.markModified('event');
-                    item.save();
+                    item.save(function(err, item){
+                        if(!err)
+                            push.emit('current event devices updated', data.eventid);
+                    });
                 }
             });
         },
 
-        _findDevicesById : function(eventid){
+        _findDevicesByEventId : function(eventid){
             this.findById(eventid, function(err, item){
                 var deviceArray = item.event.devices;
 
-                devices.findAll(deviceArray,function(err, items){
-                    
-                    //io.sockets.emit('findDevicesById/currentDevice', JSON.stringify(items));
+                devices.findAll({'_id': { $in: deviceArray }},function(err, items){
+                    //console.log(items);
+                    io.sockets.emit('findDevicesByEventId/currentDevices', JSON.stringify(items));
                 });
-
             });
         },
 
@@ -141,7 +172,7 @@ var io,
                     start: data.start,
                     end: data.end,
                     repeat_daily: data.repeat_daily,
-                    devices: []
+                    devices: data.devices
                     }
                 }
                 , function (err, item) {
