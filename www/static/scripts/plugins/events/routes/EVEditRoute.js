@@ -53,7 +53,6 @@ define(
             },
 
             actions: {
-
                 setTypeTemplate: function(selection){
                     if(selection.configRoute != ''){
                         this.render(selection.configRoute, {into: 'devices.new', outlet: 'typeconfig'});
