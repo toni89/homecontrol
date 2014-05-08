@@ -55,7 +55,7 @@ define(
             actions: {
                 setTypeTemplate: function(selection){
                     if(selection.configRoute != ''){
-                        this.render(/*selection.configRoute */'timeconfig', {into: 'event.new', outlet: 'event.config'});
+                        this.render(/*selection.configRoute */'timeconfig', {into: 'events.edit', outlet: 'eventconfig'});
                     }
                 },
 
