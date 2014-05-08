@@ -1,6 +1,7 @@
 var assert = require("assert"),
     Event = require("./libs/Event.js");
     emitter = require("events");
+    http = require("http");
 
 var io,
     mgs,
@@ -303,6 +304,20 @@ var io,
 
           if(callback) callback(null);
           setTimeout(this.checkTimeForEvent.bind(this), 1000 * 5);
+        },
+
+        checkWeather: function(callback){
+
+            http.request('http://api.openweathermap.org/data/2.5/weather?lat=48.514978&lon=10.727965', function(response){
+                var body = '';
+                response.on('data', function (data) {
+                    var erg = JSON.parse(data);
+                    console.log(erg);
+                    //console.log(erg.sys.sunrise);
+                });
+            }).end();
+
+            setTimeout(this.checkWeather.bind(this), 1000 * 60);
         }
     }
 
@@ -323,6 +338,7 @@ module.exports = function(options, imports, register) {
 
     events.init();
     events.checkTimeForEvent();
+    events.checkWeather();
 
     register(null, {
         "events" : events
