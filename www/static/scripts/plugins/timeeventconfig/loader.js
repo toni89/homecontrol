@@ -13,6 +13,6 @@ define(
     });
 
     return {
-        TEConfigView: TEConfigView
+        TimeconfigView: TEConfigView
     }
 });
