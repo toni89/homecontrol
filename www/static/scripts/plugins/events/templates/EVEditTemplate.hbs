@@ -6,10 +6,17 @@
             {{input type=text name=defaultConfig.name id=defaultConfig.name placeholder="Eventname eingeben" value=event.event.name}}
             {{input type=text name=defaultConfig.description id=defaultConfig.description placeholder="Beschreibung eingeben" value=event.event.description}}
 
-            <label for="name">Start Uhrzeit</label>
-            {{input type=text name=defaultConfig.start id=defaultConfig.start placeholder="hh" value=event.event.start}}
-            <label for="name">End Uhrzeit</label>
-            {{input type=text name=defaultConfig.end id=defaultConfig.end placeholder="hh" value=event.event.end}}
+            <label for="name">Bedinung</label>
+            {{view Ember.Select
+            content=names
+            prompt="Bitte Bedingung wählen"
+            selectionBinding="selectedType"
+            }}
+
+            {{#if selectedType}}
+                {{outlet eventconfig}}
+            {{/if}}
+
 
             <label for="name">Täglich wiederholen?</label>
             {{input type="checkbox" name=defaultConfig.repeat_daily checked=event.event.repeat_daily}}

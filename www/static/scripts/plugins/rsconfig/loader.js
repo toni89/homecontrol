@@ -4,12 +4,12 @@ define(
 [
     "./controller/RSConfigController",
     "./views/RSConfigView",
+
 ]
 , function(
     RSConfigController,
     RSConfigView
     ) {
-
 
     App.Router.map(function() {
         this.route('rsconfig');

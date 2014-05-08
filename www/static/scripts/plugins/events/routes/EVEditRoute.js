@@ -53,6 +53,13 @@ define(
             },
 
             actions: {
+
+                setTypeTemplate: function(selection){
+                    if(selection.configRoute != ''){
+                        this.render(selection.configRoute, {into: 'devices.new', outlet: 'typeconfig'});
+                    }
+                },
+
                 addDeviceToEvent: function(deviceid) {
                     App.io.emit('events/addDeviceToEvent', {
                         eventid: eventid,
