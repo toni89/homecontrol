@@ -1,6 +1,6 @@
 define(
 [
-    "hbs!plugins/rsconfig/templates/RSConfigTemplate",
+    "hbs!plugins/rsconfig/templates/RSConfigTemplate"
 ],
 function(TimeConfigTemplate) {
     return Ember.View.extend({
