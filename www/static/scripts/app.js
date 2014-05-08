@@ -99,10 +99,12 @@ require(["App"], function(App) {
         "plugins/remotesockets/loader",
         "plugins/gpio/loader",
         "plugins/rsconfig/loader",
-        "plugins/events/loader"
+        "plugins/events/loader",
+
+        "plugins/timeeventconfig/loader"
 
     ], function(ApplicationView, SidebarView, DashboardView, SettingsView,
-        devices, remotesockets, gpio, rsconfig, events) {
+        devices, remotesockets, gpio, rsconfig, events, timeeventconfig) {
 
         // Application Base
         App.ApplicationView = ApplicationView;  // Load ApplicationTemplate
@@ -117,6 +119,8 @@ require(["App"], function(App) {
         App.reopen(gpio);
         App.reopen(rsconfig);
         App.reopen(events);
+        App.reopen(timeeventconfig);
+
 
         // Give Control back to Ember
         App.advanceReadiness();
