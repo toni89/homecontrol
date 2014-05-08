@@ -1,9 +1,9 @@
 define(
 [
-    "hbs!plugins/rsconfig/templates/RSConfigTemplate"
+    "hbs!plugins/timeeventconfig/templates/TEConfigTemplate"
 ],
-function(TimeConfigTemplate) {
+function(TEConfigTemplate) {
     return Ember.View.extend({
-        defaultTemplate: TimeConfigTemplate
+        defaultTemplate: TEConfigTemplate
     });
 });
