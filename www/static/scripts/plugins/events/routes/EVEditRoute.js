@@ -34,7 +34,7 @@ define(
                 eventid = params.event_id;
 
                 //ganze liste an devices
-                App.io.emit('main/devices/list');
+                App.io.emit('main/devices/list', eventid);
                 //device nur für id
                 App.io.emit('event/devices/list', eventid);
 

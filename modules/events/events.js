@@ -317,7 +317,7 @@ var io,
                 });
             }).end();
 
-            setTimeout(this.checkWeather.bind(this), 1000 * 60);
+            setTimeout(this.checkWeather.bind(this), 1000 * 5000);
         }
     }
 
@@ -338,7 +338,7 @@ module.exports = function(options, imports, register) {
 
     events.init();
     events.checkTimeForEvent();
-    events.checkWeather();
+    //events.checkWeather();
 
     register(null, {
         "events" : events
