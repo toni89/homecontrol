@@ -6,6 +6,8 @@ function Event(){
     this.end = '';
 
     this.repeat_daily = false;
+    this.active = false;
+
     this.devices = [];
 }
 

@@ -82,6 +82,7 @@ var io,
                 start: event.start,
                 end: event.end,
                 repeat_daily: event.repeat_daily,
+                active: event.active,
                 devices: []
             });
 
@@ -90,7 +91,7 @@ var io,
                 if(err){
                     console.log('Safe Error ' + err);
                 }else{
-                    //io.socket.emit('eventobject saved', {});
+                    io.socket.emit('eventobject saved', item._id);
                 }
             });
         },
@@ -337,7 +338,7 @@ module.exports = function(options, imports, register) {
     eventModel = mgs.model('Event', eventSchema, 'events');
 
     events.init();
-    events.checkTimeForEvent();
+    //events.checkTimeForEvent();
     //events.checkWeather();
 
     register(null, {

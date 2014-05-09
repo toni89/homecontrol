@@ -28,6 +28,7 @@ define(
 
                     var start = this.controller.get('defaultConfig').start;
                     var end = this.controller.get('defaultConfig').end;
+                    var active = this.controller.get('defaultConfig').active;
 
                     if(name != '') {
                         App.io.emit('events/createEvent', {
@@ -35,7 +36,9 @@ define(
                             description: description,
                             repeat_daily: repeat_daily,
                             start: start,
-                            end: end});
+                            end: end,
+                            active: active
+                        });
                     }
                 }
             }

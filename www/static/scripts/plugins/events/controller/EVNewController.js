@@ -12,7 +12,8 @@ define(
                 start_mm: '',
                 start_hh: '',
                 end_mm: '',
-                end_hh: ''
+                end_hh: '',
+                active: false
             }
 
         });
