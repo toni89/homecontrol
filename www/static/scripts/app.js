@@ -101,10 +101,11 @@ require(["App"], function(App) {
         "plugins/rsconfig/loader",
         "plugins/events/loader",
 
-        "plugins/timeeventconfig/loader"
+        "plugins/timeeventconfig/loader",
+        "plugins/weathereventconfig/loader"
 
     ], function(ApplicationView, SidebarView, DashboardView, SettingsView,
-        devices, remotesockets, gpio, rsconfig, events, timeeventconfig) {
+        devices, remotesockets, gpio, rsconfig, events, timeeventconfig, weathereventconfig) {
 
         // Application Base
         App.ApplicationView = ApplicationView;  // Load ApplicationTemplate
@@ -120,6 +121,7 @@ require(["App"], function(App) {
         App.reopen(rsconfig);
         App.reopen(events);
         App.reopen(timeeventconfig);
+        App.reopen(weathereventconfig);
 
 
         // Give Control back to Ember

@@ -20,10 +20,13 @@
 
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <label for="name">Auslösebedingung</label>
+
                                     {{view Ember.Select
                                     content=names
                                     prompt="Bitte Bedingung wählen"
                                     selectionBinding="selectedType"
+                                    optionValuePath="content.value"
+                                    optionLabelPath="content.name"
                                     }}
 
                                     <label for="name">Täglich wiederholen?</label>
@@ -33,17 +36,10 @@
                         </div>
                     </div>
 
-                    <div class="boxed">
-                        <div class="title-bar white">
-                            <h4>Auslösebedingung</h4>
-                        </div>
 
-                        <div class="inner no-radius">
                         {{#if selectedType}}
                             {{outlet eventconfig}}
                         {{/if}}
-                        </div>
-                    </div>
 
                     <div class="boxed">
                         <div class="title-bar white">

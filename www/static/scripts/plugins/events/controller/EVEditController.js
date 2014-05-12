@@ -10,7 +10,11 @@ define([],
                 end: '',
                 devices: []
             },
-            names: ["Time", "Weather"],
+            names: [
+                {name: 'Time',
+                value: 'timeconfig'},
+                {name: 'Weather',
+                value: 'weatherconfig'}],
 
             selectedTypeChanged: function(selectedType){
                 this.send('setTypeTemplate', this.get('selectedType'));
