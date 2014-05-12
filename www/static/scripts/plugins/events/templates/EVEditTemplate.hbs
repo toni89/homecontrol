@@ -26,16 +26,22 @@
                                     selectionBinding="selectedType"
                                     }}
 
-                                    {{#if selectedType}}
-                                        {{outlet eventconfig}}
-                                    {{/if}}
-
                                     <label for="name">Täglich wiederholen?</label>
                                     {{input type="checkbox" name=defaultConfig.repeat_daily checked=event.event.repeat_daily}}
-
-                                    <button {{action 'submit'}} type="button" class="btn btn-sm btn-success">Angaben Speichern!</button>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+
+                    <div class="boxed">
+                        <div class="title-bar white">
+                            <h4>Auslösebedingung</h4>
+                        </div>
+
+                        <div class="inner no-radius">
+                        {{#if selectedType}}
+                            {{outlet eventconfig}}
+                        {{/if}}
                         </div>
                     </div>
 
@@ -64,6 +70,14 @@
                                     </span>
                                 </li>
                             {{/each}}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <button {{action 'submit'}} type="button" class="btn btn-sm btn-success">Angaben Speichern!</button>
                         </div>
                     </div>
 

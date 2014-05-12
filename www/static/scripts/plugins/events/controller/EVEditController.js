@@ -16,6 +16,5 @@ define([],
                 this.send('setTypeTemplate', this.get('selectedType'));
             }.observes('selectedType'),
             selectedType:null
-
         });
     });

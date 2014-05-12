@@ -59,7 +59,16 @@ var io,
                     self.deleteEventById(eventid);
                 });
 
+                socket.on('main/event/toggle', function(eventid) {
+                    self.eventToggle(eventid);
+                });
+
                 socket.on('events/updateEvent', function(data){
+
+                    console.log('====');
+                    console.log(data);
+                    console.log('====');
+
                    self.updateEvent(data);
                 });
 
@@ -78,21 +87,31 @@ var io,
         _newEvent : function(event){
             var newevent = events.createEvent({
                 name : event.name,
-                description: event.description,
-                start: event.start,
-                end: event.end,
-                repeat_daily: event.repeat_daily,
-                active: event.active,
+                description: '',
+                start: '',
+                end: '',
+                repeat_daily: false,
+                active: false,
                 devices: []
             });
 
             events.addAndSave(newevent, function(err, item){
-                //console.log('err:=> '+ err + 'item: '+ item);
                 if(err){
-                    console.log('Safe Error ' + err);
+                    console.log('Error addAndSave' + err);
                 }else{
-                    io.socket.emit('eventobject saved', item._id);
+                    io.sockets.emit('eventobject saved', item._id);
                 }
+            });
+        },
+
+        eventToggle : function(id){
+            this.findById(id, function(err, item){
+                item.event.active = !item.event.active;
+                item.markModified('event');
+                item.save(function(err, item){
+                    //if(!err)
+                        //push.emit('current event devices updated', item.eventid);
+                });
             });
         },
 
@@ -167,21 +186,22 @@ var io,
 
         updateEvent: function (data) {
 
-            /*
             this.findById(data.id, function(err, item){
                 item.event.name = data.name;
                 item.event.description = data.description;
                 item.event.start = data.start;
                 item.event.end = data.end;
                 item.event.repeat_daily = data.repeat_daily;
+                item.event.active = data.active;
 
                 item.markModified('event');
                 item.save(function(err, item){
                     if(!err)
                         io.sockets.emit('current event updated', data.eventid);
                 });
-            });*/
+            });
 
+            /*
             eventModel.update(
                 {_id: data.id},
                 { event: {
@@ -197,7 +217,7 @@ var io,
                     if (err) {
                         console.log(err);
                     }
-                });
+                });*/
         },
 
         createEvent : function(options) {

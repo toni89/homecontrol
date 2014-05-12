@@ -14,6 +14,16 @@ define(
 
             model: function() {
                 App.io.emit('main/events/list');
+            },
+
+            actions: {
+                delete: function(id) {
+                    App.io.emit('main/events/delete', id);
+                },
+
+                toggle: function(id) {
+                    App.io.emit('main/event/toggle', id);
+                }
             }
         });
-    })
+})
