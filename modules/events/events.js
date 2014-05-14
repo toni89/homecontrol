@@ -26,6 +26,10 @@ var io,
                 self.findDevicesByEventId(id);
             });
 
+            push.on('current event triggers updated', function(id){
+                self.findTriggersByEventId(id);
+            });
+
             // Socket-Events to Frontend
             io.sockets.on('connection', function(socket) {
 
@@ -77,6 +81,10 @@ var io,
 
                 socket.on('event/devices/list', function(id){
                     self.findDevicesByEventId(id);
+                });
+
+                socket.on('event/triggers/list', function(id){
+                   self.findTriggersByEventId(id);
                 });
             });
         },
@@ -212,6 +220,16 @@ var io,
                 item.save(function(err, item){
                     if(!err)
                         push.emit('current event triggers updated', data.eventid);
+                });
+            });
+        },
+
+        findTriggersByEventId : function(eventid){
+            this.findById(eventid, function(err, item){
+                var deviceArray = item.event.triggers;
+
+                triggers.findAll({'_id': { $in: deviceArray }},function(err, items){
+                    io.sockets.emit('findTriggersByEventId/currentTriggers', JSON.stringify(items));
                 });
             });
         },

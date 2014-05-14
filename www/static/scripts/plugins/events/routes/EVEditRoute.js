@@ -21,6 +21,11 @@ define(
                     self.controller.set('triggers', triggers);
                 });
 
+                App.io.on('findTriggersByEventId/currentTriggers', function(currentTriggers) {
+                    var currentTriggers = JSON.parse(currentTriggers);
+                    self.controller.set('currentTriggers', currentTriggers);
+                });
+
                 /*
                 App.io.on('event/deviceadded', function(device) {
                     console.log('===');
@@ -45,6 +50,8 @@ define(
 
                 //ganze liste an triggers
                 App.io.emit('main/triggers/list');
+
+                App.io.emit('event/triggers/list', eventid);
 
                 return new Ember.RSVP.Promise(function(resolve) {
                     App.io.on('main/events/info', function(event) {

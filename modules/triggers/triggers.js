@@ -89,6 +89,16 @@ var io,
                     if(callback) callback(null, item);
                 }
             });
+        },
+
+        findAll: function(params, callback) {
+            triggerModel.find(params, function(err, items) {
+                if(err) {
+                    console.log(err);
+                    if(callback) callback(err);
+                } else if(callback)
+                    callback(null, items);
+            });
         }
 
         /*
@@ -203,17 +213,7 @@ var io,
             });
         },
 
-        findAll: function(params, callback) {
-            deviceModel.find(params, function(err, items) {
-                if(err) {
-                    console.log(err);
-                    if(callback) callback(err);
-                } else if(callback)
-                    callback(null, items);
-            });
-        },
-
-        update: function(deviceid, device) {
+                update: function(deviceid, device) {
 
         },
 
@@ -332,7 +332,6 @@ var io,
         */
 }
 
-
 module.exports = function(options, imports, register) {
     assert(imports.server, "Package 'server' is required");
     assert(imports.db, "Package 'db' is required");
@@ -346,15 +345,6 @@ module.exports = function(options, imports, register) {
 
     triggerModel = mgs.model('Trigger', triggerSchema, 'triggers');
     triggers.init();
-
-    var newTrigger = new triggerModel({ trigger: {
-        name: 'test777',
-        description: 'eine sehr schöne beschreibung'
-    }});
-
-    newTrigger.save(function(err, item) {
-        console.log(item);
-    });
 
     register(null, {
         "triggers" : triggers
