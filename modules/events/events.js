@@ -202,15 +202,11 @@ var io,
         },
 
         deleteTriggerFromEvent : function(data){
-            console.log('======123');
-            console.log(data);
-            console.log('======123');
-            this.findById(data.eventid, function(err, item){
-
+           this.findById(data.eventid, function(err, item){
                 var newArray = [];
 
                 for(var i = 0; i < item.event.triggers.length; i++){
-                    if(item.event.triggers[i] === data.deviceid){
+                    if(item.event.triggers[i] === data.triggerid){
                         delete item.event.triggers[i];
                     }else{
                         newArray.push(item.event.triggers[i]);
@@ -218,11 +214,17 @@ var io,
                 }
 
                 item.event.triggers = newArray;
-
                 item.markModified('event');
                 item.save(function(err, item){
-                    if(!err)
+                    console.log(item);
+                    if(!err){
+
+                        console.log(item);
+
                         push.emit('current event triggers updated', data.eventid);
+                    }else{
+                        console.log(err);
+                    }
                 });
             });
         },
