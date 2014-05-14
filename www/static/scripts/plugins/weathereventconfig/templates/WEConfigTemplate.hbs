@@ -1,0 +1,23 @@
+<div class="boxed">
+    <div class="title-bar white">
+        <h4>Bedingung</h4>
+    </div>
+
+    <div class="inner no-radius">
+        <label for="name">Hinzugefügte Bedingungen:</label>
+        <ul>
+            {{#each currentTriggers}}
+                <li><a href="#" {{action 'deleteTriggerFromEvent' _id}}>{{trigger.name}}</a></li>
+            {{/each}}
+        </ul>
+        <hr>
+        <label for="name">Verfügbare Bedingungen:</label>
+        <ul>
+            {{#each triggers}}
+                <li><a href="#" {{action 'addTriggerToEvent' _id}}>{{trigger.name}}</a></li>
+            {{/each}}
+        </ul>
+    </div>
+</div>
+
+

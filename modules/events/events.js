@@ -202,6 +202,9 @@ var io,
         },
 
         deleteTriggerFromEvent : function(data){
+            console.log('======123');
+            console.log(data);
+            console.log('======123');
             this.findById(data.eventid, function(err, item){
 
                 var newArray = [];
