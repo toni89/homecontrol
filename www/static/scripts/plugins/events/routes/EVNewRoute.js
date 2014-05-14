@@ -7,12 +7,8 @@ define(
                 var self = this;
 
                 App.io.on('eventobject saved', function(id) {
-                    //var devices = JSON.parse(devices);
-
-                    console.log('JIPPIE: ' + id);
+                    console.log('Eventobject saved: ' + id);
                     self.transitionTo('/events/edit/' + id);
-
-                    //self.controller.set('devices', devices);
                 });
             },
 

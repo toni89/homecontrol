@@ -1,17 +1,20 @@
-var assert = require("assert"),
+/*var assert = require("assert"),
     Device = require("./libs/Device.js"),
     DeviceType = require("./libs/DeviceType.js"),
     events = require('events'),
     deviceClasses = require('require-all')(__dirname + '/classes');
+*/
+
+var assert = require("assert"),
+    events = require('events');
 
 var io,
     mgs,
-    deviceSchema,
-    deviceModel,
+    triggerSchema,
     push = new events.EventEmitter(),
-    devices = {
+    triggers = {
 
-        deviceTypes: [],
+        triggerTypes: [],
         event: new events.EventEmitter(),
 
 
@@ -21,15 +24,18 @@ var io,
             // Socket-Events to Frontend
             io.sockets.on('connection', function(socket) {
 
-                // Push Events
+                /*
                 push.on('devicelist updated', function() {
                     self._sendDeviceList();
                 });
+                */
 
-                socket.on('main/devices/list', function() {
-                    self._sendDeviceList();
+                // Event Handlers for Frontend
+                socket.on('main/triggers/list', function() {
+                    self.sendTriggerList();
                 });
 
+                /*
                 socket.on('main/devices/listbyids', function(ids) {
                     self._listByIds(ids);
                 });
@@ -46,9 +52,46 @@ var io,
                         }
                     });
                 });
+                */
             });
         },
 
+        sendTriggerList: function() {
+            this.getAll(function(err, items) {
+                if(!err) {
+                    io.sockets.emit('main/triggers/list', JSON.stringify(items));
+                }
+            });
+        },
+
+        getAll : function(callback) {
+            triggerModel.find(function(err, items) {
+                if(err) {
+                    console.log(err);
+                    if(callback) callback(err);
+                }
+                else if (callback)
+                    callback(null, items);
+            });
+        },
+
+        addAndSave: function(trigger, callback) {
+            var newTrigger = new triggerModel({ trigger: trigger });
+            var error = new Error('Cant save trigger');
+
+            newTrigger.save(function(err, item) {
+                if(err){
+                    console.log(error);
+                    if(callback) callback(error);
+                }
+                else {
+                    //push.emit('devicelist updated');
+                    if(callback) callback(null, item);
+                }
+            });
+        }
+
+        /*
         _listByIds : function(ids){
 
             ids = JSON.parse(ids);
@@ -124,18 +167,7 @@ var io,
         },
 
         findByIdArray: function(id_array, callback) {
-
-            /*
-            console.log('1==');
-            console.log(id_array);
-
-            console.log('2==');
-            this.findAll(id_array, function(err, items){
-                console.log(items);
-            });*/
             this.find({
-
-
             }, function(err, docs){
                 console.log
             });
@@ -185,7 +217,6 @@ var io,
 
         },
 
-        /*ÜBERFLÜSSIG? -> Dupliziert findAll*/
         getAll : function(callback) {
             deviceModel.find(function(err, items) {
                 if(err) {
@@ -298,7 +329,7 @@ var io,
 
             })
         }
-
+        */
 }
 
 
@@ -309,15 +340,23 @@ module.exports = function(options, imports, register) {
     io = imports.server.io;
     mgs = imports.db.mongoose;
 
-    deviceSchema = new mgs.Schema({
-        device: 'Mixed'
+    triggerSchema = new mgs.Schema({
+        trigger: 'Mixed'
     });
 
-    deviceModel = mgs.model('Device', deviceSchema, 'devices');
+    triggerModel = mgs.model('Trigger', triggerSchema, 'triggers');
+    triggers.init();
 
-    devices.init();
+    var newTrigger = new triggerModel({ trigger: {
+        name: 'test777',
+        description: 'eine sehr schöne beschreibung'
+    }});
+
+    newTrigger.save(function(err, item) {
+        console.log(item);
+    });
 
     register(null, {
-        "devices" : devices
+        "triggers" : triggers
     });
 }

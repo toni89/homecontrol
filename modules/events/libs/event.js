@@ -15,6 +15,7 @@ function Event(){
     this.repeat_daily = false;
     this.active = false;
     this.devices = [];
+    this.triggers = [];
 }
 
 module.exports = Event;

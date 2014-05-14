@@ -81,5 +81,9 @@ module.exports = [
     //events
     {
         "packagePath" : "./modules/events"
+    },
+    //triggers
+    {
+        "packagePath" : "./modules/triggers"
     }
 ]

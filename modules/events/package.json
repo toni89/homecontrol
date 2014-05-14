@@ -7,7 +7,8 @@
         "consumes" : [
             "server",
             "db",
-            "devices"
+            "devices",
+            "triggers"
         ],
         "provides" : [
             "events"

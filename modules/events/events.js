@@ -9,6 +9,7 @@ var io,
     eventModel,
     push = new emitter.EventEmitter(),
     devices,
+    triggers,
     events = {
         init: function() {
             var self = this;
@@ -18,11 +19,11 @@ var io,
             });
 
             push.on('eventlist updated', function(){
-                self._sendEventList();
+                self.sendEventList();
             });
 
             push.on('current event devices updated', function(id){
-                self._findDevicesByEventId(id);
+                self.findDevicesByEventId(id);
             });
 
             // Socket-Events to Frontend
@@ -30,29 +31,36 @@ var io,
 
                 //????? SOLLTE HIER DRIN NICHT GEHN ?????
                 push.on('eventlist updated', function(){
-                    self._sendEventList();
+                    self.sendEventList();
                 });
 
                 // Event Handlers for creation of new Events
                 socket.on('events/createEvent', function(event) {
-                    self._newEvent(event);
+                    self.newEvent(event);
                 });
 
                 socket.on('main/events/info', function(id) {
-                    self._eventInfo(id);
+                    self.eventInfo(id);
                 });
 
-                socket.on('events/addDeviceToEvent', function(data) {
-                    self._addDeviceToEvent(data);
+                socket.on('event/addDeviceToEvent', function(data) {
+                    self.addDeviceToEvent(data);
                 });
 
-                socket.on('events/deleteDeviceFromEvent', function(data) {
-                    self._deleteDeviceFromEvent(data);
+                socket.on('event/deleteDeviceFromEvent', function(data) {
+                    self.deleteDeviceFromEvent(data);
                 });
 
-                // Event Handlers for Frontend
+                socket.on('event/addTriggerToEvent', function(data) {
+                    self.addTriggerToEvent(data);
+                });
+
+                socket.on('event/deleteTriggerFromEvent', function(data) {
+                    self.deleteTriggerFromEvent(data);
+                });
+
                 socket.on('main/events/list', function() {
-                    self._sendEventList();
+                    self.sendEventList();
                 });
 
                 socket.on('main/events/delete', function(eventid) {
@@ -64,27 +72,22 @@ var io,
                 });
 
                 socket.on('events/updateEvent', function(data){
-
-                    console.log('====');
-                    console.log(data);
-                    console.log('====');
-
                    self.updateEvent(data);
                 });
 
                 socket.on('event/devices/list', function(id){
-                    self._findDevicesByEventId(id);
+                    self.findDevicesByEventId(id);
                 });
             });
         },
 
-        _eventInfo : function(id){
+        eventInfo : function(id){
           this.findById(id, function(err, event){
               io.sockets.emit('main/events/info', JSON.stringify(event));
           });
         },
 
-        _newEvent : function(event){
+        newEvent : function(event){
             var newevent = events.createEvent({
                 name : event.name,
                 description: '',
@@ -115,7 +118,7 @@ var io,
             });
         },
 
-        _deleteDeviceFromEvent : function(data){
+        deleteDeviceFromEvent : function(data){
             this.findById(data.eventid, function(err, item){
 
                 //new array, because delete function produces null objects in array
@@ -139,7 +142,7 @@ var io,
             });
         },
 
-        _addDeviceToEvent : function(data){
+        addDeviceToEvent : function(data){
             this.findById(data.eventid, function(err, item){
 
                 console.log(item);
@@ -166,7 +169,54 @@ var io,
             });
         },
 
-        _findDevicesByEventId : function(eventid){
+        addTriggerToEvent : function(data){
+            this.findById(data.eventid, function(err, item){
+
+                var isUnique = true;
+                var deviceArray = item.event.triggers;
+
+                for(var itemkey in deviceArray){
+                    var existingkey = deviceArray[itemkey];
+
+                    if(existingkey === data.triggerid){
+                        isUnique = false;
+                    }
+                }
+                if(isUnique === true){
+                    item.event.triggers.push(data.triggerid);
+                    item.markModified('event');
+                    item.save(function(err, item){
+                        if(!err)
+                            push.emit('current event triggers updated', data.eventid);
+                    });
+                }
+            });
+        },
+
+        deleteTriggerFromEvent : function(data){
+            this.findById(data.eventid, function(err, item){
+
+                var newArray = [];
+
+                for(var i = 0; i < item.event.triggers.length; i++){
+                    if(item.event.triggers[i] === data.deviceid){
+                        delete item.event.triggers[i];
+                    }else{
+                        newArray.push(item.event.triggers[i]);
+                    }
+                }
+
+                item.event.triggers = newArray;
+
+                item.markModified('event');
+                item.save(function(err, item){
+                    if(!err)
+                        push.emit('current event triggers updated', data.eventid);
+                });
+            });
+        },
+
+        findDevicesByEventId : function(eventid){
             this.findById(eventid, function(err, item){
                 var deviceArray = item.event.devices;
 
@@ -176,7 +226,7 @@ var io,
             });
         },
 
-        _sendEventList : function(){
+        sendEventList : function(){
             this.findAll({}, function(err, items){
                 if(!err){
                     io.sockets.emit('main/events/list', JSON.stringify(items));
@@ -346,10 +396,12 @@ module.exports = function(options, imports, register) {
     assert(imports.server, "Package 'server' is required");
     assert(imports.db, "Package 'db' is required");
     assert(imports.devices, "Devices is required");
+    assert(imports.triggers, "Triggers is required");
 
     io = imports.server.io;
     mgs = imports.db.mongoose;
     devices = imports.devices;
+    triggers = imports.triggers;
 
     eventSchema = new mgs.Schema({
         event: 'Mixed'

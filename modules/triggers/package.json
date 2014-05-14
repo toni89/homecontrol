@@ -1,0 +1,15 @@
+{
+    "name": "triggers",
+    "description": "Trigger control layer",
+    "version" : "0.0.1",
+    "main" : "./triggers.js",
+    "plugin" : {
+        "consumes" : [
+            "server",
+            "db"
+        ],
+        "provides" : [
+            "triggers"
+        ]
+    }
+}

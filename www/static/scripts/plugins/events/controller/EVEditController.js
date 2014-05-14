@@ -16,6 +16,19 @@ define([],
                 {name: 'Weather',
                 value: 'weatherconfig'}],
 
+            conditions: [
+                {name: 'Temperatur',
+                value: 'temperatur'},
+                {name: 'Luftdruck',
+                value: 'luftdruck'},
+                {name: 'Sturmwarnung',
+                value: 'Sturmwarnung'},
+                {name: 'Sonnenaufgang',
+                value: 'sonnenaufgang'},
+                {name: 'Sonnenuntergang',
+                value: 'sonnenuntergang'}
+            ],
+
             selectedTypeChanged: function(selectedType){
                 this.send('setTypeTemplate', this.get('selectedType'));
             }.observes('selectedType'),
