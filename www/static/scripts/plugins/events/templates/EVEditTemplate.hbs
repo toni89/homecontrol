@@ -38,29 +38,6 @@
 
                     <div class="boxed">
                         <div class="title-bar white">
-                            <h4>Geräte Konfigurator</h4>
-                        </div>
-
-                        <div class="inner no-radius">
-                            <label for="name">Hinzugefügte Geräte:</label>
-                            <ul>
-                            {{#each currentDevices}}
-                                <li><a href="#" {{action 'deleteDeviceFromEvent' _id}}>{{device.name}}</a></li>
-                            {{/each}}
-                            </ul>
-                            <hr>
-                            <label for="name">Verfügbare Geräte:</label>
-                            <ul>
-                            {{#each devices}}
-                                <li><a href="#" {{action 'addDeviceToEvent' _id}}>{{device.name}}</a></li>
-                            {{/each}}
-                            </ul>
-                        </div>
-                    </div>
-
-
-                    <div class="boxed">
-                        <div class="title-bar white">
                             <h4>Bedingung</h4>
                         </div>
 
@@ -81,6 +58,27 @@
                         </div>
                     </div>
 
+                    <div class="boxed">
+                        <div class="title-bar white">
+                            <h4>Geräte Konfigurator</h4>
+                        </div>
+
+                        <div class="inner no-radius">
+                            <label for="name">Hinzugefügte Geräte:</label>
+                            <ul>
+                                {{#each currentDevices}}
+                                    <li><a href="#" {{action 'deleteDeviceFromEvent' _id}}>{{device.name}}</a></li>
+                                {{/each}}
+                            </ul>
+                            <hr>
+                            <label for="name">Verfügbare Geräte:</label>
+                            <ul>
+                                {{#each devices}}
+                                    <li><a href="#" {{action 'addDeviceToEvent' _id}}>{{device.name}}</a></li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
 
                     <div class="row">
                         <div class="col-md-6">

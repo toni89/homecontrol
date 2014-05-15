@@ -21,7 +21,7 @@
                                 {{#each event in events}}
                                     <li>
                                         <span>
-                                            {{event.name}}
+                                            {{event.event.name}}
                                             {{#link-to 'events.edit' event._id}}<button type="button" class="btn btn-xs btn-primary">Edit</button>{{/link-to}}
                                             <button {{action 'delete' event._id}} type="button" class="btn btn-xs btn-primary">Delete</button>
                                         </span>
