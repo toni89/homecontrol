@@ -45,12 +45,10 @@ define(
 
                 //ganze liste an devices
                 App.io.emit('main/devices/list');
-                //device nur für id
                 App.io.emit('event/devices/list', eventid);
 
                 //ganze liste an triggers
                 App.io.emit('main/triggers/list');
-
                 App.io.emit('event/triggers/list', eventid);
 
                 return new Ember.RSVP.Promise(function(resolve) {
