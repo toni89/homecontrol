@@ -91,7 +91,7 @@ var io,
         },
 
         setOn: function(deviceId) {
- 
+
         },
 
         setOff: function(deviceId) {
