@@ -234,7 +234,8 @@ var io,
                 var deviceArray = item.event.triggers;
 
                 triggers.findAll({'_id': { $in: deviceArray }},function(err, items){
-                    io.sockets.emit('findTriggersByEventId/currentTriggers', JSON.stringify(items));
+                    io.sockets.emit('event/triggers/list', JSON.stringify(items));
+                    io.sockets.emit('event/triggers/list/update', JSON.stringify(items));
                 });
             });
         },
@@ -244,7 +245,8 @@ var io,
                 var deviceArray = item.event.devices;
 
                 devices.findAll({'_id': { $in: deviceArray }},function(err, items){
-                    io.sockets.emit('findDevicesByEventId/currentDevices', JSON.stringify(items));
+                    io.sockets.emit('event/devices/list', JSON.stringify(items));
+                    io.sockets.emit('event/devices/list/update', JSON.stringify(items));
                 });
             });
         },

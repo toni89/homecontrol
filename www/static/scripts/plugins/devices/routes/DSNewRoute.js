@@ -12,7 +12,6 @@ define(
                     App.io.emit('main/devices/listtypes');
                 }, 3000);
 
-
 /*
                 var r1 = new Ember.RSVP.Promise(function(resolve) { resolve(); });
                 var r2 = new Ember.RSVP.Promise(function(resolve) { resolve(); });

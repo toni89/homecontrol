@@ -3,66 +3,92 @@ define(
     function() {
         return Ember.Route.extend({
 
-            beforeModel: function() {
+            beforeModel: function(params) {
                 var self = this;
 
-                App.io.on('main/devices/list', function(devices) {
+                App.io.on('main/devices/list/update', function(devices) {
                     var devices = JSON.parse(devices);
                     self.controller.set('devices', devices);
                 });
 
-                App.io.on('findDevicesByEventId/currentDevices', function(currentDevices) {
+                App.io.on('event/devices/list/update', function(currentDevices) {
                     var currentDevices = JSON.parse(currentDevices);
                     self.controller.set('currentDevices', currentDevices);
                 });
 
-                App.io.on('main/triggers/list', function(triggers) {
+                App.io.on('main/triggers/list/update', function(triggers) {
                     var triggers = JSON.parse(triggers);
                     self.controller.set('triggers', triggers);
                 });
 
-                App.io.on('findTriggersByEventId/currentTriggers', function(currentTriggers) {
+                App.io.on('event/triggers/list/update', function(currentTriggers) {
                     var currentTriggers = JSON.parse(currentTriggers);
                     self.controller.set('currentTriggers', currentTriggers);
                 });
-
-                /*
-                App.io.on('event/deviceadded', function(device) {
-                    console.log('===');
-                    console.log(device);
-                    console.log('===');
-                });
-                */
-
-                /*App.io.on('event/devices/list', function(event_devices) {
-                    var event_devices = JSON.parse(event_devices);
-                    self.controller.set('event_devices', event_devices);
-                });*/
             },
 
             model: function(params) {
                 eventid = params.event_id;
 
-                //ganze liste an devices
-                App.io.emit('main/devices/list');
-                App.io.emit('event/devices/list', eventid);
-
-                //ganze liste an triggers
-                App.io.emit('main/triggers/list');
-                App.io.emit('event/triggers/list', eventid);
-
-                return new Ember.RSVP.Promise(function(resolve) {
+                var r1 = new Ember.RSVP.Promise(function(resolve) {
                     App.io.on('main/events/info', function(event) {
                         event = JSON.parse(event);
                         resolve({'event': event});
                     });
-                    App.io.emit('main/events/info', params.event_id);
+                    App.io.emit('main/events/info', eventid);
                 }, 3000);
+
+                var r2 = new Ember.RSVP.Promise(function(resolve) {
+                    App.io.on('main/devices/list', function(devices) {
+                        devices = JSON.parse(devices);
+                        resolve({'devices': devices});
+                    });
+                    App.io.emit('main/devices/list');
+                }, 3000);
+
+                var r3 = new Ember.RSVP.Promise(function(resolve) {
+                    App.io.on('event/devices/list', function(currentDevices) {
+                        currentDevices = JSON.parse(currentDevices);
+                        resolve({'currentDevices': currentDevices});
+                    });
+                    App.io.emit('event/devices/list', eventid);
+                }, 3000);
+
+                var r4 = new Ember.RSVP.Promise(function(resolve) {
+                    App.io.on('main/triggers/list', function(triggers) {
+                        triggers = JSON.parse(triggers);
+                        resolve({'triggers': triggers});
+                    });
+                    App.io.emit('main/triggers/list');
+                }, 3000);
+
+                var r5 = new Ember.RSVP.Promise(function(resolve) {
+                    App.io.on('event/triggers/list', function(currentTriggers) {
+                        currentTriggers = JSON.parse(currentTriggers);
+                        resolve({'currentTriggers': currentTriggers});
+                    });
+                    App.io.emit('event/triggers/list', eventid);
+                }, 3000);
+
+                return new Ember.RSVP.all([r1, r2, r3, r4, r5]).then(function(response){
+                    event = response[0].event;
+                    devices = response[1].devices;
+                    currentDevices = response[2].currentDevices;
+
+                    triggers = response[3].triggers;
+                    currentTriggers = response[4].currentTriggers;
+                });
             },
 
             setupController: function(controller, model) {
-                id = model.event._id;
-                controller.set('event', model.event);
+                id = event._id;
+                controller.set('event', event);
+
+                controller.set('devices', devices);
+                controller.set('currentDevices', currentDevices);
+
+                controller.set('triggers', triggers);
+                controller.set('currentTriggers', currentTriggers);
             },
 
             actions: {
@@ -109,11 +135,6 @@ define(
 
                     var start = this.controller.get('event').event.start;
                     var end = this.controller.get('event').event.end;
-
-                    /*App.io.on('eventobject saved', function(socket) {
-                     console.log('eventobject PING zurück ' + socket);
-                     self.transitionToRoute('events.index');
-                     });*/
 
                     App.io.emit('events/updateEvent', {
                         id: id,

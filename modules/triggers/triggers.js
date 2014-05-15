@@ -60,6 +60,7 @@ var io,
             this.getAll(function(err, items) {
                 if(!err) {
                     io.sockets.emit('main/triggers/list', JSON.stringify(items));
+                    io.sockets.emit('main/triggers/list/update', JSON.stringify(items));
                 }
             });
         },

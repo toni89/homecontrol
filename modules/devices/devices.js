@@ -73,6 +73,7 @@ var io,
             this.getAll(function(err, items) {
                 if(!err) {
                     io.sockets.emit('main/devices/list', JSON.stringify(items));
+                    io.sockets.emit('main/devices/listnew', JSON.stringify(items));
                 }
             });
         },
