@@ -1,0 +1,35 @@
+
+    <div class="boxed no-padding col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+        <!-- Title Bart Start -->
+        <div class="title-bar white">
+            <h4>GPIO Ouput</h4>
+        </div>
+        <!-- Title Bart End -->
+
+
+        <div class="inner">
+            <form method="post" action="#" class="basic-form">
+                <ul>
+                {{#each gpiomap}}
+                    <li>
+                    Pin {{pin}} / Rev1-GPIO: {{rev1}} / Rev2-GPIO {{rev2}}<br>
+                    {{description}}
+                    </li>
+                    <br>
+                {{/each}}
+                </ul>
+            </form>
+        </div>
+    </div>
+
+
+
+
+    <div class="boxed col-lg-6 col-md-6 col-sm-12 col-xs-12">
+        <div class="inner">
+            <div class="col-md-6 text-right">
+                <button {{action 'submit'}} type="button" class="btn btn-sm btn-success">Save</button>
+            </div>
+        </div>
+    </div>

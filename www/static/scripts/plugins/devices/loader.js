@@ -27,6 +27,7 @@ define(
         "./classes/views/DSCSwitchMultilevelView",
 
         // Config
+        "./config/gpio-output/loader",
         "./config/remotesockets/loader",
         "./config/scriptexec/loader",
 
@@ -44,7 +45,7 @@ define(
         DSCSwitchBinaryController, DSCSwitchBinaryView,
         DSCSwitchMultilevelController, DSCSwitchMultilevelView,
 
-        RemotesocketsConfig, ScriptexecConfig
+        GpiooutputConfig, RemotesocketsConfig, ScriptexecConfig
         ) {
 
         // Add Route
@@ -55,6 +56,7 @@ define(
             });
         });
 
+        App.reopen(GpiooutputConfig);
         App.reopen(RemotesocketsConfig);
         App.reopen(ScriptexecConfig);
 

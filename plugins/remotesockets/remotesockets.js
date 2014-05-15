@@ -54,9 +54,9 @@ var io,
 
                     var switch_binary = devices.configDeviceClass(
                         'CLASS_SWITCH_BINARY', {
-                            setOn: self.routes.CLASS_SWITCH_BINARY.setOn,
-                            setOff: self.routes.CLASS_SWITCH_BINARY.setOff,
-                            getState: self.routes.CLASS_SWITCH_BINARY.setOff
+                            SetOn: self.routes.CLASS_SWITCH_BINARY.setOn,
+                            SetOff: self.routes.CLASS_SWITCH_BINARY.setOff,
+                            GetState: self.routes.CLASS_SWITCH_BINARY.getState
                         }
                     );
 

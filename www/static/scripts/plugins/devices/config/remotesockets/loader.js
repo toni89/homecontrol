@@ -1,10 +1,7 @@
-// Moduleloader
 define(
-// Define Routes, Controller, Views, etc.
 [
     "./RSConfigController",
-    "./RSConfigView",
-
+    "./RSConfigView"
 ]
 , function(
     RSConfigController,

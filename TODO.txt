@@ -10,7 +10,7 @@ Backend:
 
 Frontend:
 
-* sidebar + scrolling aktivieren, ectl. sidr alternative suchen
+* headerbar-collapse implementieren
 * periodische Termine von google calendar kopieren
 * fehlerseite bei verbindungsabbruch
 
