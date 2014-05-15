@@ -4,7 +4,9 @@ define("main/views/SettingsView",
     ],
     function(SettingsTemplate) {
         return Ember.View.extend({
-            defaultTemplate: SettingsTemplate
+            defaultTemplate: SettingsTemplate,
+            classNames: ['row', 'maincontent']
+
         });
     });
 

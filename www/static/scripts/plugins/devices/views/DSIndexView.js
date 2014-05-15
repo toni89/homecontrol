@@ -4,7 +4,8 @@ define(
 ],
 function(DSIndexTemplate) {
     return Ember.View.extend({
-        defaultTemplate: DSIndexTemplate
+        defaultTemplate: DSIndexTemplate,
+        classNames: ['row', 'maincontent']
     });
 });
 

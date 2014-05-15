@@ -4,6 +4,7 @@ define(
     ],
     function(EVEditTemplate) {
         return Ember.View.extend({
-            defaultTemplate: EVEditTemplate
+            defaultTemplate: EVEditTemplate,
+            classNames: ['row', 'maincontent']
         });
     });

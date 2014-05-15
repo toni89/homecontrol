@@ -5,6 +5,7 @@ define(
     function(DSNewTemplate) {
         return Ember.View.extend({
             defaultTemplate: DSNewTemplate,
+            classNames: ['row', 'maincontent'],
 
             didInsertElement: function() {
 

@@ -17,6 +17,7 @@
         "moment" : "2.5.1",
         "openzwave" : "0.0.32",
         "require-all" : "0.0.8",
-        "openweather-node" : "0.0.4"
+        "openweather-node" : "0.0.4",
+        "node-schedule" : "0.x"
     }
 }

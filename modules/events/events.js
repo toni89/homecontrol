@@ -436,6 +436,7 @@ module.exports = function(options, imports, register) {
     //events.checkTimeForEvent();
     //events.checkWeather();
 
+
     register(null, {
         "events" : events
     });

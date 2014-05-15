@@ -35,7 +35,7 @@ define(
                 else if(state == 0)
                     return 'OFF';
                 else
-                    return '-'
+                    return '-';
             }.property('state'),
 
             actions: {
@@ -45,13 +45,13 @@ define(
 
                 'switchOn' : function() {
                     if(this.device && this.deviceClass) {
-                        App.io.emit(this.deviceClass.setOn, this.device);
+                        App.io.emit(this.deviceClass.SetOn, this.device._id);
                     }
                 },
 
                 'switchOff' : function() {
                     if(this.device && this.deviceClass) {
-                        App.io.emit(this.deviceClass.setOff, this.device);
+                        App.io.emit(this.deviceClass.SetOff, this.device._id);
                     }
                 }
 

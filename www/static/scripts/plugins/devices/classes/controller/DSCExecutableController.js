@@ -5,21 +5,21 @@ define(
     function() {
         return Ember.Controller.extend({
             device: null,
-            deviceClass: null,
-
 
             init: function() {
+                var self = this;
+
                 this.device = this.get('model').get('device');
                 this.deviceClass = this.get('model').get('deviceClass');
+
             },
 
             actions: {
-                setLevel: function(level) {
-                    if(0 <= level && level <= 99) {
-                        App.io.emit(this.deviceClass.SetLevel, this.device._id, level);
+                'execute' : function() {
+                    if(this.device && this.deviceClass) {
+                        App.io.emit(this.deviceClass.Start, this.device._id);
                     }
                 }
-
             }
 
 

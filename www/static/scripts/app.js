@@ -11,10 +11,8 @@ require.config({
         text: 'libs/requirejs.text/requirejs.text-2.0.10',
         jquery: 'libs/jquery/jquery-2.1.0.min',
         'jquery.jquery-ui': 'libs/jquery.jquery-ui/jquery-ui-1.10.3.custom.min',
-        'jquery.sidr': 'libs/jquery.sidr/jquery.sidr.min',
-        'jquery.touchwipe': 'libs/jquery.touchwipe/jquery.touchwipe-1.1.1.min',
         'jquery.icheck': './../themes/simplicity/assets/icheck/icheck',
-        enquire: 'libs/enquire/enquire-2.1.0.min',
+        'jquery.nicescroll': 'libs/jquery.nicescroll/jquery.nicescroll.min',
         underscore: 'libs/underscore/underscore.min',
         socketio: 'libs/socketio/socket.io'
     },
@@ -53,6 +51,10 @@ require.config({
         },
 
         'jquery.jquery-ui' : {
+            deps: ["jquery"]
+        },
+
+        'jquery.nicescroll' : {
             deps: ["jquery"]
         }
     }
@@ -98,14 +100,13 @@ require(["App"], function(App) {
         "plugins/devices/loader",
         "plugins/remotesockets/loader",
         "plugins/gpio/loader",
-        "plugins/rsconfig/loader",
         "plugins/events/loader",
 
         "plugins/timeeventconfig/loader",
         "plugins/weathereventconfig/loader"
 
     ], function(ApplicationView, SidebarView, DashboardView, SettingsView,
-        devices, remotesockets, gpio, rsconfig, events, timeeventconfig, weathereventconfig) {
+        devices, remotesockets, gpio, events, timeeventconfig, weathereventconfig) {
 
         // Application Base
         App.ApplicationView = ApplicationView;  // Load ApplicationTemplate
@@ -118,7 +119,6 @@ require(["App"], function(App) {
         App.reopen(devices);
         App.reopen(remotesockets);
         App.reopen(gpio);
-        App.reopen(rsconfig);
         App.reopen(events);
         App.reopen(timeeventconfig);
         App.reopen(weathereventconfig);

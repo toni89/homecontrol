@@ -1,16 +1,16 @@
 {
-    "name" : "weather",
-    "description" : "Provides api for weatherevents",
+    "name": "eventhandler",
+    "description": "Event control layer",
     "version" : "0.0.1",
-    "main" : "./weather.js",
+    "main" : "./eventhandler.js",
     "plugin" : {
         "consumes" : [
             "server",
             "db",
-            "eventhandler"
+            "devices"
         ],
         "provides" : [
-            "weather"
+            "eventhandler"
         ]
     }
 }

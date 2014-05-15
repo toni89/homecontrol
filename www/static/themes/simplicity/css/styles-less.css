@@ -129,7 +129,7 @@ header .header-bar {
   text-indent: 20px;
   transition: all 0.3s ease 0s;
   width: 20px;
-  height: 45px;
+  height: 56px;
   display: block;
 }
 .header-bar .search:hover {
@@ -192,7 +192,7 @@ header .header-bar {
   background-color: #ffffff;
   border-bottom: 1px solid #d5dddf;
   margin: 0px -15px 20px -15px;
-  min-height: 45px;
+  min-height: 56px;
   padding-top: 10px !important;
 }
 /***** Header Bar - Left Icons *****/
