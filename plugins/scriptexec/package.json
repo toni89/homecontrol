@@ -1,0 +1,13 @@
+{
+    "name": "scriptexec",
+    "description": "Povides control layer for execution of scripts",
+    "version" : "0.0.1",
+    "main" : "./scriptexec.js",
+    "plugin" : {
+        "consumes" : [
+            "server",
+            "devices",
+            "db"
+        ]
+    }
+}

@@ -4,7 +4,8 @@ define("main/views/DashboardView",
 ],
 function(DashboardTemplate) {
     return Ember.View.extend({
-        defaultTemplate: DashboardTemplate
+        defaultTemplate: DashboardTemplate,
+        classNames: ['row', 'maincontent']
     });
 });
 

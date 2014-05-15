@@ -85,5 +85,10 @@ module.exports = [
     //triggers
     {
         "packagePath" : "./modules/triggers"
+    },
+
+    // eventhandler
+    {
+        "packagePath" : "./modules/eventhandler"
     }
 ]

@@ -17,11 +17,18 @@ define(
         "./views/DSItemView",
 
         // DeviceClasses
+        "./classes/controller/DSCExecutableController",
+        "./classes/views/DSCExecutableView",
+
         "./classes/controller/DSCSwitchBinaryController",
         "./classes/views/DSCSwitchBinaryView",
 
         "./classes/controller/DSCSwitchMultilevelController",
         "./classes/views/DSCSwitchMultilevelView",
+
+        // Config
+        "./config/remotesockets/loader",
+        "./config/scriptexec/loader",
 
         // Helper
         "./helper/DSDeviceClassHelper"
@@ -33,8 +40,11 @@ define(
 
         DSItemController, DSItemView,
 
+        DSCExecutableController, DSCExecutableView,
         DSCSwitchBinaryController, DSCSwitchBinaryView,
-        DSCSwitchMultilevelController, DSCSwitchMultilevelView
+        DSCSwitchMultilevelController, DSCSwitchMultilevelView,
+
+        RemotesocketsConfig, ScriptexecConfig
         ) {
 
         // Add Route
@@ -44,6 +54,10 @@ define(
                 //this.route("edit", { path: 'edit/:socket_id' });    // /#/devices/edit/123456
             });
         });
+
+        App.reopen(RemotesocketsConfig);
+        App.reopen(ScriptexecConfig);
+
 
         // Build Object Package an return it to App
         return {
@@ -60,11 +74,14 @@ define(
             DeviceItemView: DSItemView,
 
             // DeviceClasses
+            DeviceClassExecutableController: DSCExecutableController,
+            DeviceClassExecutableView: DSCExecutableView,
+
             DeviceClassSwitchBinaryController: DSCSwitchBinaryController,
             DeviceClassSwitchBinaryView: DSCSwitchBinaryView,
 
             DeviceClassSwitchMultilevelController: DSCSwitchMultilevelController,
             DeviceClassSwitchMultilevelView: DSCSwitchMultilevelView
 
-        }
+        };
     });

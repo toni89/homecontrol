@@ -1,3 +1,8 @@
+Features:
+
+* Benutzerlogin + Benutzerverwaltung
+* Skript-Device: Pseudo device das exec ausführt
+
 Backend:
 
 * Final Version: Start mongodb from node
@@ -7,69 +12,7 @@ Frontend:
 
 * sidebar + scrolling aktivieren, ectl. sidr alternative suchen
 * periodische Termine von google calendar kopieren
+* fehlerseite bei verbindungsabbruch
 
 
 
-
-
-<div class="boxed">
-                        {{#link-to 'devices.new'}}<button type="button" class="btn btn-xs btn-primary">New Device</button>{{/link-to}}
-                        <!-- Title Bart Start -->
-                        <div class="title-bar white">
-                            <h4>Devices</h4>
-                        </div>
-                        <!-- Title Bart End -->
-
-                        <div class="inner no-radius">
-                            <ul class="socket-list">
-                                {{#each devices}}
-                                    <li>
-                                        <span>
-                                            {{device.name}}
-                                            {{device.description}}
-                                            <button {{action 'deleteDevice' _id}} type="button" class="btn btn-xs btn-danger">Delete</button>
-                                            <button {{action 'switchOn' this}} type="button" class="btn btn-xs btn-danger">ON</button>
-                                            <button {{action 'switchOff' this}} type="button" class="btn btn-xs btn-danger">OFF</button>
-                                            <button {{action 'setLevel0' this}} type="button" class="btn btn-xs btn-danger">LEVEL 0</button>
-                                            <button {{action 'setLevel99' this}} type="button" class="btn btn-xs btn-danger">LEVEL 99</button>
-                                        </span>
-                                    </li>
-                                {{/each}}
-                            </ul>
-
-
-                        </div>
-                    </div>
-
-
-
-
-                    define(
-                        [],
-                        function() {
-
-                            return Ember.Route.extend({
-                                model: function(params) {
-
-                                    return new Ember.RSVP.Promise(function(resolve) {
-                                        App.io.on('event/info', function(event) {
-                                            event = JSON.parse(event);
-                                            resolve({'event': event });
-                                        });
-                                        App.io.emit('event/info', params.event_id);
-                                    }, 3000);
-                                },
-
-                                setupController: function(controller, model) {
-                                    //controller.set('event', model.event);
-                                }
-                            });
-                        });
-
-
-                        App.Router.map(function() {
-                                    this.resource("events", function() {
-                                        this.route("new");
-                                        this.route("edit", { path: 'edit/:event_id' });
-                                    });
-                                });

@@ -2,7 +2,8 @@ var assert = require("assert"),
     http = require("http"),
     express = require("express"),
     _io = require("socket.io"),
-    restify = require("restify");
+    restify = require("restify"),
+    events = require("events");
 
 module.exports = function(options, imports, register) {
     assert(options.http.server, "Option 'http.server' is required");
@@ -14,7 +15,8 @@ module.exports = function(options, imports, register) {
     var app = express(),
         httpServer = http.createServer(app),
         ioServer = _io.listen(httpServer),
-        restServer = restify.createServer();
+        restServer = restify.createServer(),
+        localServer = new events.EventEmitter();
 
 
     httpServer.listen(options.http.port, options.http.server, function() {
@@ -29,7 +31,8 @@ module.exports = function(options, imports, register) {
         "server" : {
             "express" : app,
             "io" : ioServer,
-            "rest" : restServer
+            "rest" : restServer,
+            "local" : localServer
         }
     });
 }

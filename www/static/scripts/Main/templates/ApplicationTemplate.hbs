@@ -1,25 +1,26 @@
-<section class="content">
-    <!-- Sidebar Start -->
-    {{view App.SidebarView}}
-    <!-- Sidebar End -->
 
-    <div class="content-liquid-full">
-        <div class="container">
+<!-- Sidebar Start -->
+{{view App.SidebarView}}
+<!-- Sidebar End -->
 
-            <!-- header Start -->
-            <div class="row header-bar">
-                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 hidden-xs hidden-sm">
-                    <ul class="left-icons">
-                        <li><a href="#" id="toggle-sidr-sidebar"><i class="fa fa-bars"></i></a></li>
-                    </ul>
-                </div>
+<div class="content-liquid-full">
+    <div class="container">
 
+
+        <!-- Header Bar Start -->
+        <div class="row header-bar">
+
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 hidden-xs hidden-sm">
+                <ul class="left-icons">
+                    <li><a href="#" class="collapse-sidebar"><i class="fa fa-bars"></i></a></li>
+                </ul>
             </div>
-            <!-- header End -->
-
-            <!-- Content Start -->
-            <div id="maincontent" class="content">{{outlet}}</div>
-            <!-- Content End -->
         </div>
+        <!-- Header Bar End -->
+
+
+        <!-- Content Start -->
+        {{outlet}}
+        <!-- Content End -->
     </div>
-</section>
+</div>

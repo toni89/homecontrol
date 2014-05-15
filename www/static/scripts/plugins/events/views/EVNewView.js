@@ -5,7 +5,8 @@ define(
     function(EVNewTemplate) {
 
         return Ember.View.extend({
-            defaultTemplate: EVNewTemplate
+            defaultTemplate: EVNewTemplate,
+            classNames: ['row', 'maincontent']
         });
     });
 
