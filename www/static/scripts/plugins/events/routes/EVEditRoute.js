@@ -98,11 +98,18 @@ define(
                     }
                 },
 
-                addDeviceToEvent: function(deviceid) {
+                addDeviceToEvent: function(deviceid, device) {
                     App.io.emit('event/addDeviceToEvent', {
                         eventid: eventid,
                         deviceid: deviceid
                     });
+
+                //console.log(device);
+                //this.controller.set('devices').removeObject(device);
+                //this.controller.set('devices').destroyRecord(deviceid);
+
+                //console.log(this.controller.get('devices'));
+                //console.log(deviceid);
                 },
 
                 deleteDeviceFromEvent: function(deviceid) {

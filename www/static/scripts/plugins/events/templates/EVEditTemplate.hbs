@@ -53,7 +53,7 @@
                             <label for="name">Verfügbare Geräte:</label>
                             <ul>
                                 {{#each devices}}
-                                    <li><a href="#" {{action 'addDeviceToEvent' _id}}>{{device.name}}</a></li>
+                                    <li><a href="#" {{action 'addDeviceToEvent' _id device}}>{{device.name}}</a></li>
                                 {{/each}}
                             </ul>
                         </div>

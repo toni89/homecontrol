@@ -6,8 +6,10 @@ define([],
                 name: '',
                 description: '',
                 repeat_daily: false,
-                start: '',
-                end: '',
+                start_time: '',
+                end_time: '',
+                start_date: '',
+                end_date: '',
                 devices: []
             },
             names: [

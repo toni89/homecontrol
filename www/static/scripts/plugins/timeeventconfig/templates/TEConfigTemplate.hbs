@@ -7,8 +7,13 @@
         <form method="post" action="#" class="basic-form">
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <label for="name">Start & Ende:</label>
-                {{input type=text name=defaultConfig.start id=defaultConfig.start placeholder="Startzeit" value=event.event.start}}
-                {{input type=text name=defaultConfig.end id=defaultConfig.end placeholder="Endzeit" value=event.event.end}}
+                {{input type=text name=defaultConfig.start_date id='date' placeholder="Startdatum" value=event.event.start_date}}
+                {{input type=text name=defaultConfig.start_time id='time' placeholder="Startzeit" value=event.event.start_time}}
+
+                <hr>
+
+                {{input type=text name=defaultConfig.end_date id='date' class='test' placeholder="Enddatum" value=event.event.end_date}}
+                {{input type=text name=defaultConfig.end_time id='time' placeholder="Endzeit" value=event.event.end_time}}
 
                 <label for="name">Täglich wiederholen?</label>
                 {{input type="checkbox" name=defaultConfig.repeat_daily checked=event.event.repeat_daily}}
@@ -16,28 +21,3 @@
         </form>
     </div>
 </div>
-
-
-
-<div class="boxed">
-    <div class="title-bar white">
-        <h4>Bedingung</h4>
-    </div>
-
-    <div class="inner no-radius">
-        <div class="row">
-            <div class="boxed no-padding col-lg-6 col-md-6 col-sm-12 col-xs-12">
-
-                <!-- Title Bart Start -->
-                <div class="title-bar white">
-                    <h4>Time</h4>
-                </div>
-                <!-- Title Bart End -->
-
-
-
-            </div>
-        </div>
-    </div>
-</div>
-

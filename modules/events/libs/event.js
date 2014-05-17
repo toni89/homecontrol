@@ -5,8 +5,10 @@ function Event(){
     this.description = '';
 
     //Startstring & Ende
-    this.start = '';
-    this.end = '';
+    this.start_time = '';
+    this.end_time = '';
+    this.start_date = '';
+    this.end_date = '';
 
     //Trigger Kategorie
     this.trigger = '';
