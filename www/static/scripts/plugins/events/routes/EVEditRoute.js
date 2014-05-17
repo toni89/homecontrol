@@ -140,16 +140,22 @@ define(
                     var description = this.controller.get('event').event.description;
                     var repeat_daily = this.controller.get('event').event.repeat_daily;
 
-                    var start = this.controller.get('event').event.start;
-                    var end = this.controller.get('event').event.end;
+                    var start_date = this.controller.get('event').event.start_date;
+                    var start_time = this.controller.get('event').event.start_time;
 
-                    App.io.emit('events/updateEvent', {
+                    var end_date = this.controller.get('event').event.end_date;
+                    var end_time = this.controller.get('event').event.end_time;
+
+                    App.io.emit('event/updateEvent', {
                         id: id,
                         name: name,
                         description: description,
                         repeat_daily: repeat_daily,
-                        start: start,
-                        end: end});
+                        start_date: start_date,
+                        start_time: start_time,
+                        end_date: end_date,
+                        end_time: end_time
+                    });
                 }
             }
         });

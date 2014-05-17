@@ -75,7 +75,7 @@ var io,
                     self.eventToggle(eventid);
                 });
 
-                socket.on('events/updateEvent', function(data){
+                socket.on('event/updateEvent', function(data){
                    self.updateEvent(data);
                 });
 
@@ -264,8 +264,13 @@ var io,
             this.findById(data.id, function(err, item){
                 item.event.name = data.name;
                 item.event.description = data.description;
-                item.event.start = data.start;
-                item.event.end = data.end;
+
+                item.event.start_date = data.start_date;
+                item.event.start_time = data.start_time;
+
+                item.event.end_date = data.end_date;
+                item.event.end_time = data.end_time;
+
                 item.event.repeat_daily = data.repeat_daily;
                 item.event.active = data.active;
 
