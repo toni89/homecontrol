@@ -1,2 +1,4 @@
 Frontend:
 * devices/new: Beim zurückwechseln auf 'Select Type' wird das aktuelle deviceConfig nicht gelöscht
+
+Beim klicken auf ein Device wird dieses zwar Übertragen, aber es fällt nicht aus der Auswahl der Verfügbaren Geräte

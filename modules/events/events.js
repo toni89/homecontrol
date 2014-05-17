@@ -96,14 +96,31 @@ var io,
         },
 
         newEvent : function(event){
+
+        var now = new Date();
+        var hour = now.getHours();
+        var minute = now.getMinutes();
+
+        var day = now.getDay();
+        var month = now.getMonth();
+        var year = now.getFullYear();
+
+        hhmm = hour + ':' + minute;
+
+        ddmmyy = day + '.' + month + '.' + year;
+
             var newevent = events.createEvent({
                 name : event.name,
                 description: '',
-                start: '',
-                end: '',
+                start_time: hhmm,
+                end_time: hhmm,
+
+                end_date: ddmmyy,
+                start_date: ddmmyy,
+
                 repeat_daily: false,
-                active: false,
-                devices: []
+                devices: [],
+                active: false
             });
 
             events.addAndSave(newevent, function(err, item){
@@ -260,8 +277,8 @@ var io,
         },
 
         updateEvent: function (data) {
-
             this.findById(data.id, function(err, item){
+
                 item.event.name = data.name;
                 item.event.description = data.description;
 

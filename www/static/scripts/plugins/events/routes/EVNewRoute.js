@@ -14,17 +14,19 @@ define(
 
 
             model: function() {
+                /*
                 return new Ember.RSVP.Promise(function(resolve) {
-                    App.io.on('main/events/info', function(event) {
+                    App.io.on('main/event/info', function(event) {
                         event = JSON.parse(event);
                         resolve({'event': event });
                     });
-                    App.io.emit('main/events/info');
+                    App.io.emit('main/event/info');
                 }, 3000);
+                */
             },
 
             setupController: function(controller, model) {
-                controller.set('devices', model.devices);
+                //controller.set('devices', model.devices);
             },
 
             actions: {

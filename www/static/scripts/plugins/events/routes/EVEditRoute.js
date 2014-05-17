@@ -104,12 +104,10 @@ define(
                         deviceid: deviceid
                     });
 
-                //console.log(device);
+                //this.controller.set('devices').destroyRecord(device);
                 //this.controller.set('devices').removeObject(device);
-                //this.controller.set('devices').destroyRecord(deviceid);
 
-                //console.log(this.controller.get('devices'));
-                //console.log(deviceid);
+                //this.controller.set('devices').destroy;
                 },
 
                 deleteDeviceFromEvent: function(deviceid) {
@@ -145,6 +143,8 @@ define(
 
                     var end_date = this.controller.get('event').event.end_date;
                     var end_time = this.controller.get('event').event.end_time;
+
+                    console.log(end_date, end_time);
 
                     App.io.emit('event/updateEvent', {
                         id: id,

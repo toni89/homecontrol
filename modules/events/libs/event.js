@@ -5,10 +5,10 @@ function Event(){
     this.description = '';
 
     //Startstring & Ende
-    this.start_time = '';
+    this.start_time = hhmm;
     this.start_date = '';
 
-    this.end_time = '';
+    this.end_time = hhmm;
     this.end_date = '';
 
     //Trigger Kategorie
@@ -16,9 +16,10 @@ function Event(){
 
     //Täglich wiederholen
     this.repeat_daily = false;
-    this.active = false;
     this.devices = [];
     this.triggers = [];
+
+    this.active = false;
 }
 
 module.exports = Event;
