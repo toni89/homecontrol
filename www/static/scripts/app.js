@@ -74,8 +74,6 @@ define('App', ['ember', 'ember.states', 'ember.ds', 'hbs', 'socketio'],
 require(["App"], function(App) {
 
     App.io = io.connect();
-
-
     App.ApplicationAdapter = DS.FixtureAdapter.extend();
 
     // Release Control to User
@@ -103,17 +101,18 @@ require(["App"], function(App) {
         "plugins/events/loader",
 
         "plugins/timeeventconfig/loader",
-        "plugins/weathereventconfig/loader"
+        "plugins/weathereventconfig/loader",
+
+        "plugins/triggers/loader"
 
     ], function(ApplicationView, SidebarView, DashboardView, SettingsView,
-        devices, remotesockets, gpio, events, timeeventconfig, weathereventconfig) {
+        devices, remotesockets, gpio, events, timeeventconfig, weathereventconfig, triggers) {
 
         // Application Base
         App.ApplicationView = ApplicationView;  // Load ApplicationTemplate
         App.SidebarView = SidebarView;          // Load SidebarTemplate into MainTemplate
         App.DashboardView = DashboardView;      // Fill MainTemplate with Content
         App.SettingsView = SettingsView;        // Sample Page which replace Content (Dashboard) in ApplicationTemplate
-
 
         // Load Plugin into App
         App.reopen(devices);
@@ -123,6 +122,7 @@ require(["App"], function(App) {
         App.reopen(timeeventconfig);
         App.reopen(weathereventconfig);
 
+        App.reopen(triggers);
 
         // Give Control back to Ember
         App.advanceReadiness();

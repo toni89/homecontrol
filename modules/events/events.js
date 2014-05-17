@@ -43,7 +43,7 @@ var io,
                     self.newEvent(event);
                 });
 
-                socket.on('main/events/info', function(id) {
+                socket.on('main/event/info', function(id) {
                     self.eventInfo(id);
                 });
 
@@ -91,7 +91,7 @@ var io,
 
         eventInfo : function(id){
           this.findById(id, function(err, event){
-              io.sockets.emit('main/events/info', JSON.stringify(event));
+              io.sockets.emit('main/event/info', JSON.stringify(event));
           });
         },
 

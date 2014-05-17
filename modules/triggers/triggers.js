@@ -21,18 +21,24 @@ var io,
         init: function() {
             var self = this;
 
+            push.on('triggerlist updated', function() {
+                self.sendTriggerList();
+            });
+
             // Socket-Events to Frontend
             io.sockets.on('connection', function(socket) {
-
-                /*
-                push.on('devicelist updated', function() {
-                    self._sendDeviceList();
-                });
-                */
 
                 // Event Handlers for Frontend
                 socket.on('main/triggers/list', function() {
                     self.sendTriggerList();
+                });
+
+                socket.on('main/triggers/delete', function(triggerid) {
+                    self.deleteTriggerById(triggerid);
+                });
+
+                socket.on('main/trigger/info', function(id) {
+                    self.triggerInfo(id);
                 });
 
                 /*
@@ -40,9 +46,7 @@ var io,
                     self._listByIds(ids);
                 });
 
-                socket.on('main/devices/delete', function(deviceid) {
-                    self.deleteDeviceById(deviceid);
-                });
+
 
                 socket.on('main/devices/listtypes', function() {
                     self.getDeviceTypes(function(err, items) {
@@ -53,6 +57,12 @@ var io,
                     });
                 });
                 */
+            });
+        },
+
+        triggerInfo : function(id){
+            this.findById(id, function(err, trigger){
+                io.sockets.emit('main/trigger/info', JSON.stringify(trigger));
             });
         },
 
@@ -99,6 +109,31 @@ var io,
                     if(callback) callback(err);
                 } else if(callback)
                     callback(null, items);
+            });
+        },
+
+        deleteTriggerById: function(triggerid, callback) {
+            this.findById(triggerid, function(err, item) {
+                if(err) {
+                    if(callback) callback(err);
+                }
+                else if(item) {
+                    item.remove(function() {
+                        console.log('JOOOOP');
+                        push.emit('triggerlist updated');
+                        if(callback) callback(null);
+                    });
+                }
+            })
+        },
+
+        findById: function(triggerid, callback) {
+            triggerModel.findOne({ _id : triggerid }, function(err, item) {
+                if(err) {
+                    console.log(err);
+                    if(callback) callback(err);
+                } else if(callback)
+                    callback(null, item);
             });
         }
 
@@ -150,31 +185,6 @@ var io,
 
                 });
             }
-        },
-
-        deleteDeviceById: function(deviceid, callback) {
-            this.findById(deviceid, function(err, item) {
-                if(err) {
-                    if(callback) callback(err);
-                }
-                else if(item) {
-                    item.remove(function() {
-                        push.emit('devicelist updated');
-                        if(callback) callback(null);
-                    });
-                }
-            })
-        },
-
-        findById: function(deviceid, callback) {
-            deviceModel.findOne({ _id : deviceid }, function(err, item) {
-                if(err) {
-                    console.log(err);
-                    if(callback) callback(err);
-                } else if(callback)
-                    callback(null, item);
-
-            });
         },
 
         findByIdArray: function(id_array, callback) {
