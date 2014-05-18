@@ -97,17 +97,21 @@ var io,
 
         newEvent : function(event){
 
-        var now = new Date();
-        var hour = now.getHours();
-        var minute = now.getMinutes();
+        /* Standard Datum generieren */
+        d = new Date();
+        var yyyy = d.getFullYear().toString();
+        var mm = (d.getMonth()+1).toString();
+        var dd  = d.getDate().toString();
+        var erg = (dd[1]?dd:"0"+dd[0]) + '.' + (mm[1]?mm:"0"+mm[0]) + '.' + yyyy ;
 
-        var day = now.getDay();
-        var month = now.getMonth();
-        var year = now.getFullYear();
+        var hour = d.getHours();
+        var minute = d.getMinutes();
+
+        var day = d.getDay();
+        var month = d.getMonth();
+        var year = d.getFullYear();
 
         hhmm = hour + ':' + minute;
-
-        ddmmyy = day + '.' + month + '.' + year;
 
             var newevent = events.createEvent({
                 name : event.name,
@@ -115,12 +119,10 @@ var io,
                 start_time: hhmm,
                 end_time: hhmm,
 
-                end_date: ddmmyy,
-                start_date: ddmmyy,
+                end_date: erg,
+                start_date: erg,
 
-                repeat_daily: false,
-                devices: [],
-                active: false
+                devices: []
             });
 
             events.addAndSave(newevent, function(err, item){
@@ -288,8 +290,8 @@ var io,
                 item.event.end_date = data.end_date;
                 item.event.end_time = data.end_time;
 
-                item.event.repeat_daily = data.repeat_daily;
                 item.event.active = data.active;
+                item.event.repeat = data.repeat;
 
                 item.markModified('event');
                 item.save(function(err, item){

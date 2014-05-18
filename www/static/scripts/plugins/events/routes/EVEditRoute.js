@@ -144,17 +144,26 @@ define(
                     var end_date = this.controller.get('event').event.end_date;
                     var end_time = this.controller.get('event').event.end_time;
 
-                    console.log(end_date, end_time);
+                    var repeat = this.controller.get('event').event.repeat;
+                    var active = this.controller.get('event').event.active;
+
+                    /*Funktioniert noch nicht*/
+                    console.log(repeat, active);
 
                     App.io.emit('event/updateEvent', {
                         id: id,
                         name: name,
                         description: description,
+
                         repeat_daily: repeat_daily,
+
                         start_date: start_date,
                         start_time: start_time,
                         end_date: end_date,
-                        end_time: end_time
+                        end_time: end_time,
+
+                        repeat: repeat,
+                        active: active
                     });
                 }
             }

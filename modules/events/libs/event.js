@@ -15,11 +15,11 @@ function Event(){
     this.trigger = '';
 
     //Täglich wiederholen
-    this.repeat_daily = false;
     this.devices = [];
     this.triggers = [];
 
     this.active = false;
+    this.repeat = false;
 }
 
 module.exports = Event;
