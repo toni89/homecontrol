@@ -17,19 +17,19 @@
                                     {{input type=text name=defaultConfig.name id=defaultConfig.name placeholder="Eventname eingeben" value=event.event.name}}
                                     {{input type=text name=defaultConfig.description id=defaultConfig.description placeholder="Beschreibung eingeben" value=event.event.description}}
                                 </div>
-
-                                <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <label for="name">Auslösebedingung</label>
-                                    {{view Ember.Select
-                                    content=names
-                                    prompt="Bitte Bedingung wählen"
-                                    selectionBinding="selectedType"
-                                    optionValuePath="content.value"
-                                    optionLabelPath="content.name"
-                                    }}
-                                </div>
                             </form>
                         </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="name">Auslösebedingung</label>
+                        {{view Ember.Select
+                        content=names
+                        prompt="Bitte Bedingung wählen"
+                        selectionBinding="selectedType"
+                        optionValuePath="content.value"
+                        optionLabelPath="content.name"
+                        }}
                     </div>
 
                         {{#if selectedType}}
