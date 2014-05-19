@@ -1,0 +1,51 @@
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h3>Triggers</h3>
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="boxed">
+                        <div class="title-bar white">
+                            <h4>Trigger Bearbeiten</h4>
+                        </div>
+
+                        <div class="inner no-radius">
+                            <form method="post" action="#" class="basic-form">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <label for="name">Name & Beschreibung:</label>
+                                    {{input type=text name=defaultConfig.name id=defaultConfig.name placeholder="Eventname eingeben" value=trigger.trigger.name}}
+                                    {{input type=text name=defaultConfig.description id=defaultConfig.description placeholder="Beschreibung eingeben" value=trigger.trigger.description}}
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12">
+                            <label for="name">Auslösebedingung</label>
+                            {{view Ember.Select
+                            content=names
+                            prompt="Bitte Bedingung wählen"
+                            selectionBinding="selectedType"
+                            optionValuePath="content.value"
+                            optionLabelPath="content.name"
+                            }}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <button {{action 'submit'}} type="button" class="btn btn-sm btn-success">Angaben Speichern!</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
