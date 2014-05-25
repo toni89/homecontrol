@@ -1,23 +1,77 @@
 <div class="boxed">
     <div class="title-bar white">
-        <h4>Bedingung</h4>
+        <h4>Other Trigger</h4>
     </div>
 
     <div class="inner no-radius">
-        <label for="name">Hinzugefügte Bedingungen:</label>
+        <form method="post" action="#" class="basic-form">
+            <div class="col-lg-6 col-md-6 col-sm-12">
+        <label for="name">Other Triggers:</label>
         <ul>
             {{#each currentTriggers}}
                 <li><a href="#" {{action 'deleteTriggerFromEvent' _id}}>{{trigger.name}}</a></li>
             {{/each}}
         </ul>
+
         <hr>
-        <label for="name">Verfügbare Bedingungen:</label>
-        <ul>
-            {{#each triggers}}
-                <li><a href="#" {{action 'addTriggerToEvent' _id}}>{{trigger.name}}</a></li>
-            {{/each}}
-        </ul>
-    </div>
+
+        {{input type="checkbox" name=defaultConfig.repeat_daily checked=event.event.repeat}}
+        Temperature
+        </br>
+        {{view Ember.Select
+        content=conditions
+        prompt="="
+        selectionBinding="selectedTimeType"
+        optionValuePath="content.value"
+        optionLabelPath="content.name"
+        }}
+        {{input type=text name=defaultConfig.start_time id=event.event.start_time placeholder="Startzeit" value=event.event.start_time}}
+        <hr>
+
+        {{input type="checkbox" name=defaultConfig.repeat_daily checked=event.event.repeat}}
+        Pressure
+        </br>
+
+        {{view Ember.Select
+        content=conditions
+        prompt="<"
+        selectionBinding="selectedTimeType"
+        optionValuePath="content.value"
+        optionLabelPath="content.name"
+        }}
+        {{input type=text name=defaultConfig.start_time id=event.event.start_time placeholder="Startzeit" value=event.event.start_time}}
+        <hr>
+        {{input type="checkbox" name=defaultConfig.repeat_daily checked=event.event.repeat}}
+        Humidity
+        </br>
+        {{view Ember.Select
+        content=conditions
+        prompt="="
+        selectionBinding="selectedTimeType"
+        optionValuePath="content.value"
+        optionLabelPath="content.name"
+        }}
+        {{input type=text name=defaultConfig.start_time id=event.event.start_time placeholder="Startzeit" value=event.event.start_time}}
+        <hr>
+        {{input type="checkbox" name=defaultConfig.repeat_daily checked=event.event.repeat}}
+        Humidity
+        </br>
+        {{view Ember.Select
+        content=sun
+        prompt=""
+        selectionBinding="selectedTimeType"
+        optionValuePath="content.value"
+        optionLabelPath="content.name"
+        }}
+        {{view Ember.Select
+        content=plusminus
+        prompt="+"
+        selectionBinding="selectedTimeType"
+        optionValuePath="content.value"
+        optionLabelPath="content.name"
+        }}
+
+        <hr>
+        </div>
+    </form>
 </div>
-
-

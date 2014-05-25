@@ -15,20 +15,37 @@ define([],
             names: [
                 {name: 'Time',
                 value: 'timeconfig'},
-                {name: 'Weather',
+                {name: 'Other',
                 value: 'weatherconfig'}],
 
+            timetriggers: [
+                {name: 'daily',
+                value: 'daily'},
+                {name: 'weekly',
+                value: 'weekly'}
+            ],
+
+            sun: [
+                {name: 'sunset',
+                value: 'sunset'},
+                {name: 'sunrise',
+                value: 'sunrise'}
+            ],
+
+            plusminus: [
+                {name: '+',
+                value: '+'},
+                {name: '-',
+                value: '-'}
+            ],
+
             conditions: [
-                {name: 'Temperatur',
-                value: 'temperatur'},
-                {name: 'Luftdruck',
-                value: 'luftdruck'},
-                {name: 'Sturmwarnung',
-                value: 'Sturmwarnung'},
-                {name: 'Sonnenaufgang',
-                value: 'sonnenaufgang'},
-                {name: 'Sonnenuntergang',
-                value: 'sonnenuntergang'}
+                {name: '<',
+                 value: '<'},
+                {name: '=',
+                 value: '='},
+                {name: '>',
+                value: '>'}
             ],
 
             selectedTypeChanged: function(selectedType){

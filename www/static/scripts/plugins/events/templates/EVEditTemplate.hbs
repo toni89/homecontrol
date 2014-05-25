@@ -15,17 +15,16 @@
                                 <div class="col-lg-6 col-md-6 col-sm-12">
                                     <label for="name">Name & Beschreibung:</label>
                                     {{input type=text name=defaultConfig.name id=defaultConfig.name placeholder="Eventname eingeben" value=event.event.name}}
-                                    {{input type=text name=defaultConfig.description id=defaultConfig.description placeholder="Beschreibung eingeben" value=event.event.description}}
                                 </div>
                             </form>
                         </div>
                     </div>
 
                     <div class="col-lg-6 col-md-6 col-sm-12">
-                        <label for="name">Auslösebedingung</label>
+                        <label for="name">Trigger:</label>
                         {{view Ember.Select
                         content=names
-                        prompt="Bitte Bedingung wählen"
+                        prompt="Please select"
                         selectionBinding="selectedType"
                         optionValuePath="content.value"
                         optionLabelPath="content.name"

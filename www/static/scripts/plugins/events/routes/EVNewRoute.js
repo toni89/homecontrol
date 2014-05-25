@@ -32,6 +32,7 @@ define(
             actions: {
 
                 submit: function() {
+
                     var self = this;
 
                     var name = this.controller.get('defaultConfig').name;
