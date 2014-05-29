@@ -55,14 +55,6 @@ var io,
                     self.deleteDeviceFromEvent(data);
                 });
 
-                socket.on('event/addTriggerToEvent', function(data) {
-                    self.addTriggerToEvent(data);
-                });
-
-                socket.on('event/deleteTriggerFromEvent', function(data) {
-                    self.deleteTriggerFromEvent(data);
-                });
-
                 socket.on('main/events/list', function() {
                     self.sendEventList();
                 });
@@ -83,8 +75,8 @@ var io,
                     self.findDevicesByEventId(id);
                 });
 
-                socket.on('event/triggers/list', function(id){
-                   self.findTriggersByEventId(id);
+                socket.on('event/device/toggleState', function(data){
+                   self.deviceToggleState(data);
                 });
             });
         },
@@ -152,7 +144,7 @@ var io,
                 var newArray = [];
 
                 for(var i = 0; i < item.event.devices.length; i++){
-                    if(item.event.devices[i] === data.deviceid){
+                    if(item.event.devices[i].id === data.deviceid){
                         delete item.event.devices[i];
                     }else{
                         newArray.push(item.event.devices[i]);
@@ -172,21 +164,20 @@ var io,
         addDeviceToEvent : function(data){
             this.findById(data.eventid, function(err, item){
 
-                console.log(item);
-
                 /*No double entries*/
                 var isUnique = true;
                 var deviceArray = item.event.devices;
 
                 for(var itemkey in deviceArray){
-                    var existingkey = deviceArray[itemkey];
+                    var object = deviceArray[itemkey];
 
-                    if(existingkey === data.deviceid){
+                    if(object.id === data.deviceid){
                         isUnique = false;
                     }
                 }
+
                 if(isUnique === true){
-                    item.event.devices.push(data.deviceid);
+                    item.event.devices.push({id : data.deviceid, state: false});
                     item.markModified('event');
                     item.save(function(err, item){
                         if(!err)
@@ -196,57 +187,6 @@ var io,
             });
         },
 
-        addTriggerToEvent : function(data){
-            this.findById(data.eventid, function(err, item){
-
-                var isUnique = true;
-                var deviceArray = item.event.triggers;
-
-                for(var itemkey in deviceArray){
-                    var existingkey = deviceArray[itemkey];
-
-                    if(existingkey === data.triggerid){
-                        isUnique = false;
-                    }
-                }
-                if(isUnique === true){
-                    item.event.triggers.push(data.triggerid);
-                    item.markModified('event');
-                    item.save(function(err, item){
-                        if(!err)
-                            push.emit('current event triggers updated', data.eventid);
-                    });
-                }
-            });
-        },
-
-        deleteTriggerFromEvent : function(data){
-           this.findById(data.eventid, function(err, item){
-                var newArray = [];
-
-                for(var i = 0; i < item.event.triggers.length; i++){
-                    if(item.event.triggers[i] === data.triggerid){
-                        delete item.event.triggers[i];
-                    }else{
-                        newArray.push(item.event.triggers[i]);
-                    }
-                }
-
-                item.event.triggers = newArray;
-                item.markModified('event');
-                item.save(function(err, item){
-                    console.log(item);
-                    if(!err){
-
-                        console.log(item);
-
-                        push.emit('current event triggers updated', data.eventid);
-                    }else{
-                        console.log(err);
-                    }
-                });
-            });
-        },
 
         findTriggersByEventId : function(eventid){
             this.findById(eventid, function(err, item){
@@ -260,12 +200,30 @@ var io,
         },
 
         findDevicesByEventId : function(eventid){
-            this.findById(eventid, function(err, item){
-                var deviceArray = item.event.devices;
+            this.findById(eventid, function(err, event){
+                var deviceObjects = event.event.devices;
+                var idArray = [];
 
-                devices.findAll({'_id': { $in: deviceArray }},function(err, items){
-                    io.sockets.emit('event/devices/list', JSON.stringify(items));
-                    io.sockets.emit('event/devices/list/update', JSON.stringify(items));
+                for(var itemkey in deviceObjects){
+                    var object = deviceObjects[itemkey];
+
+                    idArray.push(object.id);
+                }
+
+                devices.findAll({'_id': { $in: idArray }},function(err, devices){
+
+                    for(var devicekey in devices){
+                        for(var itemkey in deviceObjects){
+                            //Falls Sie sich treffen
+                            if(devices[devicekey]._id == deviceObjects[itemkey].id){
+                                //Übergebe state Information
+                                devices[devicekey].device.state = deviceObjects[itemkey].state;
+                            }
+                        }
+                    }
+
+                    io.sockets.emit('event/devices/list', JSON.stringify(devices));
+                    io.sockets.emit('event/devices/list/update', JSON.stringify(devices));
                 });
             });
         },
@@ -299,24 +257,6 @@ var io,
                         io.sockets.emit('current event updated', data.eventid);
                 });
             });
-
-            /*
-            eventModel.update(
-                {_id: data.id},
-                { event: {
-                    name: data.name,
-                    description: data.description,
-                    start: data.start,
-                    end: data.end,
-                    repeat_daily: data.repeat_daily,
-                    devices: data.devices
-                    }
-                }
-                , function (err, item) {
-                    if (err) {
-                        console.log(err);
-                    }
-                });*/
         },
 
         createEvent : function(options) {
@@ -363,6 +303,24 @@ var io,
                     });
                 }
             })
+        },
+
+        deviceToggleState: function(data){
+            this.findById(data.eventid, function(err, item){
+
+                for(var i = 0; i < item.event.devices.length; i++){
+                    if(item.event.devices[i].id === data.deviceid){
+                        item.event.devices[i].state = !item.event.devices[i].state;
+                    }
+                }
+
+                item.markModified('event');
+                item.save(function(err, item){
+                    if(!err)
+                        //io.sockets.emit('current event updated', data.eventid);
+                        push.emit('current event devices updated', data.eventid);
+                });
+            });
         },
 
         findById: function(eventid, callback) {

@@ -63,7 +63,6 @@ var io,
                     console.log('===');
                     console.log(item);
                     console.log('===');
-
                 });
 
             }

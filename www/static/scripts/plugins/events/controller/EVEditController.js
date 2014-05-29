@@ -7,9 +7,7 @@ define([],
                 description: '',
                 repeat_daily: false,
                 start_time: '',
-                end_time: '',
                 start_date: '',
-                end_date: '',
                 devices: []
             },
             names: [

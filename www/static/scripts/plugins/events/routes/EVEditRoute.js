@@ -13,17 +13,8 @@ define(
 
                 App.io.on('event/devices/list/update', function(currentDevices) {
                     var currentDevices = JSON.parse(currentDevices);
+                    //console.log(currentDevices);
                     self.controller.set('currentDevices', currentDevices);
-                });
-
-                App.io.on('main/triggers/list/update', function(triggers) {
-                    var triggers = JSON.parse(triggers);
-                    self.controller.set('triggers', triggers);
-                });
-
-                App.io.on('event/triggers/list/update', function(currentTriggers) {
-                    var currentTriggers = JSON.parse(currentTriggers);
-                    self.controller.set('currentTriggers', currentTriggers);
                 });
             },
 
@@ -54,29 +45,10 @@ define(
                     App.io.emit('event/devices/list', eventid);
                 }, 3000);
 
-                var r4 = new Ember.RSVP.Promise(function(resolve) {
-                    App.io.on('main/triggers/list', function(triggers) {
-                        triggers = JSON.parse(triggers);
-                        resolve({'triggers': triggers});
-                    });
-                    App.io.emit('main/triggers/list');
-                }, 3000);
-
-                var r5 = new Ember.RSVP.Promise(function(resolve) {
-                    App.io.on('event/triggers/list', function(currentTriggers) {
-                        currentTriggers = JSON.parse(currentTriggers);
-                        resolve({'currentTriggers': currentTriggers});
-                    });
-                    App.io.emit('event/triggers/list', eventid);
-                }, 3000);
-
-                return new Ember.RSVP.all([r1, r2, r3, r4, r5]).then(function(response){
+                return new Ember.RSVP.all([r1, r2, r3]).then(function(response){
                     event = response[0].event;
                     devices = response[1].devices;
                     currentDevices = response[2].currentDevices;
-
-                    triggers = response[3].triggers;
-                    currentTriggers = response[4].currentTriggers;
                 });
             },
 
@@ -86,9 +58,6 @@ define(
 
                 controller.set('devices', devices);
                 controller.set('currentDevices', currentDevices);
-
-                controller.set('triggers', triggers);
-                controller.set('currentTriggers', currentTriggers);
             },
 
             actions: {
@@ -106,7 +75,6 @@ define(
 
                 //this.controller.set('devices').destroyRecord(device);
                 //this.controller.set('devices').removeObject(device);
-
                 //this.controller.set('devices').destroy;
                 },
 
@@ -117,22 +85,19 @@ define(
                     });
                 },
 
-                addTriggerToEvent: function(triggerid) {
-                    App.io.emit('event/addTriggerToEvent', {
+                toggleState: function(deviceid){
+                    App.io.emit('event/device/toggleState', {
                         eventid: eventid,
-                        triggerid: triggerid
-                    });
-                },
-
-                deleteTriggerFromEvent: function(triggerid) {
-                    App.io.emit('event/deleteTriggerFromEvent', {
-                        eventid: eventid,
-                        triggerid: triggerid
+                        deviceid: deviceid
                     });
                 },
 
                 submit: function() {
                     var self = this;
+
+                    var selectedDate = this.get('timetriggers.value');
+                    console.log( selectedDate );
+
 
                     var name = this.controller.get('event').event.name;
                     var description = this.controller.get('event').event.description;
@@ -146,9 +111,6 @@ define(
 
                     var repeat = this.controller.get('event').event.repeat;
                     var active = this.controller.get('event').event.active;
-
-                    /*Funktioniert noch nicht*/
-                    console.log(repeat, active);
 
                     App.io.emit('event/updateEvent', {
                         id: id,

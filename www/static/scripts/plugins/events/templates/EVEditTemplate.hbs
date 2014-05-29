@@ -7,13 +7,13 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                     <div class="boxed">
                         <div class="title-bar white">
-                            <h4>Event Bearbeiten</h4>
+                            <h4>Edit Event</h4>
                         </div>
 
                         <div class="inner no-radius">
                             <form method="post" action="#" class="basic-form">
                                 <div class="col-lg-6 col-md-6 col-sm-12">
-                                    <label for="name">Name & Beschreibung:</label>
+                                    <label for="name">Name:</label>
                                     {{input type=text name=defaultConfig.name id=defaultConfig.name placeholder="Eventname eingeben" value=event.event.name}}
                                 </div>
                             </form>
@@ -37,18 +37,18 @@
 
                     <div class="boxed">
                         <div class="title-bar white">
-                            <h4>Geräte Konfigurator</h4>
+                            <h4>Device Configuration</h4>
                         </div>
 
                         <div class="inner no-radius">
-                            <label for="name">Hinzugefügte Geräte:</label>
+                            <label for="name">Added Devices:</label>
                             <ul>
                                 {{#each currentDevices}}
-                                    <li><a href="#" {{action 'deleteDeviceFromEvent' _id}}>{{device.name}}</a></li>
+                                    <li><a href="#" {{action 'deleteDeviceFromEvent' _id}}>{{device.name}}</a> <a href="#" {{action 'toggleState' _id}}>{{device.state}}</a></li>
                                 {{/each}}
                             </ul>
                             <hr>
-                            <label for="name">Verfügbare Geräte:</label>
+                            <label for="name">Available Devices:</label>
                             <ul>
                                 {{#each devices}}
                                     <li><a href="#" {{action 'addDeviceToEvent' _id device}}>{{device.name}}</a></li>
@@ -61,7 +61,7 @@
                         <div class="col-md-6">
                         </div>
                         <div class="col-md-6 text-right">
-                            <button {{action 'submit'}} type="button" class="btn btn-sm btn-success">Angaben speichern!</button>
+                            <button {{action 'submit'}} type="button" class="btn btn-sm btn-success">Save!</button>
                         </div>
                     </div>
 

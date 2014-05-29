@@ -9,11 +9,10 @@
                 <label for="name">Start:</label>
                 {{input type=text name=defaultConfig.start_date id=event.event.start_date placeholder="Startdatum" value=event.event.start_date}}
                 {{input type=text name=defaultConfig.start_time id=event.event.start_time placeholder="Startzeit" value=event.event.start_time}}
-
                 <hr>
-
                 <label for="name">Repeat?</label>
-                {{input type="checkbox" name=defaultConfig.repeat_daily checked=event.event.repeat}}
+                {{input type="checkbox" name=defaultConfig.repeat checked=event.event.repeat}}
+
                 {{view Ember.Select
                 content=timetriggers
                 prompt="Please select"

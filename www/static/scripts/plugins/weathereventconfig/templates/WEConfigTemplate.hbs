@@ -27,34 +27,9 @@
         }}
         {{input type=text name=defaultConfig.start_time id=event.event.start_time placeholder="Startzeit" value=event.event.start_time}}
         <hr>
+        {{input type="checkbox" name=defaultConfig.repeat_daily checked=event.event.repeat}}
 
-        {{input type="checkbox" name=defaultConfig.repeat_daily checked=event.event.repeat}}
-        Pressure
-        </br>
-
-        {{view Ember.Select
-        content=conditions
-        prompt="<"
-        selectionBinding="selectedTimeType"
-        optionValuePath="content.value"
-        optionLabelPath="content.name"
-        }}
-        {{input type=text name=defaultConfig.start_time id=event.event.start_time placeholder="Startzeit" value=event.event.start_time}}
-        <hr>
-        {{input type="checkbox" name=defaultConfig.repeat_daily checked=event.event.repeat}}
-        Humidity
-        </br>
-        {{view Ember.Select
-        content=conditions
-        prompt="="
-        selectionBinding="selectedTimeType"
-        optionValuePath="content.value"
-        optionLabelPath="content.name"
-        }}
-        {{input type=text name=defaultConfig.start_time id=event.event.start_time placeholder="Startzeit" value=event.event.start_time}}
-        <hr>
-        {{input type="checkbox" name=defaultConfig.repeat_daily checked=event.event.repeat}}
-        Humidity
+        Sunrise / sunset
         </br>
         {{view Ember.Select
         content=sun
@@ -70,6 +45,7 @@
         optionValuePath="content.value"
         optionLabelPath="content.name"
         }}
+        {{input type=text name=defaultConfig.start_time id=event.event.start_time placeholder="Startzeit" value=event.event.start_time}}
 
         <hr>
         </div>
