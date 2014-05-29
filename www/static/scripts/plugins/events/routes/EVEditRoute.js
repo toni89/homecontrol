@@ -13,7 +13,6 @@ define(
 
                 App.io.on('event/devices/list/update', function(currentDevices) {
                     var currentDevices = JSON.parse(currentDevices);
-                    //console.log(currentDevices);
                     self.controller.set('currentDevices', currentDevices);
                 });
             },
@@ -72,10 +71,6 @@ define(
                         eventid: eventid,
                         deviceid: deviceid
                     });
-
-                //this.controller.set('devices').destroyRecord(device);
-                //this.controller.set('devices').removeObject(device);
-                //this.controller.set('devices').destroy;
                 },
 
                 deleteDeviceFromEvent: function(deviceid) {
@@ -95,37 +90,23 @@ define(
                 submit: function() {
                     var self = this;
 
-                    var selectedDate = this.get('timetriggers.value');
-                    console.log( selectedDate );
-
-
+                    //var selectedDate = this.get('timetriggers.value');
+                    //console.log( selectedDate );
                     var name = this.controller.get('event').event.name;
-                    var description = this.controller.get('event').event.description;
-                    var repeat_daily = this.controller.get('event').event.repeat_daily;
 
                     var start_date = this.controller.get('event').event.start_date;
                     var start_time = this.controller.get('event').event.start_time;
 
-                    var end_date = this.controller.get('event').event.end_date;
-                    var end_time = this.controller.get('event').event.end_time;
-
                     var repeat = this.controller.get('event').event.repeat;
-                    var active = this.controller.get('event').event.active;
 
                     App.io.emit('event/updateEvent', {
                         id: id,
                         name: name,
-                        description: description,
-
-                        repeat_daily: repeat_daily,
 
                         start_date: start_date,
                         start_time: start_time,
-                        end_date: end_date,
-                        end_time: end_time,
 
-                        repeat: repeat,
-                        active: active
+                        repeat: repeat
                     });
                 }
             }

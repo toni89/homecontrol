@@ -9,7 +9,6 @@ var io,
     eventModel,
     push = new emitter.EventEmitter(),
     devices,
-    triggers,
     events = {
         init: function() {
             var self = this;
@@ -107,13 +106,6 @@ var io,
 
             var newevent = events.createEvent({
                 name : event.name,
-                description: '',
-                start_time: hhmm,
-                end_time: hhmm,
-
-                end_date: erg,
-                start_date: erg,
-
                 devices: []
             });
 
@@ -206,7 +198,6 @@ var io,
 
                 for(var itemkey in deviceObjects){
                     var object = deviceObjects[itemkey];
-
                     idArray.push(object.id);
                 }
 
@@ -239,22 +230,21 @@ var io,
         updateEvent: function (data) {
             this.findById(data.id, function(err, item){
 
+                console.log(data);
+
                 item.event.name = data.name;
-                item.event.description = data.description;
 
-                item.event.start_date = data.start_date;
-                item.event.start_time = data.start_time;
-
-                item.event.end_date = data.end_date;
-                item.event.end_time = data.end_time;
-
-                item.event.active = data.active;
-                item.event.repeat = data.repeat;
+                item.event.trigger = { cat : "time",
+                                       start_time : data.start_time,
+                                       start_date : data.start_date,
+                                       repeat : data.repeat
+                                    }
 
                 item.markModified('event');
                 item.save(function(err, item){
                     if(!err)
                         io.sockets.emit('current event updated', data.eventid);
+                        console.log(item);
                 });
             });
         },
@@ -403,12 +393,10 @@ module.exports = function(options, imports, register) {
     assert(imports.server, "Package 'server' is required");
     assert(imports.db, "Package 'db' is required");
     assert(imports.devices, "Devices is required");
-    assert(imports.triggers, "Triggers is required");
 
     io = imports.server.io;
     mgs = imports.db.mongoose;
     devices = imports.devices;
-    triggers = imports.triggers;
 
     eventSchema = new mgs.Schema({
         event: 'Mixed'
@@ -419,7 +407,6 @@ module.exports = function(options, imports, register) {
     events.init();
     //events.checkTimeForEvent();
     //events.checkWeather();
-
 
     register(null, {
         "events" : events

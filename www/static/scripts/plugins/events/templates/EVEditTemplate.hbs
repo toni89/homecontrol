@@ -44,7 +44,11 @@
                             <label for="name">Added Devices:</label>
                             <ul>
                                 {{#each currentDevices}}
-                                    <li><a href="#" {{action 'deleteDeviceFromEvent' _id}}>{{device.name}}</a> <a href="#" {{action 'toggleState' _id}}>{{device.state}}</a></li>
+                                    <li><a href="#" {{action 'deleteDeviceFromEvent' _id}}>{{device.name}}</a> <a href="#" {{action 'toggleState' _id}}>
+
+                                        {{device.state}}
+
+                                    </a></li>
                                 {{/each}}
                             </ul>
                             <hr>

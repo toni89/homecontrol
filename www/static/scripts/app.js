@@ -103,10 +103,9 @@ require(["App"], function(App) {
         "plugins/timeeventconfig/loader",
         "plugins/weathereventconfig/loader",
 
-        "plugins/triggers/loader"
 
     ], function(ApplicationView, SidebarView, DashboardView, SettingsView,
-        devices, remotesockets, gpio, events, timeeventconfig, weathereventconfig, triggers) {
+        devices, remotesockets, gpio, events, timeeventconfig, weathereventconfig) {
 
         // Application Base
         App.ApplicationView = ApplicationView;  // Load ApplicationTemplate
@@ -121,8 +120,6 @@ require(["App"], function(App) {
         App.reopen(events);
         App.reopen(timeeventconfig);
         App.reopen(weathereventconfig);
-
-        App.reopen(triggers);
 
         // Give Control back to Ember
         App.advanceReadiness();

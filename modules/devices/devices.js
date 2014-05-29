@@ -123,10 +123,6 @@ var io,
             });
         },
 
-        findByType: function(type, callback) {
-
-        },
-
         findOne: function(params, callback) {
             deviceModel.findOne(params, function(err, item) {
                 if(err) {

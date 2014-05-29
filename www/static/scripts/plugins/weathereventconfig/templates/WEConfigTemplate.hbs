@@ -15,7 +15,7 @@
 
         <hr>
 
-        {{input type="checkbox" name=defaultConfig.repeat_daily checked=event.event.repeat}}
+        {{input type="checkbox" name=defaultConfig.temperature checked=event.event.temperature}}
         Temperature
         </br>
         {{view Ember.Select
@@ -25,10 +25,10 @@
         optionValuePath="content.value"
         optionLabelPath="content.name"
         }}
-        {{input type=text name=defaultConfig.start_time id=event.event.start_time placeholder="Startzeit" value=event.event.start_time}}
+        {{input type=text name=defaultConfig.start_time id=event.triggers.start_time placeholder="Grad Celsius" value=event.triggers.start_time}}
         <hr>
-        {{input type="checkbox" name=defaultConfig.repeat_daily checked=event.event.repeat}}
 
+        {{input type="checkbox" name=defaultConfig.sunrise checked=event.event.sunrise}}
         Sunrise / sunset
         </br>
         {{view Ember.Select
@@ -38,6 +38,7 @@
         optionValuePath="content.value"
         optionLabelPath="content.name"
         }}
+
         {{view Ember.Select
         content=plusminus
         prompt="+"
@@ -45,7 +46,7 @@
         optionValuePath="content.value"
         optionLabelPath="content.name"
         }}
-        {{input type=text name=defaultConfig.start_time id=event.event.start_time placeholder="Startzeit" value=event.event.start_time}}
+        {{input type=text name=defaultConfig.start_time id=event.triggers.start_time placeholder="min" value=event.triggers.start_time}}
 
         <hr>
         </div>
