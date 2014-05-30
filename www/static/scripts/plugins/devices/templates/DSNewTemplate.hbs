@@ -5,40 +5,41 @@
 
     <h3>New Device</h3>
 
-
-    <div class="boxed no-padding col-lg-6 col-md-6 col-sm-12 col-xs-12">
-
-        <!-- Title Bart Start -->
-        <div class="title-bar white">
-            <h4>Generic</h4>
-        </div>
-        <!-- Title Bart End -->
-
-
-        <div class="inner">
-            <form method="post" action="#" class="basic-form">
-                <label for="name">Name</label>
-                {{input type=text name=defaultConfig.name id=defaultConfig.name placeholder="Enter Name" value=defaultConfig.name}}
-
-
-                <label for="dropdown">Type</label>
-                {{view Ember.Select
-                    content=getCreatableTypes
-                    optionValuePath="content.name"
-                    optionLabelPath="content.displayName"
-                    selectionBinding="selectedType"
-                    prompt="Select Type"}}
-
-                <!--
-                <label for="groups">Groups</label>
-                <div class="col-md-6">
-                    <input type="checkbox" name="checkbox" id="checkbox" value="1" class="icheck-blue" checked="checked"/> Check me out
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="boxed">
+                <!-- Title Bart Start -->
+                <div class="title-bar white">
+                    <h4>Generic</h4>
                 </div>
-                -->
-            </form>
+                <!-- Title Bart End -->
+
+
+                <div class="inner">
+                    <form method="post" action="#" class="basic-form">
+                        <label for="name">Name</label>
+                        {{input type=text name=defaultConfig.name id=defaultConfig.name placeholder="Enter Name" value=defaultConfig.name}}
+
+
+                        <label for="dropdown">Type</label>
+                        {{view Ember.Select
+                            content=getCreatableTypes
+                            optionValuePath="content.name"
+                            optionLabelPath="content.displayName"
+                            selectionBinding="selectedType"
+                            prompt="Select Type"}}
+
+                        <!--
+                        <label for="groups">Groups</label>
+                        <div class="col-md-6">
+                            <input type="checkbox" name="checkbox" id="checkbox" value="1" class="icheck-blue" checked="checked"/> Check me out
+                        </div>
+                        -->
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-
 
 {{#if selectedType}}
 

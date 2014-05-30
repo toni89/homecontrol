@@ -6,11 +6,7 @@ define(
 
         return Ember.View.extend({
             defaultTemplate: EVNewTemplate,
-            classNames: ['row', 'maincontent'],
-
-            didInsertElement: function() {
-
-            }
+            classNames: ['row', 'maincontent']
         });
     });
 

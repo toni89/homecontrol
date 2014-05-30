@@ -8,6 +8,7 @@ define(
         "./controller/EVNewController",
         "./views/EVNewView",
 
+        // DeviceItem
         "./routes/EVEditRoute",
         "./controller/EVEditController",
         "./views/EVEditView"
@@ -30,6 +31,7 @@ define(
             this.resource("events", function() {
                 this.route("new");
                 this.route("edit", { path: 'edit/:event_id' });
+                this.route("delete", { path: 'delete/:event_id' });
             });
         });
 

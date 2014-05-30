@@ -1,6 +1,7 @@
 function CLASS_EXECUTABLE() {
     this.id = 'CLASS_EXECUTABLE';
-    this.renderTarget = 'deviceClassExecutable';
+    this.displayName = 'Execute';
+    this.render = 'deviceClassExecutable';
     this.visibleActions = ['Start', 'Stop'];
 
     this.Start = '';

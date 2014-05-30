@@ -1,6 +1,7 @@
 function CLASS_SWITCH_MULTILEVEL() {
     this.id = 'CLASS_SWITCH_MULTILEVEL';
-    this.renderTarget = 'deviceClassSwitchMultilevel';
+    this.displayName = 'Level';
+    this.render = 'deviceClassSwitchMultilevel';
     this.visibleActions = ['SetLevel'];
 
     this.SetLevel = '';

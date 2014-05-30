@@ -1,18 +1,28 @@
 Features:
-
-* Benutzerlogin + Benutzerverwaltung
-* Skript-Device: Pseudo device das exec ausführt
+* Events-New: Devices nach Gruppen ordnen
 
 Backend:
-
+* Settingsmodul
 * Final Version: Start mongodb from node
+* Ein Pluginordner für alle Dateien
+* automatisches Einbinden von Plugins
+
 
 
 Frontend:
-
 * headerbar-collapse implementieren
 * periodische Termine von google calendar kopieren
 * fehlerseite bei verbindungsabbruch
 
 
+Future Features:
+* Nest-Integration -> unofficial-nest-api
+* Benutzerlogin + Benutzerverwaltung
+* E-Mail Benachrichtigung
 
+
+Agenda:
+
+1. Trigger und eventhandler fertig machen
+2. plugins halten ihre eigenen www-Daten. pagehandler liefrt diese auf wunsch an ember aus!
+2.1 Ember weiß wo es die Daten holt -> Convention over configuration

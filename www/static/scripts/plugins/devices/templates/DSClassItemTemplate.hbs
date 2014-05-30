@@ -1,0 +1,19 @@
+<div style="margin: 20px 0px;padding: 10px;border: 1px solid #000;">
+    <h4>{{model.displayName}}</h4>
+
+    <form method="post" action="#" class="basic-form">
+    <div>
+    {{#each deviceAction in deviceActions}}
+        {{input type="checkbox" id=deviceAction.id  name=deviceAction.id checked=deviceAction.checked}} {{deviceAction.name}}
+    {{/each}}
+    </div>
+
+    <div>
+        {{#each getProperties}}
+            {{input type="text" placeholder=this}}
+        {{/each}}
+    </div>
+    </form>
+    <br>
+    <button {{action 'collect'}}>Test</button>
+</div>

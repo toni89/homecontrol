@@ -17,9 +17,9 @@ define(
             options.contexts[1] = context;
 
             try {
-                success = Ember.Handlebars.helpers.render.call(this, deviceClass.renderTarget, '', options);
+                success = Ember.Handlebars.helpers.render.call(this, deviceClass.render, '', options);
             } catch(err) {
-                console.log("renderDeviceClass-Helper: Can't find '" + deviceClass.renderTarget + "' target");
+                console.log("renderDeviceClass-Helper: Can't find '" + deviceClass.render + "' target");
             }
             return success;
         });

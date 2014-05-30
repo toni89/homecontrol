@@ -1,0 +1,16 @@
+{
+    "name": "events",
+    "description": "Events control layer",
+    "version" : "0.0.1",
+    "main" : "./events.js",
+    "plugin" : {
+        "consumes" : [
+            "server",
+            "db",
+            "devices"
+        ],
+        "provides" : [
+            "events"
+        ]
+    }
+}

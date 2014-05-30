@@ -13,8 +13,16 @@ define(
         "./views/DSNewView",
 
         // DeviceItem
-        "./controller/DSItemController",
-        "./views/DSItemView",
+        "./controller/DSDeviceItemController",
+        "./views/DSDeviceItemView",
+
+        // ActionItem
+        "./controller/DSActionItemController",
+        "./views/DSActionItemView",
+
+        // ClassItem
+        "./controller/DSClassItemController",
+        "./views/DSClassItemView",
 
         // DeviceClasses
         "./classes/controller/DSCExecutableController",
@@ -32,14 +40,17 @@ define(
         "./config/scriptexec/loader",
 
         // Helper
-        "./helper/DSDeviceClassHelper"
+        "./helper/DSDeviceClassHelper",
+        "./helper/DSActionClassHelper"
     ]
     , function(
         DSIndexController, DSIndexRoute, DSIndexView,
 
         DSNewController, DSNewRoute, DSNewView,
 
-        DSItemController, DSItemView,
+        DSDeviceItemController, DSDeviceItemView,
+        DSActionItemController, DSActionItemView,
+        DSClassItemController, DSClassItemView,
 
         DSCExecutableController, DSCExecutableView,
         DSCSwitchBinaryController, DSCSwitchBinaryView,
@@ -72,8 +83,17 @@ define(
             DevicesNewController: DSNewController,
             DevicesNewView: DSNewView,
 
-            DeviceItemController: DSItemController,
-            DeviceItemView: DSItemView,
+            // DeviceItem
+            DeviceItemController: DSDeviceItemController,
+            DeviceItemView: DSDeviceItemView,
+
+            // DeviceActionItem
+            DeviceActionItemController: DSActionItemController,
+            DeviceActionItemView: DSActionItemView,
+
+            // ClassItem
+            ClassItemController: DSClassItemController,
+            ClassItemView: DSClassItemView,
 
             // DeviceClasses
             DeviceClassExecutableController: DSCExecutableController,

@@ -1,0 +1,77 @@
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <h3>Events</h3>
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    <div class="boxed">
+                        <div class="title-bar white">
+                            <h4>Event Bearbeiten</h4>
+                        </div>
+
+                        <div class="inner no-radius">
+                            <form method="post" action="#" class="basic-form">
+                                <div class="col-lg-6 col-md-6 col-sm-12">
+                                    <label for="name">Name & Beschreibung:</label>
+                                    {{input type=text name=defaultConfig.name id=defaultConfig.name placeholder="Eventname eingeben" value=event.event.name}}
+                                    {{input type=text name=defaultConfig.description id=defaultConfig.description placeholder="Beschreibung eingeben" value=event.event.description}}
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6 col-sm-12">
+                        <label for="name">Auslösebedingung</label>
+                        {{view Ember.Select
+                        content=names
+                        prompt="Bitte Bedingung wählen"
+                        selectionBinding="selectedType"
+                        optionValuePath="content.value"
+                        optionLabelPath="content.name"
+                        }}
+                    </div>
+
+                        {{#if selectedType}}
+                            {{outlet eventconfig}}
+                        {{/if}}
+
+                    <div class="boxed">
+                        <div class="title-bar white">
+                            <h4>Geräte Konfigurator</h4>
+                        </div>
+
+                        <div class="inner no-radius">
+                            <label for="name">Hinzugefügte Geräte:</label>
+                            <ul>
+                                {{#each currentDevices}}
+                                    <li><a href="#" {{action 'deleteDeviceFromEvent' _id}}>{{device.name}}</a></li>
+                                {{/each}}
+                            </ul>
+                            <hr>
+                            <label for="name">Verfügbare Geräte:</label>
+                            <ul>
+                                {{#each devices}}
+                                    <li><a href="#" {{action 'addDeviceToEvent' _id device}}>{{device.name}}</a></li>
+                                {{/each}}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <button {{action 'submit'}} type="button" class="btn btn-sm btn-success">Angaben speichern!</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
