@@ -1,5 +1,6 @@
 Features:
 * Events-New: Devices nach Gruppen ordnen
+* Z-Wave: Verbrauch messen, Klasse: 50
 
 Backend:
 * Settingsmodul
@@ -22,7 +23,6 @@ Future Features:
 
 
 Agenda:
-
 1. Trigger und eventhandler fertig machen
 2. plugins halten ihre eigenen www-Daten. pagehandler liefrt diese auf wunsch an ember aus!
 2.1 Ember weiß wo es die Daten holt -> Convention over configuration

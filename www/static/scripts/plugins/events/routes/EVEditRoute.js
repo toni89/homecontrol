@@ -13,7 +13,6 @@ define(
 
                 App.io.on('event/devices/list/update', function(currentDevices) {
                     var currentDevices = JSON.parse(currentDevices);
-                    //??
                     self.controller.set('currentDevices', currentDevices);
                 });
             },

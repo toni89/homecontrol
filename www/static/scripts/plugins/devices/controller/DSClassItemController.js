@@ -17,7 +17,7 @@ define(
                     self.deviceActions.push({
                         id: 'Actions[' + deviceId + ']['+ model.id + '][' + item +']',
                         name: item,
-                        checked: false 
+                        checked: false
                     })
                 });
 
