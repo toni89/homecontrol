@@ -4,7 +4,6 @@ define(
         return Ember.Controller.extend({
 
             devices: [],
-
             defaultConfig: {}
 
         });

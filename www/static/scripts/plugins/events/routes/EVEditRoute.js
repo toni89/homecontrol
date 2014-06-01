@@ -61,6 +61,9 @@ define(
 
             actions: {
                 setTypeTemplate: function(selection){
+
+                    selectvalue = selection.value;
+
                     if(selection.configRoute != ''){
                         this.render(selection.value, {into: 'events.edit', outlet: 'eventconfig'});
                     }
@@ -90,23 +93,53 @@ define(
                 submit: function() {
                     var self = this;
 
-                    //var selectedDate = this.get('timetriggers.value');
-                    //console.log( selectedDate );
+                    var trigger = {};
+                    trigger.category = 'time';
+
                     var name = this.controller.get('event').event.name;
+                    var triggertype = this.controller.get('selectedType');
 
-                    var start_date = this.controller.get('event').event.start_date;
-                    var start_time = this.controller.get('event').event.start_time;
+                    /*
+                    Timeconfig
+                     */
+                    if(triggertype.value == 'timeconfig'){
 
-                    var repeat = this.controller.get('event').event.repeat;
+                        trigger.start_date = this.controller.get('event').event.start_date;
+                        trigger.start_time = this.controller.get('event').event.start_time;
+                        trigger.repeat = this.controller.get('event').event.repeat;
+a
+                        if (repeat == true){
+                            trigger.selectedTimeRepeat = this.controller.get('selectedTimeRepeat').value;
+                        }
+
+                    /*
+                    Weatherconfig
+                     */
+                    }else if(triggertype.value == 'weatherconfig'){
+
+                        var trigger = {};
+                        trigger.category = 'weather';
+
+                        var temperatureBool = this.controller.get('event').event.temperatureBool;
+                        var sunBool = this.controller.get('event').event.sunBool;
+
+                        if (temperatureBool == true){
+                            trigger.temperatureBool = true;
+                            trigger.selectedTemperatureType = this.controller.get('selectedTemperatureType').value;
+                            trigger.temperature = this.controller.get('event').event.temperature;
+                        }
+                        if (sunBool == true){
+                            trigger.sunBool = true;
+                            trigger.selectedSunType = this.controller.get('selectedSunType').value;
+                            trigger.selectedPlusminusType = this.controller.get('selectedPlusminusType').value;
+                            trigger.minutes = this.controller.get('event').event.minutes;
+                        }
+                    }
 
                     App.io.emit('event/updateEvent', {
                         id: id,
                         name: name,
-
-                        start_date: start_date,
-                        start_time: start_time,
-
-                        repeat: repeat
+                        trigger: trigger
                     });
                 }
             }

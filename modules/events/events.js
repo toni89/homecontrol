@@ -230,21 +230,19 @@ var io,
         updateEvent: function (data) {
             this.findById(data.id, function(err, item){
 
+                console.log('===');
                 console.log(data);
+                console.log('===');
 
                 item.event.name = data.name;
 
-                item.event.trigger = { cat : "time",
-                                       start_time : data.start_time,
-                                       start_date : data.start_date,
-                                       repeat : data.repeat
-                                    }
+                item.event.trigger = data.trigger;
 
                 item.markModified('event');
                 item.save(function(err, item){
                     if(!err)
                         io.sockets.emit('current event updated', data.eventid);
-                        console.log(item);
+                        //console.log(item);
                 });
             });
         },

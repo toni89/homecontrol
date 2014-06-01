@@ -7,46 +7,43 @@
         <form method="post" action="#" class="basic-form">
             <div class="col-lg-6 col-md-6 col-sm-12">
         <label for="name">Other Triggers:</label>
-        <ul>
-            {{#each currentTriggers}}
-                <li><a href="#" {{action 'deleteTriggerFromEvent' _id}}>{{trigger.name}}</a></li>
-            {{/each}}
-        </ul>
 
         <hr>
 
-        {{input type="checkbox" name=defaultConfig.temperature checked=event.event.temperature}}
+        {{input type="checkbox" name=defaultConfig.temperatureBool checked=event.event.temperatureBool}}
         Temperature
         </br>
         {{view Ember.Select
         content=conditions
-        prompt="="
-        selectionBinding="selectedTimeType"
+        prompt=""
+        selectionBinding="selectedTemperatureType"
         optionValuePath="content.value"
         optionLabelPath="content.name"
         }}
-        {{input type=text name=defaultConfig.start_time id=event.triggers.start_time placeholder="Grad Celsius" value=event.triggers.start_time}}
+        {{input type=text name=defaultConfig.temperature id=event.event.temperature placeholder="Grad Celsius" value=event.event.temperature}}
+
+
         <hr>
 
-        {{input type="checkbox" name=defaultConfig.sunrise checked=event.event.sunrise}}
+        {{input type="checkbox" name=defaultConfig.sunBool checked=event.event.sunBool}}
         Sunrise / sunset
         </br>
         {{view Ember.Select
         content=sun
         prompt=""
-        selectionBinding="selectedTimeType"
+        selectionBinding="selectedSunType"
         optionValuePath="content.value"
         optionLabelPath="content.name"
         }}
 
         {{view Ember.Select
         content=plusminus
-        prompt="+"
-        selectionBinding="selectedTimeType"
+        prompt=""
+        selectionBinding="selectedPlusminusType"
         optionValuePath="content.value"
         optionLabelPath="content.name"
         }}
-        {{input type=text name=defaultConfig.start_time id=event.triggers.start_time placeholder="min" value=event.triggers.start_time}}
+        {{input type=text name=defaultConfig.minutes id=event.event.minutes placeholder="min" value=event.event.minutes}}
 
         <hr>
         </div>

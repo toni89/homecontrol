@@ -8,8 +8,15 @@ define([],
                 repeat_daily: false,
                 start_time: '',
                 start_date: '',
-                devices: []
+                devices: [],
+
+
+                temperatureBool : false,
+                temperature: '',
+                sunBool: false,
+                min: ''
             },
+
             names: [
                 {name: 'Time',
                 value: 'timeconfig'},

@@ -7,7 +7,6 @@ define(
 
             },
 
-
             model: function() {
                 return new Ember.RSVP.Promise(function(resolve) {
                     App.io.on('main/devices/list', function(devices) {
@@ -26,7 +25,6 @@ define(
                 submit: function() {
 
                     var self = this;
-
                 }
             }
 
