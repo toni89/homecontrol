@@ -4,7 +4,7 @@ function Event(){
 
     //Täglich wiederholen
     this.devices = [];
-    this.triggers = {};
+    this.triggers = [];
 }
 
 module.exports = Event;

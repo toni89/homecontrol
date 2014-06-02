@@ -234,9 +234,38 @@ var io,
                 console.log(data);
                 console.log('===');
 
+                var i = 0;
                 item.event.name = data.name;
 
-                item.event.trigger = data.trigger;
+                while(i < item.event.triggers.length){
+                    if(item.event.triggers[i].category === data.trigger.category){
+                        //console.log(item.event.triggers[i]);
+                        item.event.triggers[i] = data.trigger;
+                    }else{
+                        item.event.triggers[i].push(data.trigger);
+                    }
+                    i = i + 1;
+                }
+
+
+                /*var deviceArray = item.event.devices;
+
+                for(var itemkey in deviceArray){
+                    var object = deviceArray[itemkey];
+
+                    if(object.id === data.deviceid){
+                        isUnique = false;
+                    }
+                }
+
+                if(isUnique === true){
+                    item.event.devices.push({id : data.deviceid, state: false});
+                    item.markModified('event');
+                    item.save(function(err, item){
+                        if(!err)
+                            push.emit('current event devices updated', data.eventid);
+                    });
+                }*/
 
                 item.markModified('event');
                 item.save(function(err, item){

@@ -97,6 +97,7 @@ define(
                     trigger.category = 'time';
 
                     var name = this.controller.get('event').event.name;
+                    var repeat = this.controller.get('event').event.repeat;
                     var triggertype = this.controller.get('selectedType');
 
                     /*
@@ -107,7 +108,7 @@ define(
                         trigger.start_date = this.controller.get('event').event.start_date;
                         trigger.start_time = this.controller.get('event').event.start_time;
                         trigger.repeat = this.controller.get('event').event.repeat;
-a
+
                         if (repeat == true){
                             trigger.selectedTimeRepeat = this.controller.get('selectedTimeRepeat').value;
                         }
