@@ -238,14 +238,61 @@ var io,
                 item.event.name = data.name;
 
                 var i = 0;
-                while(i < item.event.triggers.length || item.event.trigger.length === 0){
-                    if(item.event.triggers[i].category === data.array.category){
+                var y = 0;
+
+                /*
+                var isUnique = true;
+                var deviceArray = item.event.devices;
+
+                for(var itemkey in deviceArray){
+                    var object = deviceArray[itemkey];
+
+                    if(object.id === data.deviceid){
+                        isUnique = false;
+                    }
+                }
+                if(isUnique === true){
+                    item.event.devices.push({id : data.deviceid, state: false});
+                    item.markModified('event');
+                    item.save(function(err, item){
+                        if(!err)
+                            push.emit('current event devices updated', data.eventid);
+                    });
+                }
+                */
+                //while(i < item.event.triggers.length || item.event.trigger.length == 0){
+
+                while(i < data.array.length){
+
+                    var isUnique = true;
+                    var triggers = item.event.triggers;
+
+                    /*if(item.event.triggers.length > 0){
+                        while(y < item.event.triggers.length){
+                            if(item.event.triggers[y].category === data.array[i].category && item.event.triggers[y] != null){
+                                //item.event.triggers[y] = data.array[i];
+                                delete item.event.triggers[y];
+                                item.event.triggers.push(data.array[i]);
+                            }
+                            //}else{
+                            //    item.event.triggers.push(data.array[i]);
+                            //}
+                            item.event.triggers.push(data.array[i]);
+                            y = y + 1;
+                        }
+                    }else{*/
+                        item.event.triggers.push(data.array[i]);
+                    //}
+
+                    /*if(item.event.triggers[i].category === data.array.category){
                         item.event.triggers[i] = data.array;
                     }else{
-                        item.event.triggers.push(data.array);
-                    }
+                        item.event.triggers.push(data.array[i]);
+                    }*/
                     i = i + 1;
                 }
+
+                //}
 
 
                 /*while(j < data.array.length){

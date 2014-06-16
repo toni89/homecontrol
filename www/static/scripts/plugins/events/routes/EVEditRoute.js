@@ -138,10 +138,12 @@ define(
                         array.push(trigger);
                     }
 
+                    console.log(array);
+
                     App.io.emit('event/updateEvent', {
                         id: id,
                         name: name,
-                        array: trigger
+                        array: array
                     });
                 }
             }
