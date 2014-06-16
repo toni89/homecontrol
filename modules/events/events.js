@@ -25,17 +25,18 @@ var io,
                 self.findDevicesByEventId(id);
             });
 
-            push.on('current event triggers updated', function(id){
+            /*push.on('current event triggers updated', function(id){
                 self.findTriggersByEventId(id);
-            });
+            });*/
 
             // Socket-Events to Frontend
             io.sockets.on('connection', function(socket) {
 
                 //????? SOLLTE HIER DRIN NICHT GEHN ?????
-                push.on('eventlist updated', function(){
+
+                /*push.on('eventlist updated', function(){
                     self.sendEventList();
-                });
+                });*/
 
                 // Event Handlers for creation of new Events
                 socket.on('events/createEvent', function(event) {
@@ -202,7 +203,6 @@ var io,
                 }
 
                 devices.findAll({'_id': { $in: idArray }},function(err, devices){
-
                     for(var devicekey in devices){
                         for(var itemkey in deviceObjects){
                             //Falls Sie sich treffen
@@ -234,19 +234,73 @@ var io,
                 console.log(data);
                 console.log('===');
 
-                var i = 0;
+                var j = 0;
                 item.event.name = data.name;
 
-                while(i < item.event.triggers.length){
-                    if(item.event.triggers[i].category === data.trigger.category){
-                        //console.log(item.event.triggers[i]);
-                        item.event.triggers[i] = data.trigger;
+                var i = 0;
+                while(i < item.event.triggers.length || item.event.trigger.length === 0){
+                    if(item.event.triggers[i].category === data.array.category){
+                        item.event.triggers[i] = data.array;
                     }else{
-                        item.event.triggers[i].push(data.trigger);
+                        item.event.triggers.push(data.array);
                     }
                     i = i + 1;
                 }
 
+
+                /*while(j < data.array.length){
+
+                    var i = 0;
+                    while(i < item.event.triggers.length){
+
+                        console.log(item.event.triggers);
+                        console.log(data.array[j]);
+
+                        //if(item.event.triggers[i].category === data.array[j].category){
+                        //    item.event.triggers[i] = data.array[j];
+                        //}else{
+                            item.event.triggers.push(data.array[j]);
+                        //}
+                        i = i + 1;
+                    }
+                    j = j + 1;
+                }*/
+
+                /*
+
+                var isUnique = true;
+                var triggerArray = item.event.triggers;
+
+                for(var itemkey in triggerArray){
+                    var object = triggerArray[itemkey];
+
+                    if(object.id === data.deviceid){
+                        isUnique = false;
+                    }
+                }
+
+                if(isUnique === true){
+                    item.event.devices.push({id : data.deviceid, state: false});
+                    item.markModified('event');
+                    item.save(function(err, item){
+                        if(!err)
+                            push.emit('current event devices updated', data.eventid);
+                    });
+                }*/
+
+                /*while(j < data.array.length){
+                    var i = 0;
+                    while(i < item.event.triggers.length){
+                        if(item.event.triggers[i].category === data.array[j].category){
+                            item.event.triggers[i] = data.array[j];
+                        }else{
+                            console.log('PUSH');
+                            item.event.triggers.push(data.array[j]);
+                        }
+                        i = i + 1;
+                    }
+                    j = j + 1;
+                }*/
 
                 /*var deviceArray = item.event.devices;
 

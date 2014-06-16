@@ -10,10 +10,14 @@ define([],
                 start_date: '',
                 devices: [],
 
+                repeat_time: '',
 
                 temperatureBool : false,
-                temperature: '',
+                specialDateBool : false,
                 sunBool: false,
+                repeatDateBool: false,
+
+                temperature: '',
                 min: ''
             },
 
@@ -27,7 +31,9 @@ define([],
                 {name: 'daily',
                 value: 'daily'},
                 {name: 'weekly',
-                value: 'weekly'}
+                value: 'weekly'},
+                {name: 'weekend',
+                value: 'weekend'}
             ],
 
             sun: [

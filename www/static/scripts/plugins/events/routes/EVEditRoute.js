@@ -93,54 +93,55 @@ define(
                 submit: function() {
                     var self = this;
 
-                    var trigger = {};
-                    trigger.category = 'time';
-
+                    var array = [];
                     var name = this.controller.get('event').event.name;
-                    var repeat = this.controller.get('event').event.repeat;
-                    var triggertype = this.controller.get('selectedType');
 
-                    /*
-                    Timeconfig
-                     */
-                    if(triggertype.value == 'timeconfig'){
+                    //Date
+                    var repeatDateBool = this.controller.get('event').event.repeatDateBool;
+                    var specialDateBool = this.controller.get('event').event.specialDateBool;
 
+                    //Temperature
+                    var temperatureBool = this.controller.get('event').event.temperatureBool;
+                    var sunBool = this.controller.get('event').event.sunBool;
+
+                    if(specialDateBool == true){
+                        var trigger = {};
+                        trigger.timeBool = this.controller.get('event').event.timeBool;
                         trigger.start_date = this.controller.get('event').event.start_date;
                         trigger.start_time = this.controller.get('event').event.start_time;
-                        trigger.repeat = this.controller.get('event').event.repeat;
-
-                        if (repeat == true){
-                            trigger.selectedTimeRepeat = this.controller.get('selectedTimeRepeat').value;
-                        }
-
-                    /*
-                    Weatherconfig
-                     */
-                    }else if(triggertype.value == 'weatherconfig'){
-
+                        trigger.category = 'specialDate';
+                        array.push(trigger);
+                    }
+                    if (repeatDateBool == true){
                         var trigger = {};
-                        trigger.category = 'weather';
+                        trigger.repeat_time = this.controller.get('events').event.repeat_time;
+                        trigger.selectedTimeRepeat = this.controller.get('selectedTimeRepeat').value;
+                        trigger.category = 'repeatDate';
+                        array.push(trigger);
+                    }
 
-                        var temperatureBool = this.controller.get('event').event.temperatureBool;
-                        var sunBool = this.controller.get('event').event.sunBool;
-
-                        if (temperatureBool == true){
-                            trigger.temperatureBool = true;
-                            trigger.selectedTemperatureType = this.controller.get('selectedTemperatureType').value;
-                            trigger.temperature = this.controller.get('event').event.temperature;
-                        }
-                        if (sunBool == true){
-                            trigger.sunBool = true;
-                            trigger.selectedSunType = this.controller.get('selectedSunType').value;
-                            trigger.selectedPlusminusType = this.controller.get('selectedPlusminusType').value;
-                            trigger.minutes = this.controller.get('event').event.minutes;
-                        }
+                    if (temperatureBool == true){
+                        var trigger = {};
+                        trigger.temperatureBool = true;
+                        trigger.selectedTemperatureType = this.controller.get('selectedTemperatureType').value;
+                        trigger.temperature = this.controller.get('event').event.temperature;
+                        trigger.category = 'temperature';
+                        array.push(trigger);
+                    }
+                    if (sunBool == true){
+                        var trigger = {};
+                        trigger.sunBool = true;
+                        trigger.selectedSunType = this.controller.get('selectedSunType').value;
+                        trigger.selectedPlusminusType = this.controller.get('selectedPlusminusType').value;
+                        trigger.minutes = this.controller.get('event').event.minutes;
+                        trigger.category = 'sun';
+                        array.push(trigger);
                     }
 
                     App.io.emit('event/updateEvent', {
                         id: id,
                         name: name,
-                        trigger: trigger
+                        array: trigger
                     });
                 }
             }

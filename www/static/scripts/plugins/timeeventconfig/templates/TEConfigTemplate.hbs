@@ -6,12 +6,16 @@
     <div class="inner no-radius">
         <form method="post" action="#" class="basic-form">
             <div class="col-lg-6 col-md-6 col-sm-12">
-                <label for="name">Start:</label>
+                <label for="name">Time Trigger:</label>
+                <hr>
+                {{input type="checkbox" name=defaultConfig.specialDateBool checked=event.event.specialDateBool}}
+                Special Date:
                 {{input type=text name=defaultConfig.start_date id=event.event.start_date placeholder="DD.MM.YYYY" value=event.event.start_date}}
                 {{input type=text name=defaultConfig.start_time id=event.event.start_time placeholder="hh:mm" value=event.event.start_time}}
                 <hr>
-                <label for="name">Repeat?</label>
-                {{input type="checkbox" name=defaultConfig.repeat checked=event.event.repeat}}
+                {{input type="checkbox" name=defaultConfig.repeatDateBool checked=event.event.repeatDateBool}}
+                Repeat Date:
+                {{input type=text name=defaultConfig.repeat_time id=event.event.repeat_time placeholder="hh:mm" value=event.event.repeat_time}}
 
                 {{view Ember.Select
                 content=timetriggers
